@@ -29,7 +29,7 @@
   }
 
   body {
-    @apply bg-paper text-ink font-sora antialiased selection:bg-accent selection:text-paper;
+    @apply bg-paper text-ink font-sora antialiased selection:bg-accent selection:text-paper overflow-x-hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -37,23 +37,7 @@
   }
 }
 
-::-webkit-scrollbar {
-  width: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--paper);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--faint);
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
-}
-
 html {
+  @apply overflow-x-hidden;
   scroll-behavior: smooth;
 }

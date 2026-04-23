@@ -42,7 +42,7 @@ export function BentoCard({
       }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "group relative overflow-hidden rounded-none border-[0.5px] border-white/10 bg-white/[0.03] backdrop-blur-md p-6 flex flex-col justify-between transition-all duration-500",
+        "group relative overflow-hidden rounded-none border-[0.5px] border-white/10 bg-white/[0.03] backdrop-blur-md p-4 md:p-6 flex flex-col justify-between transition-all duration-500",
         borderColors[borderColor],
         className
       )}

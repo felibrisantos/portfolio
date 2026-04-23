@@ -11,12 +11,12 @@ const NAV_LINKS = [
 
 export const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 flex justify-between items-center bg-paper/80 backdrop-blur-md border-b-[0.5px] border-white/5">
+    <nav className="fixed top-0 left-0 w-full z-50 px-4 md:px-12 py-6 flex justify-between items-center bg-paper/80 backdrop-blur-md border-b-[0.5px] border-white/5">
       <Link href="/" className="flex items-center gap-2 group" aria-label="Brigagão">
         <span className="font-mono text-[10px] text-accent/50 group-hover:text-accent transition-colors">
           [B]
         </span>
-        <span className="text-xs font-bodoni font-bold tracking-[0.2em] uppercase group-hover:tracking-[0.3em] transition-all duration-500">
+        <span className="text-xs font-bodoni font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase group-hover:tracking-[0.3em] transition-all duration-500">
           Brigagão
         </span>
         <span
@@ -24,7 +24,7 @@ export const Navbar = () => {
         />
       </Link>
 
-      <div className="hidden md:flex gap-10 items-center">
+      <div className="hidden md:flex gap-8 lg:gap-10 items-center">
         {NAV_LINKS.map((link) => (
           <Link
             key={link.name}

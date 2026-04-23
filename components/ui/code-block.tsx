@@ -100,7 +100,7 @@ export const CodeBlock = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 + i * 0.03, duration: 0.4 }}
-              style={{ paddingLeft: `${line.indent * 24}px` }}
+              style={{ paddingLeft: `${line.indent * 16}px` }}
               className="whitespace-nowrap flex gap-4"
             >
               <span className="text-white/10 w-4 text-right select-none">{i + 1}</span>

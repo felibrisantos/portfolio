@@ -32,7 +32,7 @@ export const TerminalPreview = () => {
   }, [index]);
 
   return (
-    <div className="relative w-full max-w-[400px] aspect-video bg-surface/80 backdrop-blur-md border border-white/10 rounded-none p-4 font-mono overflow-hidden">
+    <div className="relative w-full max-w-[400px] aspect-video bg-surface/80 backdrop-blur-md border border-white/10 rounded-none p-4 font-mono overflow-hidden mx-auto">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
       
       <div className="flex justify-between items-center mb-4">
