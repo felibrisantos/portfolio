@@ -14,17 +14,17 @@ interface BentoCardProps {
 }
 
 const borderColors = {
-  cyan: "hover:border-cyan/50",
-  gold: "hover:border-gold/50",
-  white: "hover:border-white/50",
-  "heineken-green": "hover:border-[#008200]/50",
+  cyan: "hover:border-accent/40",
+  gold: "hover:border-accent/30", // Re-mapped to accent for consistency
+  white: "hover:border-white/20",
+  "heineken-green": "hover:border-accent/30",
 };
 
 const glowColors = {
-  cyan: "rgba(62, 219, 240, 0.1)",
-  gold: "rgba(200, 162, 78, 0.1)",
-  white: "rgba(255, 255, 255, 0.1)",
-  "heineken-green": "rgba(0, 130, 0, 0.1)",
+  cyan: "rgba(0, 229, 255, 0.05)",
+  gold: "rgba(255, 255, 255, 0.05)",
+  white: "rgba(255, 255, 255, 0.05)",
+  "heineken-green": "rgba(0, 229, 255, 0.05)",
 };
 
 export function BentoCard({
@@ -38,23 +38,28 @@ export function BentoCard({
   return (
     <motion.div
       whileHover={{ 
-        scale: 1.01,
-        boxShadow: `0 0 20px ${glowColors[borderColor]}`,
+        scale: 1.005,
       }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "group relative overflow-hidden rounded-xl border border-white/5 bg-surface p-6 flex flex-col justify-between transition-colors duration-300",
+        "group relative overflow-hidden rounded-none border-[0.5px] border-white/10 bg-white/[0.03] backdrop-blur-md p-6 flex flex-col justify-between transition-all duration-500",
         borderColors[borderColor],
         className
       )}
     >
+      {/* Corner Markers */}
+      <div className="absolute top-0 left-0 w-1 h-1 border-t border-l border-white/0 group-hover:border-accent/50 transition-colors duration-500" />
+      <div className="absolute top-0 right-0 w-1 h-1 border-t border-r border-white/0 group-hover:border-accent/50 transition-colors duration-500" />
+      <div className="absolute bottom-0 left-0 w-1 h-1 border-b border-l border-white/0 group-hover:border-accent/50 transition-colors duration-500" />
+      <div className="absolute bottom-0 right-0 w-1 h-1 border-b border-r border-white/0 group-hover:border-accent/50 transition-colors duration-500" />
+
       <div className="relative z-10 h-full flex flex-col">
         {tags && (
           <div className="mb-4 flex flex-wrap gap-2">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="font-mono text-[10px] tracking-widest uppercase py-1 px-2 border border-white/10 bg-white/5 text-white/60"
+                className="font-mono text-[9px] tracking-[0.2em] uppercase py-1 px-2 border-[0.5px] border-white/10 bg-white/[0.02] text-white/40 group-hover:text-accent/60 group-hover:border-accent/20 transition-colors duration-500"
               >
                 {tag}
               </span>
@@ -67,12 +72,12 @@ export function BentoCard({
         {(title || subtitle) && (
           <div className="mt-auto pt-6">
             {subtitle && (
-              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/40 mb-1">
+              <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-white/30 mb-2">
                 {subtitle}
               </p>
             )}
             {title && (
-              <h3 className="text-xl font-syne group-hover:text-glow transition-all duration-300">
+              <h3 className="text-xl font-bodoni italic group-hover:text-accent transition-colors duration-500">
                 {title}
               </h3>
             )}
@@ -80,16 +85,8 @@ export function BentoCard({
         )}
       </div>
 
-      {/* Subtle Gradient Overlay on Hover */}
-      <div 
-        className={cn(
-          "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-          borderColor === 'cyan' && "bg-radial-[at_top_right,_var(--tw-gradient-stops)] from-cyan/5 via-transparent to-transparent",
-          borderColor === 'gold' && "bg-radial-[at_top_right,_var(--tw-gradient-stops)] from-gold/5 via-transparent to-transparent",
-          borderColor === 'white' && "bg-radial-[at_top_right,_var(--tw-gradient-stops)] from-white/5 via-transparent to-transparent",
-          borderColor === 'heineken-green' && "bg-radial-[at_top_right,_var(--tw-gradient-stops)] from-[#008200]/5 via-transparent to-transparent"
-        )}
-      />
+      {/* Noise Texture Overlay */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
     </motion.div>
   );
 }

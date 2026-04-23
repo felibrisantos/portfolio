@@ -13,41 +13,44 @@ const fadeUp = {
   },
 };
 
+import { CyanGlow } from "@/components/ui/cyan-glow";
+
 export const AiAgents = () => {
   return (
     <section
       id="ia"
-      className="px-6 md:px-12 py-24 md:py-32 border-t-[4px] border-ink"
+      className="relative px-6 md:px-12 py-24 md:py-32 border-t-[1px] border-white/15 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      <CyanGlow className="absolute -bottom-1/4 -left-1/4 opacity-10" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="mb-16 md:mb-20"
         >
-          <span className="font-sora text-[11px] uppercase tracking-[0.3em] text-muted block mb-4">
-            {AI_CONTENT.label}
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent block mb-4">
+            02 // INTELLIGENCE_LAYER
           </span>
-          <h2 className="font-bodoni text-5xl md:text-7xl tracking-tight">
-            {AI_CONTENT.title}
-            <span className="text-accent">.</span>
+          <h2 className="font-bodoni text-6xl md:text-8xl tracking-tighter">
+            Agentic<span className="text-accent italic font-normal">Design</span>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-12"
           >
-            <p className="text-muted leading-relaxed text-base md:text-lg font-sora">
+            <p className="text-muted leading-relaxed text-base md:text-xl font-sora max-w-xl">
               {AI_CONTENT.description}
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-6">
               {AI_CONTENT.protocols.map((protocol, index) => (
                 <motion.div
                   key={protocol}
@@ -55,10 +58,13 @@ export const AiAgents = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + index * 0.1 }}
-                  className="flex items-center gap-3 group"
+                  className="flex items-center gap-4 group"
                 >
-                  <span className="w-4 h-[1px] bg-faint group-hover:bg-accent group-hover:w-6 transition-all duration-300" />
-                  <span className="font-mono text-[10px] tracking-[0.15em] text-muted group-hover:text-ink transition-colors">
+                  <div className="relative">
+                    <span className="w-6 h-[1px] bg-white/10 group-hover:bg-accent group-hover:w-10 transition-all duration-500 block" />
+                    <span className="absolute top-1/2 -translate-y-1/2 -left-1 w-1 h-1 bg-accent/20 rounded-none group-hover:bg-accent transition-colors" />
+                  </div>
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-muted/60 group-hover:text-accent transition-all duration-500">
                     {protocol}
                   </span>
                 </motion.div>
@@ -72,10 +78,12 @@ export const AiAgents = () => {
             viewport={{ once: true }}
             transition={{
               delay: 0.3,
-              duration: 0.8,
+              duration: 1,
               ease: [0.22, 1, 0.36, 1],
             }}
+            className="relative"
           >
+            <div className="absolute -inset-4 border-[0.5px] border-white/5 pointer-events-none" />
             <CodeBlock />
           </motion.div>
         </div>

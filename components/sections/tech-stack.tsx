@@ -7,7 +7,7 @@ export const TechStack = () => {
   return (
     <section
       id="stack"
-      className="px-6 md:px-12 py-24 md:py-32 border-t-[4px] border-accent bg-surface"
+      className="px-6 md:px-12 py-24 md:py-32 border-t-[1px] border-accent/20 bg-paper"
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
@@ -16,11 +16,11 @@ export const TechStack = () => {
           viewport={{ once: true }}
           className="mb-16 md:mb-24"
         >
-          <span className="font-sora text-[11px] uppercase tracking-[0.3em] text-muted block mb-4">
-            03 // Stack Técnico
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent block mb-4">
+            03 // STACK_CORE
           </span>
-          <h2 className="font-bodoni text-5xl md:text-7xl tracking-tight">
-            Tecnologias<span className="text-accent">.</span>
+          <h2 className="font-bodoni text-6xl md:text-8xl tracking-tighter">
+            Architectural<span className="text-accent italic font-normal">Layer</span>
           </h2>
         </motion.div>
 
@@ -32,31 +32,31 @@ export const TechStack = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className={`border-t border-faint py-8 px-6 ${
-                index > 0 ? "lg:border-l" : ""
+              className={`border-t-[0.5px] border-white/10 py-10 px-8 group transition-all duration-500 hover:bg-white/[0.04] backdrop-blur-sm ${
+                index > 0 ? "lg:border-l-[0.5px]" : ""
               }`}
             >
-              <h3 className="font-bodoni text-xl md:text-2xl mb-6 tracking-tight">
+              <h3 className="font-bodoni italic text-2xl md:text-3xl mb-8 tracking-tight group-hover:text-accent transition-colors duration-500">
                 {stack.category}
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="space-y-4">
                 {stack.items.map((item) => (
                   <li
                     key={item}
-                    className="font-sora text-sm text-muted hover:text-ink transition-colors cursor-default flex items-center gap-2"
+                    className="font-mono text-[11px] text-muted hover:text-ink transition-colors cursor-default flex items-center gap-3"
                   >
-                    <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0" />
+                    <span className="w-2 h-[1px] bg-accent/30 group-hover:w-4 transition-all duration-500" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-wrap gap-1.5 mt-6">
+              <div className="flex flex-wrap gap-2 mt-10">
                 {stack.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="font-mono text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-ink text-paper"
+                    className="font-mono text-[9px] tracking-widest uppercase text-accent/60 border-[0.5px] border-accent/20 px-2 py-1"
                   >
-                    {tag}
+                    [{tag}]
                   </span>
                 ))}
               </div>

@@ -15,7 +15,7 @@ export const CyanGlow = ({ className }: { className?: string }) => {
         repeat: Infinity,
         ease: "easeInOut",
       }}
-      className={`pointer-events-none w-[500px] h-[500px] rounded-full blur-[120px] bg-[radial-gradient(circle,_rgba(62,219,240,0.08)_0%,_transparent_70%)] ${className}`}
+      className={`pointer-events-none w-[800px] h-[800px] rounded-full blur-[200px] bg-[radial-gradient(circle,_rgba(0,229,255,0.05)_0%,_transparent_70%)] ${className}`}
     />
   );
 };

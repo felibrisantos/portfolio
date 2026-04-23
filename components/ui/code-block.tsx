@@ -79,37 +79,40 @@ const colorMap: Record<string, string> = {
 
 export const CodeBlock = () => {
   return (
-    <div className="border border-faint bg-paper">
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-faint">
-        <span className="font-mono text-[10px] tracking-wider text-accent uppercase">
-          pipeline.ts
+    <div className="border-[0.5px] border-white/10 bg-white/[0.03] backdrop-blur-md rounded-none">
+      <div className="flex items-center justify-between px-4 py-3 border-b-[0.5px] border-white/10">
+        <span className="font-mono text-[9px] tracking-[0.4em] text-accent/60 uppercase">
+          src/kernel/pipeline.ts
         </span>
         <div className="flex gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-faint" />
-          <div className="w-1.5 h-1.5 rounded-full bg-faint" />
-          <div className="w-1.5 h-1.5 rounded-full bg-faint" />
+          <div className="w-1.5 h-1.5 bg-white/5" />
+          <div className="w-1.5 h-1.5 bg-white/5" />
+          <div className="w-1.5 h-1.5 bg-accent/20" />
         </div>
       </div>
 
-      <div className="p-4 md:p-6 overflow-x-auto">
-        <pre className="font-mono text-[11px] md:text-xs leading-[1.8]">
+      <div className="p-4 md:p-8 overflow-x-auto">
+        <pre className="font-mono text-[10px] md:text-[11px] leading-[2] tracking-tight">
           {CODE_LINES.map((line, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, x: -5 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4 + i * 0.04, duration: 0.3 }}
-              style={{ paddingLeft: `${line.indent * 20}px` }}
-              className="whitespace-nowrap"
+              transition={{ delay: 0.2 + i * 0.03, duration: 0.4 }}
+              style={{ paddingLeft: `${line.indent * 24}px` }}
+              className="whitespace-nowrap flex gap-4"
             >
-              {line.content.length === 0
-                ? "\u00A0"
-                : line.content.map((seg, j) => (
-                    <span key={j} className={colorMap[seg.color]}>
-                      {seg.text}
-                    </span>
-                  ))}
+              <span className="text-white/10 w-4 text-right select-none">{i + 1}</span>
+              <div className="flex">
+                {line.content.length === 0
+                  ? "\u00A0"
+                  : line.content.map((seg, j) => (
+                      <span key={j} className={colorMap[seg.color]}>
+                        {seg.text}
+                      </span>
+                    ))}
+              </div>
             </motion.div>
           ))}
         </pre>

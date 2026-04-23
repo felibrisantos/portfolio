@@ -5,18 +5,23 @@ import { SITE_CONFIG } from "@/lib/constants";
 
 export const Footer = () => {
   return (
-    <footer className="px-6 md:px-12 py-16 md:py-24 border-t-[4px] border-ink">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-        <div className="space-y-6">
-          <h2 className="font-bodoni text-4xl md:text-6xl tracking-tight">
-            {SITE_CONFIG.name}
-            <span className="text-accent">.</span>
-          </h2>
-          <p className="text-muted max-w-xs font-sora text-sm leading-relaxed">
-            Construindo interfaces que desafiam o comum e sistemas que operam no
-            limite.
+    <footer className="px-6 md:px-12 py-16 md:py-24 border-t-[0.5px] border-white/10 bg-surface">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-16">
+        <div className="space-y-8">
+          <div className="flex flex-col gap-2">
+            <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-accent/50">
+              [ CONTACT_PROTOCOL ]
+            </span>
+            <h2 className="font-bodoni italic text-5xl md:text-7xl tracking-tighter">
+              {SITE_CONFIG.name}
+            </h2>
+          </div>
+          
+          <p className="text-muted/60 max-w-sm font-sora text-sm leading-relaxed">
+            Constructing interfaces that defy the ordinary and systems that operate at the edge of possibility.
           </p>
-          <div className="flex gap-6">
+          
+          <div className="flex gap-8">
             {[
               { name: "LinkedIn", href: SITE_CONFIG.social.linkedin },
               { name: "GitHub", href: SITE_CONFIG.social.github },
@@ -30,8 +35,8 @@ export const Footer = () => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ x: 3 }}
-                className="font-sora text-[11px] uppercase tracking-[0.15em] text-muted hover:text-accent transition-colors"
+                whileHover={{ x: 5, color: "var(--accent)" }}
+                className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted/40 transition-all duration-300"
               >
                 {social.name}
               </motion.a>
@@ -39,13 +44,22 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="text-left md:text-right space-y-2">
-          <p className="font-mono text-[10px] tracking-[0.2em] text-faint uppercase">
-            &copy; {new Date().getFullYear()} {SITE_CONFIG.fullName}
-          </p>
-          <p className="font-mono text-[10px] tracking-[0.2em] text-faint uppercase">
-            Todos os direitos reservados
-          </p>
+        <div className="flex flex-col items-start md:items-end gap-6 w-full md:w-auto">
+          <div className="grid grid-cols-2 gap-x-12 gap-y-2 font-mono text-[9px] text-muted/30 uppercase tracking-[0.2em] w-full">
+            <span>VER: 2.0.4-LTS</span>
+            <span className="text-right">LOCAL: GRU-INTL</span>
+            <span>OS: NEURAL-01</span>
+            <span className="text-right">ENC: AES-256</span>
+          </div>
+          
+          <div className="text-left md:text-right space-y-2 border-t-[0.5px] border-white/5 pt-6 w-full">
+            <p className="font-mono text-[10px] tracking-[0.3em] text-muted/20 uppercase">
+              &copy; {new Date().getFullYear()} {SITE_CONFIG.fullName.toUpperCase()}
+            </p>
+            <p className="font-mono text-[10px] tracking-[0.3em] text-accent/20 uppercase">
+              ALL_RIGHTS_RESERVED
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0A0A0A;
-  --color-paper: #FAFAF7;
-  --color-surface: #F0EFEB;
-  --color-accent: #E63322;
-  --color-muted: #8A8A87;
-  --color-faint: #D4D3CF;
+  --color-ink: #FFFFFF;
+  --color-paper: #09090B;
+  --color-surface: #121215;
+  --color-accent: #00E5FF;
+  --color-muted: #888888;
+  --color-faint: rgba(255, 255, 255, 0.12);
 
   --font-bodoni: var(--font-bodoni);
   --font-sora: var(--font-sora);
@@ -15,30 +15,25 @@
 }
 
 :root {
-  --ink: #0A0A0A;
-  --paper: #FAFAF7;
-  --surface: #F0EFEB;
-  --accent: #E63322;
-  --muted: #8A8A87;
-  --faint: #D4D3CF;
+  --ink: #FFFFFF;
+  --paper: #09090B;
+  --surface: #121215;
+  --accent: #00E5FF;
+  --muted: #888888;
+  --faint: rgba(255, 255, 255, 0.12);
 }
 
 @layer base {
   * {
-    @apply border-faint;
+    @apply border-faint rounded-none!;
   }
 
   body {
-    @apply bg-paper text-ink font-sora antialiased;
+    @apply bg-paper text-ink font-sora antialiased selection:bg-accent selection:text-paper;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bodoni tracking-tight;
-  }
-
-  ::selection {
-    background: var(--accent);
-    color: var(--paper);
   }
 }
 
