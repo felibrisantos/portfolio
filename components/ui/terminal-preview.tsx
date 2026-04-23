@@ -1,0 +1,90 @@
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const LOG_MESSAGES = [
+  "CYMA_ENGINE_ACTIVE",
+  "NEURAL_MODELS_SYNCED",
+  "PROMPT_VERIFIED_STRICT",
+  "CORE_KERNEL_LOADED",
+  "VIRTUAL_DOM_SYNCING",
+  "DATA_STREAM_ESTABLISHED",
+  "AGENT_MESH_ONLINE",
+  "SECURE_LAYER_STABLE",
+];
+
+export const TerminalPreview = () => {
+  const [logs, setLogs] = useState<string[]>([]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLogs((prev) => {
+        const nextLogs = [...prev, LOG_MESSAGES[index]];
+        if (nextLogs.length > 5) return nextLogs.slice(1);
+        return nextLogs;
+      });
+      setIndex((prev) => (prev + 1) % LOG_MESSAGES.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [index]);
+
+  return (
+    <div className="relative w-full max-w-[400px] aspect-video bg-black/40 border border-white/5 rounded-sm p-4 font-mono overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#C8A24E]/20 to-transparent" />
+      
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex gap-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+        </div>
+        <div className="text-[10px] text-white/40 uppercase tracking-widest">VISUALIZAÇÃO_NÚCLEO_AI</div>
+      </div>
+
+      <div className="space-y-1.5">
+        <AnimatePresence mode="popLayout">
+          {logs.map((log, i) => (
+            <motion.div
+              key={`${log}-${i}`}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="text-[10px] flex items-center gap-2"
+            >
+              <span className="text-[#C8A24E]">›</span>
+              <span className="text-white/70">{log}</span>
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="w-1 h-3 bg-[#C8A24E]/50"
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      <div className="absolute bottom-4 right-4">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="w-12 h-12 rounded-full border border-[#C8A24E]/20 flex items-center justify-center"
+        >
+          <div className="w-6 h-6 rounded-full bg-[#C8A24E]/10 blur-sm" />
+        </motion.div>
+      </div>
+
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%]" />
+    </div>
+  );
+};
