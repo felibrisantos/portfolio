@@ -20,7 +20,7 @@ export const TechStack = () => {
             03 // STACK_CORE
           </span>
           <h2 className="font-bodoni text-4xl md:text-6xl lg:text-8xl tracking-tighter">
-            Architectural<span className="text-accent italic font-normal">Layer</span>
+            Camada<span className="text-accent italic font-normal">Arquitetural</span>
           </h2>
         </motion.div>
 

@@ -34,7 +34,7 @@ export const AiAgents = () => {
             02 // INTELLIGENCE_LAYER
           </span>
           <h2 className="font-bodoni text-4xl md:text-6xl lg:text-8xl tracking-tighter">
-            Agentic<span className="text-accent italic font-normal">Design</span>
+            Design<span className="text-accent italic font-normal">Agêntico</span>
           </h2>
         </motion.div>
 

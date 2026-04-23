@@ -29,7 +29,7 @@ export function Ecosystem() {
             01 // OUTPUT_REGISTRY
           </span>
           <h2 className="font-bodoni text-4xl md:text-6xl lg:text-8xl tracking-tighter">
-            System<span className="text-accent italic font-normal">Ecology</span>
+            Ecologia<span className="text-accent italic font-normal">Sistema</span>
           </h2>
         </motion.div>
 
@@ -92,8 +92,8 @@ export function Ecosystem() {
             </svg>
           </div>
           <p className="font-bodoni text-xl md:text-4xl text-muted italic max-w-3xl leading-tight tracking-tight px-4">
-            &ldquo;Complexity is the silent enemy of excellence.
-            We build to endure, we simplify to evolve.&rdquo;
+            &ldquo;A complexidade é o inimigo silencioso da excelência.
+            Construímos para durar, simplificamos para evoluir.&rdquo;
           </p>
           <div className="mt-8 font-mono text-[9px] uppercase tracking-[0.5em] text-accent/40">
             CORE_PRINCIPLE_01

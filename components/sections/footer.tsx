@@ -18,7 +18,7 @@ export const Footer = () => {
           </div>
           
           <p className="text-muted/60 max-w-sm font-sora text-sm leading-relaxed">
-            Constructing interfaces that defy the ordinary and systems that operate at the edge of possibility.
+            Construindo interfaces que desafiam o comum e sistemas que operam no limite do possível.
           </p>
           
           <div className="flex gap-6 md:gap-8">

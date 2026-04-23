@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
   name: "Brigagão",
   fullName: "Felipe Brigagão",
-  role: "Fullstack & AI Architect",
+  role: "Arquiteto Fullstack & IA",
   email: "felipe@brigagao.tech",
   social: {
     linkedin: "https://linkedin.com/in/felibrisantos",
@@ -10,7 +10,7 @@ export const SITE_CONFIG = {
 };
 
 export const HERO_CONTENT = {
-  label: "Fullstack & AI Architect",
+  label: "Arquiteto Fullstack & IA",
   firstName: "Felipe",
   lastName: "Brigagão",
   description:
@@ -69,7 +69,7 @@ export const AI_CONTENT = {
   description:
     "Experiência prática na construção de motores de inteligência utilizando Claude e OpenAI. Foco em arquiteturas RAG e integração via Model Context Protocol (MCP).",
   protocols: [
-    "PROTOCOLO_MCP_IMPLEMENTADO",
+    "MCP_PROTOCOL_IMPLEMENTED",
     "GOOGLE_GENAI_INTEGRATION",
     "MULTI_AGENT_REASONING",
   ],
