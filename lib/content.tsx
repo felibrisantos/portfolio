@@ -108,7 +108,7 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     id: "cyma-architect",
-    year: "2025",
+    year: "2025-2026",
     client: { pt: "CYMA Digital", en: "CYMA Digital" },
     title: { pt: "CYMA Architect Agent", en: "CYMA Architect Agent" },
     tag: { pt: "Orquestração de agentes", en: "Agent orchestration" },
@@ -125,7 +125,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "cymatrix",
-    year: "2025",
+    year: "2026",
     client: { pt: "CYMA Digital", en: "CYMA Digital" },
     title: { pt: "CYMATRIX", en: "CYMATRIX" },
     tag: { pt: "Operações em tempo real", en: "Real-time operations" },
@@ -142,7 +142,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "cymadisplay",
-    year: "2024",
+    year: "2025-2026",
     client: { pt: "CYMA Digital", en: "CYMA Digital" },
     title: { pt: "CYMADISPLAY", en: "CYMADISPLAY" },
     tag: { pt: "Plataforma comercial", en: "Commerce platform" },
@@ -159,7 +159,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "portal-tm-hnk",
-    year: "2023–2024",
+    year: "2025–2026",
     client: {
       pt: "Desenvolvido na Abdou para Heineken Brasil",
       en: "Developed at Abdou for Heineken Brasil",
