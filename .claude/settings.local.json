@@ -1,8 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)",
-      "Bash(git show *)"
+      "Skill(git-commit)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
