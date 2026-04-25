@@ -148,12 +148,12 @@ export const PROJECTS: Project[] = [
     tag: { pt: "Plataforma comercial", en: "Commerce platform" },
     role: { pt: "Fullstack", en: "Fullstack" },
     summary: {
-      pt: "Plataforma completa de catálogo, conteúdo e checkout para displays LED. SEO técnico, pagamentos com Stripe e pipeline de email transacional.",
-      en: "Catalog, content and checkout platform for LED displays. Technical SEO, Stripe payments and a transactional email pipeline.",
+      pt: "Plataforma completa de catálogo, conteúdo e checkout para digital signage em telas. SEO técnico, pagamentos com Stripe e pipeline de email transacional.",
+      en: "Catalog, content and checkout platform for screen-based digital signage. Technical SEO, Stripe payments and a transactional email pipeline.",
     },
     outcome: {
-      pt: "Produto ativo — displays instalados em todo o Brasil.",
-      en: "Shipped product — displays installed across Brazil.",
+      pt: "Produto ativo — telas instaladas em todo o Brasil.",
+      en: "Shipped product — screens installed across Brazil.",
     },
     stack: ["Next.js", "Prisma", "Stripe", "SendGrid"],
   },
