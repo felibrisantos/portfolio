@@ -4,7 +4,7 @@ type Bi = { pt: string; en: string };
 
 export const SITE = {
   name: "Felipe Brigagão",
-  email: "felipe@brigagao.tech",
+  email: "felibrisantos@gmail.com",
   location: "São Paulo, Brasil",
   social: {
     linkedin: "https://linkedin.com/in/felibrisantos",
