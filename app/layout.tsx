@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Cursor } from "@/components/cursor";
 
-const fraunces = Fraunces({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  axes: ["opsz", "SOFT"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const interTight = Inter_Tight({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter-tight",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -40,8 +40,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${interTight.variable} ${jetbrains.variable}`}>
-      <body>{children}</body>
+    <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable} scroll-smooth`}>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+      </head>
+      <body className="bg-grid-pattern font-body text-[#0f172a] antialiased selection:bg-[#0038FF] selection:text-white">
+        <div className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.035] mix-blend-difference">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
+            <filter id="noiseFilter">
+              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+          </svg>
+        </div>
+        {children}
+        <Cursor />
+      </body>
     </html>
   );
 }
