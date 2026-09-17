@@ -1,4 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <rect width="180" height="180" fill="#fafaf7"></rect>
-  <text x="90" y="128" font-family="Fraunces, Georgia, serif" font-size="120" font-weight="300" font-style="italic" text-anchor="middle" fill="oklch(0.58 0.12 38)">B</text>
+  <rect width="180" height="180" fill="#0038FF" />
+  <text x="90" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="-4">FB</text>
 </svg>
