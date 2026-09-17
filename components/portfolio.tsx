@@ -2,14 +2,14 @@
 
 import { useLang } from "@/lib/use-lang";
 import { COPY, PROJECTS, SITE, STACK } from "@/lib/content";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { User, ArrowUpRight, ArrowRight, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
 
 export function Portfolio() {
   const { lang, toggle } = useLang();
   const t = COPY[lang];
 
-  const sectionVariants = {
+  const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
@@ -18,7 +18,7 @@ export function Portfolio() {
     },
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
