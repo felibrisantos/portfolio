@@ -30,7 +30,7 @@ export function Portfolio() {
     <>
 
       {/* DESKTOP HEADER */}
-      <header className="hidden md:flex fixed top-0 left-0 w-full z-50 bg-white border-b-[2.5px] border-[#0038FF] [box-shadow:0px_3px_0px_#0038FF]">
+      <header className="hidden md:flex fixed top-0 left-0 w-full z-50 bg-white border-b-[2.5px] border-black [box-shadow:0px_3px_0px_#0038FF]">
         <div className="h-16 w-full max-w-[1400px] mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-4 md:gap-6">
             <a
@@ -39,7 +39,7 @@ export function Portfolio() {
             >
               Felipe Brigagão
             </a>
-            <div className="hidden lg:flex items-center gap-2 border-[2px] border-[#0038FF] px-2.5 py-1 bg-[#eff6ff] [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-y-0.5">
+            <div className="hidden lg:flex items-center gap-2 border-[2px] border-black px-2.5 py-1 bg-[#eff6ff] [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-y-0.5">
               <span className="w-2 h-2 bg-[#0038FF] beacon-pulse relative"></span>
               <span className="font-code text-xs uppercase text-[#0038FF] font-bold tracking-wider">
                 {lang === "pt" ? "Disponível Q3-Q4 2026 / São Paulo" : "Available H2 2026 / São Paulo"}
@@ -61,7 +61,7 @@ export function Portfolio() {
                 [04] {t.nav.contact}
               </a>
             </nav>
-            <div className="flex items-center border-l-[2px] border-[#0038FF] pl-4 gap-2 font-code text-xs uppercase font-bold">
+            <div className="flex items-center border-l-[2px] border-black pl-4 gap-2 font-code text-xs uppercase font-bold">
               <button
                 className={`${lang === "pt" ? "text-[#0038FF]" : "text-slate-500"} hover:text-[#0f172a] transition-colors cursor-pointer`}
                 onClick={() => lang !== "pt" && toggle()}
@@ -76,7 +76,7 @@ export function Portfolio() {
                 EN
               </button>
             </div>
-            <div className="w-8 h-8 rounded-none border-[2px] border-[#0038FF] bg-[#0038FF] flex items-center justify-center shrink-0 [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer" onClick={() => document.getElementById('contact')?.scrollIntoView()} role="button">
+            <div className="w-8 h-8 rounded-none border-[2px] border-black bg-[#0038FF] flex items-center justify-center shrink-0 [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer" onClick={() => document.getElementById('contact')?.scrollIntoView()} role="button">
               <User size={18} className="text-white" strokeWidth={2.5} />
             </div>
           </div>
@@ -90,7 +90,7 @@ export function Portfolio() {
             <span className="font-display font-extrabold text-[14.5px] tracking-tight uppercase text-black">
               FELIPE BRIGAGÃO
             </span>
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#0038FF]/10 border border-[#0038FF]/40 font-code text-[8.5px] font-bold text-[#0038FF] uppercase">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#0038FF]/10 border border-black/40 font-code text-[8.5px] font-bold text-[#0038FF] uppercase">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0038FF] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#0038FF]"></span>
@@ -119,7 +119,7 @@ export function Portfolio() {
             <span className="text-black/30">|</span>
             <span className="text-black/70">SP [UTC-3]</span>
           </div>
-          <div className="flex items-center gap-1 shrink-0 font-bold text-[#0038FF] bg-white px-1.5 py-0.5 border border-[#0038FF]/30">
+          <div className="flex items-center gap-1 shrink-0 font-bold text-[#0038FF] bg-white px-1.5 py-0.5 border border-black/30">
             <span>STATUS: ■ {lang === 'pt' ? 'OPERACIONAL' : 'OPERATIONAL'}</span>
           </div>
         </div>
@@ -158,7 +158,7 @@ export function Portfolio() {
         <div className="w-full max-w-[1360px] mx-auto px-4 md:px-8 py-2 md:py-10 space-y-12 md:space-y-24">
           
           {/* DESKTOP LIVE TELEMETRY TICKER BAR */}
-          <motion.header variants={sectionVariants} className="hidden md:flex w-full bg-white border-[2.5px] border-[#0038FF] p-2 [box-shadow:4px_4px_0px_#0038FF] items-center justify-between gap-3 overflow-hidden">
+          <motion.header variants={sectionVariants} className="hidden md:flex w-full bg-white border-[2.5px] border-black p-2 [box-shadow:4px_4px_0px_#0038FF] items-center justify-between gap-3 overflow-hidden">
             <div className="flex-1 overflow-hidden bg-[#0038FF] text-white border-[2px] border-black flex items-center relative h-10">
               {/* Infinite Marquee */}
               <div className="animate-marquee flex items-center absolute left-0 h-full">
@@ -182,10 +182,10 @@ export function Portfolio() {
             </div>
             {/* Nav anchors on desktop ticket bar */}
             <div className="flex flex-wrap items-center gap-2 shrink-0 relative z-10 bg-white pl-2">
-              <a className="btn-mechanical-sm px-3 py-1.5 bg-white border-[2px] border-[#0038FF] hover:bg-[#eff6ff] hover:text-[#0038FF] font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold [box-shadow:2px_2px_0px_#0038FF]" href="#work">
+              <a className="btn-mechanical-sm px-3 py-1.5 bg-white border-[2px] border-black hover:bg-[#eff6ff] hover:text-[#0038FF] font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold [box-shadow:2px_2px_0px_#0038FF]" href="#work">
                 [01] {t.nav.work}
               </a>
-              <a className="btn-mechanical-sm px-3 py-1.5 bg-[#0038FF] border-[2px] border-[#0038FF] font-code text-xs uppercase tracking-wider text-white hover:bg-[#0028c2] [box-shadow:2px_2px_0px_#0038FF] font-bold" href="#contact">
+              <a className="btn-mechanical-sm px-3 py-1.5 bg-[#0038FF] border-[2px] border-black font-code text-xs uppercase tracking-wider text-white hover:bg-[#0028c2] [box-shadow:2px_2px_0px_#0038FF] font-bold" href="#contact">
                 [04] {t.nav.contact}
               </a>
             </div>
@@ -194,7 +194,7 @@ export function Portfolio() {
           {/* HERO SECTION */}
           <motion.section variants={sectionVariants} className="space-y-6 md:space-y-8 relative flex flex-col md:block pt-2 md:pt-0">
             
-            <div className="hidden md:grid w-full bg-white border-[2.5px] border-[#0038FF] [box-shadow:4px_4px_0px_#0038FF] grid-cols-4 divide-x divide-[#0038FF] font-code text-sm">
+            <div className="hidden md:grid w-full bg-white border-[2.5px] border-black [box-shadow:4px_4px_0px_#0038FF] grid-cols-4 divide-x divide-black font-code text-sm">
               <div className="p-3.5 flex items-center justify-between bg-white transition-colors duration-150 hover:bg-[#eff6ff]">
                 <span className="text-[#0038FF] font-bold">{lang === "pt" ? "№ REGISTRO" : "REGISTRY №"}</span>
                 <span className="text-[#0f172a] font-bold">001 — INDEX</span>
@@ -227,12 +227,12 @@ export function Portfolio() {
               </span>
             </div>
 
-            <div className="hidden md:block p-12 bg-white border-[3px] border-[#0038FF] [box-shadow:6px_6px_0px_#0038FF] relative overflow-hidden transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
+            <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] relative overflow-hidden transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="absolute -right-10 -top-12 opacity-[0.07] pointer-events-none select-none font-display text-[220px] font-bold leading-none text-[#0038FF] transition-transform duration-500 hover:scale-105">
                 FB//01
               </div>
               <div className="space-y-4 relative z-10">
-                <div className="inline-block px-3 py-1 bg-[#eff6ff] border-[2px] border-[#0038FF] font-code text-xs text-[#0038FF] tracking-widest uppercase font-bold [box-shadow:2px_2px_0px_#0038FF]">
+                <div className="inline-block px-3 py-1 bg-[#eff6ff] border-[2px] border-black font-code text-xs text-[#0038FF] tracking-widest uppercase font-bold [box-shadow:2px_2px_0px_#0038FF]">
                   {lang === "pt" ? "ARQUITETURA DE SISTEMAS CRÍTICOS & MODELOS GENERATIVOS" : "CRITICAL SYSTEMS ARCHITECTURE & GENERATIVE MODELS"}
                 </div>
                 <h1 className="font-display text-6xl md:text-7xl uppercase tracking-tight text-[#0f172a] font-bold leading-none break-words">
@@ -243,8 +243,11 @@ export function Portfolio() {
                 </p>
               </div>
 
-              <div className="mt-8 pt-8 border-t-[2.5px] border-[#0038FF] grid grid-cols-12 gap-6 items-center">
-                <div className="col-span-8 bg-[#f8fafc] border-[2px] border-[#0038FF] p-6 [box-shadow:4px_4px_0px_#0038FF] transition-transform duration-200 hover:-translate-y-0.5">
+              <div className="mt-8 pt-8 border-t-[2.5px] border-black grid grid-cols-12 gap-6 items-center">
+                <div className="col-span-8 bg-[#f8fafc] border-[2px] border-black p-6 [box-shadow:4px_4px_0px_#0038FF] transition-transform duration-200 hover:-translate-y-0.5 relative">
+                  <div className="absolute -top-3.5 right-6 bg-[#0038FF] text-white font-code text-xs font-bold px-3 py-0.5 border-[1.5px] border-black [box-shadow:2px_2px_0px_#000]">
+                    MANIFESTO // 01
+                  </div>
                   <p className="font-body text-lg text-[#0f172a] font-semibold leading-relaxed">
                     “{t.positioning}”
                   </p>
@@ -256,10 +259,10 @@ export function Portfolio() {
                   </p>
                 </div>
                 <div className="col-span-4 flex flex-col gap-3">
-                  <a className="btn-mechanical flex items-center justify-center gap-2 w-full py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-[#0038FF] hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF]" href="#contact">
+                  <a className="btn-mechanical flex items-center justify-center gap-2 w-full py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF]" href="#contact">
                     {lang === "pt" ? "INICIAR CONVERSA" : "START A CONVERSATION"} <ArrowRight size={18} strokeWidth={2.5} />
                   </a>
-                  <a className="btn-mechanical w-full text-center py-3 px-6 bg-white border-[2px] border-[#0038FF] font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold hover:bg-[#eff6ff] [box-shadow:3px_3px_0px_#0038FF]" href="#work">
+                  <a className="btn-mechanical w-full text-center py-3 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold hover:bg-[#eff6ff] [box-shadow:3px_3px_0px_#0038FF]" href="#work">
                     {lang === "pt" ? "EXPLORAR PROJETOS" : "EXPLORE PROJECTS"} [04] ↓
                   </a>
                 </div>
@@ -325,19 +328,19 @@ export function Portfolio() {
             className="space-y-4 md:space-y-8" 
             id="work"
           >
-            <motion.div variants={sectionVariants} className="hidden md:flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-[2.5px] border-[#0038FF] pb-4">
+            <motion.div variants={sectionVariants} className="hidden md:flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-[2.5px] border-black pb-4">
               <div>
                 <span className="font-code text-xs text-[#0038FF] uppercase tracking-widest block font-bold">§ 01 // {lang === "pt" ? "TELEMETRIA DE CASOS" : "CASE TELEMETRY"}</span>
                 <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.sections.featured}</h2>
               </div>
-              <div className="flex items-center gap-2 font-code text-sm text-[#0f172a] font-bold border-[2px] border-[#0038FF] px-3 py-1.5 bg-[#eff6ff] [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-y-0.5">
+              <div className="flex items-center gap-2 font-code text-sm text-[#0f172a] font-bold border-[2px] border-black px-3 py-1.5 bg-[#eff6ff] [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-y-0.5">
                 <span className="w-2.5 h-2.5 bg-[#0038FF] beacon-pulse relative shrink-0"></span>
                 <span>{PROJECTS.length} {lang === "pt" ? "SISTEMAS HOMOLOGADOS EM PRODUÇÃO" : "SYSTEMS IN PRODUCTION"}</span>
               </div>
             </motion.div>
 
             <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-1.5 pt-4">
-              <div className="self-start inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#0038FF]/10 neo-border-sm border-[#0038FF]">
+              <div className="self-start inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#0038FF]/10 neo-border-sm border-black">
                 <span className="w-1.5 h-1.5 bg-[#0038FF] shrink-0"></span>
                 <span className="font-code text-[9px] font-bold text-[#0038FF] uppercase tracking-wide">
                   ■ {PROJECTS.length} {lang === "pt" ? "SISTEMAS EM PRODUÇÃO" : "SYSTEMS IN PRODUCTION"}
@@ -353,18 +356,18 @@ export function Portfolio() {
                 <motion.article 
                   key={p.id}
                   variants={sectionVariants}
-                  className="project-card card-mechanical cursor-none bg-white neo-border md:border-[2.5px] border-black md:border-[#0038FF] neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col justify-between rounded-none hover:bg-slate-50 transition-colors"
+                  className="project-card card-mechanical cursor-none bg-white neo-border md:border-[2.5px] border-black md:border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col justify-between rounded-none hover:bg-slate-50 transition-colors"
                 >
-                  <div className="border-b-2 md:border-b-[2px] border-black md:border-[#0038FF] bg-slate-100 md:bg-[#eff6ff] px-3 py-2 md:p-3.5 flex items-center justify-between gap-2 font-code text-xs uppercase">
+                  <div className="border-b-2 md:border-b-[2px] border-black md:border-black bg-slate-100 md:bg-[#eff6ff] px-3 py-2 md:p-3.5 flex items-center justify-between gap-2 font-code text-xs uppercase">
                     <span className="text-black md:text-[#0038FF] font-bold text-[11px] md:text-xs">[{String(i + 1).padStart(2, "0")}] {p.title[lang]}</span>
-                    <span className="px-2 md:px-2.5 py-0.5 text-white font-bold text-[9px] md:text-xs border border-black md:border-[#0038FF] md:[box-shadow:1.5px_1.5px_0px_#0038FF] bg-[#0038FF]">
+                    <span className="px-2 md:px-2.5 py-0.5 text-white font-bold text-[9px] md:text-xs border border-black md:border-black md:[box-shadow:1.5px_1.5px_0px_#0038FF] bg-[#0038FF]">
                       {p.tag[lang]}
                     </span>
                   </div>
                   <div className="p-3.5 md:p-6 space-y-4 md:space-y-5 flex-1 bg-transparent">
                     <div className="flex flex-wrap gap-1 md:gap-2">
                       {p.stack.map((s, idx) => (
-                        <span key={s} className={`font-code text-[9.5px] md:text-[11px] font-bold px-1.5 md:px-2 py-0.5 md:py-1 uppercase cursor-default ${idx === p.stack.length - 1 ? 'bg-[#0038FF] text-white border border-[#0038FF]' : 'bg-slate-50 md:bg-[#f8fafc] border-[1.5px] border-black/30 md:border-[#0038FF] text-black md:text-[#0f172a]'}`}>
+                        <span key={s} className={`font-code text-[9.5px] md:text-[11px] font-bold px-1.5 md:px-2 py-0.5 md:py-1 uppercase cursor-default ${idx === p.stack.length - 1 ? 'bg-[#0038FF] text-white border border-black' : 'bg-slate-50 md:bg-[#f8fafc] border-[1.5px] border-black/30 md:border-black text-black md:text-[#0f172a]'}`}>
                           {s}
                         </span>
                       ))}
@@ -375,11 +378,11 @@ export function Portfolio() {
                     <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
                       {p.summary[lang]}
                     </p>
-                    <div className="p-2.5 md:p-3.5 bg-white md:bg-[#eff6ff] neo-border-sm md:border-[1.5px] md:border-l-[4px] border-black/40 md:border-[#0038FF] font-code text-[12.5px] md:text-sm text-black transition-all duration-200 md:hover:bg-[#e0edff]">
+                    <div className="p-2.5 md:p-3.5 bg-white md:bg-[#eff6ff] neo-border-sm md:border-[1.5px] md:border-l-[4px] border-black/40 md:border-black font-code text-[12.5px] md:text-sm text-black transition-all duration-200 md:hover:bg-[#e0edff]">
                       <span className="text-black md:text-[#0038FF] font-bold text-[9.5px] md:text-xs block md:inline mb-0.5 md:mb-0">{lang === "pt" ? "IMPACTO:" : "IMPACT:"}</span> <span className="font-semibold">{p.outcome[lang]}</span>
                     </div>
                   </div>
-                  <div className="border-t-2 md:border-t-[2px] border-black md:border-[#0038FF] px-3 py-1.5 md:p-3.5 bg-slate-100 md:bg-[#f8fafc] flex items-center justify-between font-code text-[9.5px] md:text-xs">
+                  <div className="border-t-2 md:border-t-[2px] border-black md:border-black px-3 py-1.5 md:p-3.5 bg-slate-100 md:bg-[#f8fafc] flex items-center justify-between font-code text-[9.5px] md:text-xs">
                     <div className="flex items-center gap-1 md:gap-2 text-black md:text-[#0038FF] font-extrabold md:font-bold">
                       <span className="hidden md:inline-block w-2 h-2 bg-[#0038FF] beacon-pulse relative shrink-0"></span>
                       <span className="md:hidden">■</span>
@@ -401,7 +404,7 @@ export function Portfolio() {
             className="space-y-4 md:space-y-6 relative z-30" 
             id="research"
           >
-            <div className="hidden md:block border-b-[2.5px] border-[#0038FF] pb-4">
+            <div className="hidden md:block border-b-[2.5px] border-black pb-4">
               <span className="font-code text-xs text-[#0038FF] uppercase tracking-widest block font-bold">§ 02 // {lang === "pt" ? "PRODUÇÃO CIENTÍFICA & MODELAGEM" : "SCIENTIFIC RESEARCH & MODELING"}</span>
               <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.researchHeading}</h2>
             </div>
@@ -416,22 +419,22 @@ export function Portfolio() {
               </h2>
             </div>
 
-            <div className="bg-white neo-border md:border-[2.5px] border-black md:border-[#0038FF] neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-10 space-y-4 md:space-y-8 rounded-none md:transition-shadow md:hover:[box-shadow:8px_8px_0px_#0038FF]">
-              <div className="flex flex-wrap md:grid md:grid-cols-4 gap-1.5 md:gap-2 font-code text-[9px] md:text-xs uppercase md:border-b-[2px] border-black md:border-[#0038FF] md:pb-5">
-                <div className="px-2 py-0.5 md:p-2.5 bg-slate-100 md:bg-[#f8fafc] neo-border-sm md:border-[1.5px] md:border-[#0038FF] text-black md:text-[#0f172a] font-bold text-center">
+            <div className="bg-white neo-border md:border-[2.5px] border-black md:border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-10 space-y-4 md:space-y-8 rounded-none md:transition-shadow md:hover:[box-shadow:8px_8px_0px_#0038FF]">
+              <div className="flex flex-wrap md:grid md:grid-cols-4 gap-1.5 md:gap-2 font-code text-[9px] md:text-xs uppercase md:border-b-[2px] border-black md:border-black md:pb-5">
+                <div className="px-2 py-0.5 md:p-2.5 bg-slate-100 md:bg-[#f8fafc] neo-border-sm md:border-[1.5px] md:border-black text-black md:text-[#0f172a] font-bold text-center">
                   [ ICMR — VOL. 05, № 03 ]
                 </div>
-                <div className="px-2 py-0.5 md:p-2.5 bg-slate-100 md:bg-[#f8fafc] neo-border-sm md:border-[1.5px] md:border-[#0038FF] text-black md:text-[#0f172a] font-bold text-center">
+                <div className="px-2 py-0.5 md:p-2.5 bg-slate-100 md:bg-[#f8fafc] neo-border-sm md:border-[1.5px] md:border-black text-black md:text-[#0f172a] font-bold text-center">
                   [ {lang === "pt" ? "DEZEMBRO / 2024" : "DECEMBER / 2024"} ]
                 </div>
-                <div className="px-2 py-0.5 md:p-2.5 bg-[#0038FF] text-white neo-border-sm md:border-[1.5px] border-black md:border-[#0038FF] font-bold text-center md:[box-shadow:1.5px_1.5px_0px_#0038FF]">
+                <div className="px-2 py-0.5 md:p-2.5 bg-[#0038FF] text-white neo-border-sm md:border-[1.5px] border-black md:border-black font-bold text-center md:[box-shadow:1.5px_1.5px_0px_#0038FF]">
                   [ {t.paperKind} ]
                 </div>
-                <a className="md:hidden self-start inline-flex items-center gap-1 px-2.5 py-1 bg-slate-50 font-code text-[10.5px] font-bold text-[#0038FF] border border-[#0038FF]/40 active:underline" href="https://doi.org/10.54033/icmrv5n3-043" rel="noopener noreferrer" target="_blank">
+                <a className="md:hidden self-start inline-flex items-center gap-1 px-2.5 py-1 bg-slate-50 font-code text-[10.5px] font-bold text-[#0038FF] border border-black/40 active:underline" href="https://doi.org/10.54033/icmrv5n3-043" rel="noopener noreferrer" target="_blank">
                   <span>DOI: 10.54033/icmrv5n3-043</span>
                   <ArrowUpRight size={13} strokeWidth={3} />
                 </a>
-                <a className="hidden md:flex btn-mechanical-sm p-2.5 bg-white border-[1.5px] border-[#0038FF] text-[#0038FF] font-bold hover:bg-[#0038FF] hover:text-white items-center justify-center gap-1 [box-shadow:2px_2px_0px_#0038FF]" href="https://doi.org/10.54033/icmrv5n3-043" rel="noopener noreferrer" target="_blank">
+                <a className="hidden md:flex btn-mechanical-sm p-2.5 bg-white border-[1.5px] border-black text-[#0038FF] font-bold hover:bg-[#0038FF] hover:text-white items-center justify-center gap-1 [box-shadow:2px_2px_0px_#0038FF]" href="https://doi.org/10.54033/icmrv5n3-043" rel="noopener noreferrer" target="_blank">
                   DOI: 10.54033/icmrv5n3-043 <ArrowUpRight size={14} strokeWidth={3} />
                 </a>
               </div>
@@ -467,7 +470,7 @@ export function Portfolio() {
                   </p>
                 </div>
 
-                <div className="hidden md:block card-interactive-subtle lg:col-span-4 bg-[#eff6ff] border-[2px] border-[#0038FF] p-6 [box-shadow:4px_4px_0px_#0038FF] space-y-3">
+                <div className="hidden md:block card-interactive-subtle lg:col-span-4 bg-[#eff6ff] border-[2px] border-black p-6 [box-shadow:4px_4px_0px_#0038FF] space-y-3">
                   <span className="font-code text-xs text-[#0f172a] uppercase block font-bold">{lang === "pt" ? "MÉTRICA DE VALIDAÇÃO" : "VALIDATION METRIC"}</span>
                   <div className="font-display text-5xl text-[#0038FF] font-bold tracking-tight">
                     R² &gt; 0.90
@@ -489,7 +492,7 @@ export function Portfolio() {
             className="space-y-4 md:space-y-6 relative z-30" 
             id="stack"
           >
-            <motion.div variants={sectionVariants} className="hidden md:block border-b-[2.5px] border-[#0038FF] pb-4">
+            <motion.div variants={sectionVariants} className="hidden md:block border-b-[2.5px] border-black pb-4">
               <span className="font-code text-xs text-[#0038FF] uppercase tracking-widest block font-bold">§ 03 // {lang === "pt" ? "MATRIZ TECNOLÓGICA" : "TECHNOLOGICAL MATRIX"}</span>
               <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.stackHeading}</h2>
             </motion.div>
@@ -507,8 +510,8 @@ export function Portfolio() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-6">
               {STACK.map((s, idx) => (
-                <motion.div variants={sectionVariants} key={s.category.en} className="bg-white p-3.5 md:p-0 neo-border md:border-[2.5px] md:border-[#0038FF] neo-shadow-blue md:[box-shadow:5px_5px_0px_#0038FF] flex flex-col gap-1 md:gap-0 rounded-none md:card-interactive-subtle">
-                  <div className="flex items-center justify-between md:p-3 md:bg-[#eff6ff] md:border-b-[2px] md:border-[#0038FF]">
+                <motion.div variants={sectionVariants} key={s.category.en} className="bg-white p-3.5 md:p-0 neo-border md:border-[2.5px] md:border-black neo-shadow-blue md:[box-shadow:5px_5px_0px_#0038FF] flex flex-col gap-1 md:gap-0 rounded-none md:card-interactive-subtle">
+                  <div className="flex items-center justify-between md:p-3 md:bg-[#eff6ff] md:border-b-[2px] md:border-black">
                     <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase">[{String(idx + 1).padStart(2, '0')}] {s.category[lang]}</span>
                     <span className="font-code text-[9px] md:text-xs text-black/60 md:text-slate-500 font-bold uppercase md:font-semibold">CLI_0{idx + 1}</span>
                   </div>
@@ -538,7 +541,7 @@ export function Portfolio() {
             className="space-y-4 md:space-y-6 md:pb-12 relative z-30" 
             id="contact"
           >
-            <motion.div variants={sectionVariants} className="hidden md:block bg-white border-[3px] border-[#0038FF] [box-shadow:6px_6px_0px_#0038FF] p-12 space-y-8 transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
+            <motion.div variants={sectionVariants} className="hidden md:block bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] p-12 space-y-8 transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="space-y-2">
                 <span className="font-code text-xs text-[#0038FF] tracking-widest uppercase font-bold">
                   § 04 // {lang === "pt" ? "PROTOCOLO DE CONEXÃO DIRETA" : "DIRECT CONNECTION PROTOCOL"}
@@ -552,7 +555,7 @@ export function Portfolio() {
               </div>
 
               <div className="grid grid-cols-3 gap-6 pt-4">
-                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-[#0038FF] hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={`mailto:${SITE.email}`}>
+                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={`mailto:${SITE.email}`}>
                   <div>
                     <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">CANAL_01 // EMAIL</span>
                     <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold break-all">
@@ -565,7 +568,7 @@ export function Portfolio() {
                   </div>
                 </a>
                 
-                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-[#0038FF] hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.linkedin} rel="noreferrer" target="_blank">
+                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.linkedin} rel="noreferrer" target="_blank">
                   <div>
                     <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">CANAL_02 // LINKEDIN</span>
                     <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold">
@@ -578,7 +581,7 @@ export function Portfolio() {
                   </div>
                 </a>
                 
-                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-[#0038FF] hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.github} rel="noreferrer" target="_blank">
+                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.github} rel="noreferrer" target="_blank">
                   <div>
                     <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">CANAL_03 // GITHUB</span>
                     <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold">
@@ -592,7 +595,7 @@ export function Portfolio() {
                 </a>
               </div>
 
-              <div className="pt-6 border-t-[2px] border-[#0038FF] flex items-center justify-between font-code text-sm text-[#334155]">
+              <div className="pt-6 border-t-[2px] border-black flex items-center justify-between font-code text-sm text-[#334155]">
                 <div className="font-bold text-[#0f172a]">
                   © {new Date().getFullYear()} FELIPE BRIGAGÃO · {t.role.toUpperCase()}
                 </div>
@@ -609,7 +612,7 @@ export function Portfolio() {
 
             <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-3.5 pt-4">
               <div className="flex flex-col gap-1.5">
-                <div className="self-start inline-flex items-center px-2 py-0.5 bg-[#0038FF]/10 neo-border-sm border-[#0038FF]">
+                <div className="self-start inline-flex items-center px-2 py-0.5 bg-[#0038FF]/10 neo-border-sm border-black">
                   <span className="font-code text-[9px] font-bold text-[#0038FF] uppercase">
                     {lang === "pt" ? "SESSÃO ABERTA // 2026" : "OPEN SESSION // 2026"}
                   </span>
@@ -676,7 +679,7 @@ export function Portfolio() {
       </motion.main>
 
       {/* DESKTOP FOOTER */}
-      <footer className="hidden md:flex w-full bg-white border-t-[2.5px] border-[#0038FF] [box-shadow:0px_-2px_0px_#0038FF]">
+      <footer className="hidden md:flex w-full bg-white border-t-[2.5px] border-black [box-shadow:0px_-2px_0px_#0038FF]">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-code text-xs uppercase text-[#334155]">
           <div className="font-bold text-[#0f172a]">
             <span>© {new Date().getFullYear()} Felipe Brigagão. {lang === "pt" ? "Todos os direitos reservados." : "All rights reserved."}</span>
