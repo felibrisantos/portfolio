@@ -39,47 +39,26 @@ export function useActiveSection(ids: readonly string[]) {
     if (nodes.length === 0) return;
 
     const ratios = new Map<string, number>();
-
-    /* The decision band sits in the upper half of the viewport, so the last
-       section can never fill it: the page stops scrolling while the section
-       below is still ahead of the band. At the bottom the last id wins
-       outright. Both callers go through this, so whichever fires last still
-       agrees. */
-    const atBottom = () =>
-      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-
-    const pick = () => {
-      if (atBottom()) return ids[ids.length - 1];
-      let winner = "";
-      let best = 0;
-      ratios.forEach((ratio, id) => {
-        if (ratio > best) {
-          best = ratio;
-          winner = id;
-        }
-      });
-      return winner;
-    };
-
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
         }
-        setActive(pick());
+        let winner = "";
+        let best = 0;
+        ratios.forEach((ratio, id) => {
+          if (ratio > best) {
+            best = ratio;
+            winner = id;
+          }
+        });
+        setActive(winner);
       },
       { rootMargin: "-18% 0px -50% 0px", threshold: [0, 0.2, 0.5, 0.85, 1] },
     );
 
     nodes.forEach((node) => observer.observe(node));
-
-    const onScroll = () => setActive(pick());
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => observer.disconnect();
   }, [ids]);
 
   return active;
