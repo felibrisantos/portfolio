@@ -19,7 +19,7 @@ Fonts: Inter (body), Space Grotesk (display), JetBrains Mono (code), all via `ne
 
 ## Where the content lives
 
-- `lib/content.tsx` — every piece of copy: `SITE`, `COPY.pt` / `COPY.en`, `PROJECTS`, `STACK`. `COPY.cta` holds one label per intent; reuse those instead of writing a new CTA string.
+- `lib/content.tsx` — every piece of copy: `SITE`, `COPY.pt` / `COPY.en`, `PROJECTS`, `STACK`. `COPY.cta` holds one label per intent; reuse those instead of writing a new CTA string. A `STACK` item is a plain string when it is a product name and a `{ pt, en }` pair when it reads differently per language; render it through `stackLabel`.
 - `components/portfolio.tsx` — the page. Only the hero and the two headers keep separate desktop/mobile trees (`hidden md:` / `md:hidden`); every other section is a single responsive tree, so most copy changes touch one place.
 - `lib/use-lang.ts` — PT/EN toggle, persisted in `localStorage`, and keeps `<html lang>` in sync.
 - `app/layout.tsx` — metadata, OG tags and the `schema.org/Person` JSON-LD.

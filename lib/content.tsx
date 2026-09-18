@@ -48,7 +48,7 @@ export const COPY: Record<Lang, {
     aboutP1:
       "Estudei Análise e Desenvolvimento de Sistemas no IFSP Jacareí, de 2022 a 2025. O que mais me formou ali foi o artigo: montar a rede, escolher as entradas, medir em conjunto de teste e relatar a faixa que saiu — não a melhor rodada.",
     aboutP2:
-      "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Escrevo front em React e Next.js, back em Django e PostgreSQL, e coloco IA em produção com Claude API, LangChain, RAG sobre pgvector e integrações via MCP, para clientes de CPG. Pouco tempo de carreira, e código rodando com gente usando todo dia.",
+      "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Escrevo front em React e Next.js, back em Django e Express sobre PostgreSQL, e coloco IA em produção com OpenAI e Gemini, com os prompts versionados em arquivo e um gate de avaliação antes de trocar a versão ativa. Pouco tempo de carreira, e código rodando com gente usando todo dia.",
     stackHeading: "Stack",
     paperTitle: (
       <>O impacto dos indicadores econômicos <em>no consumo</em>: uma abordagem com redes neurais.</>
@@ -79,7 +79,7 @@ export const COPY: Record<Lang, {
     aboutP1:
       "I studied Systems Analysis and Development at IFSP Jacareí, from 2022 to 2025. What taught me most there was the paper: build the network, pick the inputs, measure on a test set and report the range that came out — not the best run.",
     aboutP2:
-      "Today I am a fullstack developer at Abdou, in Jacareí. I write front end in React and Next.js, back end in Django and PostgreSQL, and put AI into production with the Claude API, LangChain, RAG over pgvector and MCP integrations, for CPG clients. Early in my career, and code running with people using it every day.",
+      "Today I am a fullstack developer at Abdou, in Jacareí. I write front end in React and Next.js, back end in Django and Express over PostgreSQL, and put AI into production with OpenAI and Gemini, with prompts versioned as files and an evaluation gate before the active version changes. Early in my career, and code running with people using it every day.",
     stackHeading: "Stack",
     paperTitle: (
       <>The impact of economic indicators <em>on consumption</em>: a neural network approach.</>
@@ -128,14 +128,14 @@ export const PROJECTS: Project[] = [
       en: "A Tailor Made project goes through several approval levels, with assets and internal systems living apart.",
     },
     decision: {
-      pt: "Central única em Django e PostgreSQL: o fluxo de aprovação virou estado explícito, com assets no S3 e integração com os sistemas internos.",
-      en: "A single hub in Django and PostgreSQL: the approval flow became explicit state, with assets on S3 and integration with the internal systems.",
+      pt: "Central única em Django e PostgreSQL: o fluxo de aprovação virou estado explícito, com assets no S3 e integração com os sistemas internos. O resumo de histórico gerado por IA só afirma o que consegue ancorar numa etapa registrada.",
+      en: "A single hub in Django and PostgreSQL: the approval flow became explicit state, with assets on S3 and integration with the internal systems. The AI history summary only states what it can anchor to a recorded step.",
     },
     outcome: {
       pt: "Uso diário em projetos OPP, Especiais, Key Account e Spin, por BAs e gerentes regionais da Heineken.",
       en: "Daily use across OPP, Especiais, Key Account and Spin projects, by Heineken BAs and regional managers.",
     },
-    stack: ["Django", "Python", "AWS S3", "PostgreSQL"],
+    stack: ["Django", "DRF", "PostgreSQL", "AWS S3", "React 18", "TanStack Query"],
   },
   {
     id: "cyma-architect",
@@ -149,14 +149,14 @@ export const PROJECTS: Project[] = [
       en: "A redesign proposal has to start from an image of the room without what is already in it.",
     },
     decision: {
-      pt: "Separei em dois agentes — um limpa a entrada, outro gera a proposta — com orquestração que mantém o estado da conversa entre iterações.",
-      en: "I split it into two agents — one cleans the input, the other generates the proposal — with orchestration that keeps conversation state across iterations.",
+      pt: "Separei em dois agentes — um limpa a entrada, outro gera a proposta — com orquestração que mantém o estado da conversa entre iterações. Os prompts ficam versionados em arquivo e passam por um gate de avaliação antes de virar a versão ativa.",
+      en: "I split it into two agents — one cleans the input, the other generates the proposal — with orchestration that keeps conversation state across iterations. Prompts are versioned as files and pass an evaluation gate before becoming the active version.",
     },
     outcome: {
       pt: "Em produção, em uso por Heineken, FEMSA e arquitetos parceiros.",
       en: "In production, used by Heineken, FEMSA and partner architects.",
     },
-    stack: ["React 19", "Zustand", "Vite", "OpenAI", "Gemini"],
+    stack: ["React 19", "Zustand", "Express", "OpenAI", "Gemini"],
   },
   {
     id: "cymadisplay",
@@ -177,7 +177,7 @@ export const PROJECTS: Project[] = [
       pt: "Produto ativo, com telas instaladas em todo o Brasil.",
       en: "Shipped product, with screens installed across Brazil.",
     },
-    stack: ["Next.js", "Prisma", "Stripe", "SendGrid"],
+    stack: ["Next.js", "Prisma", "PostgreSQL", "Stripe", "SendGrid"],
   },
   {
     id: "cymatrix",
@@ -185,30 +185,42 @@ export const PROJECTS: Project[] = [
     client: { pt: "Na Abdou, para CYMA Digital", en: "At Abdou, for CYMA Digital" },
     title: { pt: "CYMATRIX", en: "CYMATRIX" },
     tag: { pt: "Operações em tempo real", en: "Real-time operations" },
-    role: { pt: "Frontend & integração de dados", en: "Frontend & data integration" },
+    role: { pt: "Fullstack", en: "Fullstack" },
     problem: {
       pt: "Quem opera uma frota de painéis LED precisa do estado de cada painel agora, não no relatório seguinte.",
       en: "Whoever runs a fleet of LED panels needs the state of each panel now, not in the next report.",
     },
     decision: {
-      pt: "Dashboards com estado ao vivo por WebSocket, agendamento e diagnóstico na mesma tela do operador.",
-      en: "Live-state dashboards over WebSocket, with scheduling and diagnostics on the same screen the operator already uses.",
+      pt: "Dashboards com estado ao vivo por WebSocket, agendamento e diagnóstico na mesma tela do operador. A frota aparece no mapa, e um painel pode ser alvo de agendamento sozinho ou dentro de um grupo.",
+      en: "Live-state dashboards over WebSocket, with scheduling and diagnostics on the same screen the operator already uses. The fleet shows on a map, and a panel can be a scheduling target on its own or inside a group.",
     },
-    stack: ["React 19", "Radix", "TanStack Query", "WebSockets"],
+    stack: ["React 19", "Express 5", "Prisma", "WebSockets", "Leaflet"],
   },
 ];
 
-export const STACK: { category: Bi; items: string[] }[] = [
+/** Product names stay as plain strings; anything that reads differently per language is a `Bi`. */
+export type StackItem = string | Bi;
+
+export function stackLabel(item: StackItem, lang: Lang): string {
+  return typeof item === "string" ? item : item[lang];
+}
+
+export const STACK: { category: Bi; items: StackItem[] }[] = [
   {
     category: { pt: "No produto", en: "In the product" },
-    items: ["React / Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui"],
+    items: ["React / Next.js", "TypeScript", "Tailwind CSS", "Radix / shadcn/ui", "TanStack Query"],
   },
   {
     category: { pt: "No servidor", en: "On the server" },
-    items: ["Django / Python", "PostgreSQL", "AWS S3 + CloudFront", "Vercel"],
+    items: ["Django / DRF", "Express / Node", "PostgreSQL", "Prisma", "AWS S3"],
   },
   {
     category: { pt: "IA em produção", en: "AI in production" },
-    items: ["Claude API", "LangChain", "RAG com pgvector", "MCP"],
+    items: [
+      "OpenAI gpt-image-1",
+      "Gemini 2.5 Flash Image",
+      { pt: "Prompts versionados", en: "Versioned prompts" },
+      { pt: "Gate de avaliação", en: "Evaluation gate" },
+    ],
   },
 ];

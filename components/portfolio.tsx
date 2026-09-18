@@ -1,7 +1,7 @@
 "use client";
 
 import { useLang } from "@/lib/use-lang";
-import { COPY, PROJECTS, SITE, STACK } from "@/lib/content";
+import { COPY, PROJECTS, SITE, STACK, stackLabel } from "@/lib/content";
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, ArrowRight, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
 
@@ -379,14 +379,17 @@ export function Portfolio() {
                   {/* Mobile keeps one line per category. The ruled list is tall enough
                       at 390px to push contact far below the fold. */}
                   <p className="md:hidden font-code text-[13px] text-black font-medium leading-relaxed">
-                    {s.items.join(", ")}
+                    {s.items.map((item) => stackLabel(item, lang)).join(", ")}
                   </p>
                   <ul className="hidden md:block font-code text-sm text-black font-medium">
-                    {s.items.map((item) => (
-                      <li key={item} className="py-2 border-b border-black/15 last:border-b-0">
-                        {item}
-                      </li>
-                    ))}
+                    {s.items.map((item) => {
+                      const label = stackLabel(item, lang);
+                      return (
+                        <li key={label} className="py-2 border-b border-black/15 last:border-b-0">
+                          {label}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </motion.div>
               ))}
