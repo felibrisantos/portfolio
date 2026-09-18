@@ -321,6 +321,34 @@ export function Portfolio() {
             </div>
           </motion.section>
 
+          {/* ABOUT SECTION */}
+          <motion.section 
+            initial="hidden" 
+            whileInView="show" 
+            viewport={{ once: true, margin: "-100px" }}
+            variants={sectionVariants} 
+            className="space-y-4 md:space-y-6 relative z-30" 
+            id="about"
+          >
+            <div className="hidden md:block border-b-[2.5px] border-black pb-4">
+              <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.sections.about}</h2>
+            </div>
+            <div className="md:hidden pt-4">
+              <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
+                {t.sections.about}
+              </h2>
+            </div>
+
+            <div className="bg-white neo-border md:border-[2.5px] border-black md:border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-10 space-y-3 md:space-y-5 rounded-none">
+              <p className="font-body text-[13px] md:text-lg text-black/80 md:text-[#334155] leading-relaxed max-w-3xl">
+                {t.aboutP1}
+              </p>
+              <p className="font-body text-[13px] md:text-lg text-black/80 md:text-[#334155] leading-relaxed max-w-3xl">
+                {t.aboutP2}
+              </p>
+            </div>
+          </motion.section>
+
           {/* STACK SECTION */}
           <motion.section 
             initial="hidden" 

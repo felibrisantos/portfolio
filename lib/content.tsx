@@ -20,6 +20,8 @@ export const COPY: Record<Lang, {
   sections: { featured: string; about: string; stack: string; contact: string };
   contactHeading: React.ReactNode;
   researchHeading: string;
+  aboutP1: string;
+  aboutP2: string;
   stackHeading: string;
   paperTitle: React.ReactNode;
   paperAbstract: string;
@@ -37,6 +39,10 @@ export const COPY: Record<Lang, {
       <>Vamos construir <em>algo</em>.</>
     ),
     researchHeading: "Pesquisa",
+    aboutP1:
+      "Estudei Análise e Desenvolvimento de Sistemas no IFSP Jacareí, de 2022 a 2025. O que mais me formou ali foi o artigo: montar a rede, escolher as entradas, medir em conjunto de teste e relatar a faixa que saiu — não a melhor rodada.",
+    aboutP2:
+      "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Escrevo front em React e Next.js, back em Django e PostgreSQL, e coloco IA em produção com Claude API, LangChain, RAG sobre pgvector e integrações via MCP, para clientes de CPG. Tenho pouco tempo de carreira. O que tenho é código rodando com gente usando todo dia.",
     stackHeading: "Stack",
     paperTitle: (
       <>O impacto dos indicadores econômicos <em>no consumo</em>: uma abordagem com redes neurais.</>
@@ -58,6 +64,10 @@ export const COPY: Record<Lang, {
       <>Let&apos;s build <em>something</em>.</>
     ),
     researchHeading: "Research",
+    aboutP1:
+      "I studied Systems Analysis and Development at IFSP Jacareí, from 2022 to 2025. What taught me most there was the paper: build the network, pick the inputs, measure on a test set and report the range that came out — not the best run.",
+    aboutP2:
+      "Today I am a fullstack developer at Abdou, in Jacareí. I write front end in React and Next.js, back end in Django and PostgreSQL, and put AI into production with the Claude API, LangChain, RAG over pgvector and MCP integrations, for CPG clients. I am early in my career. What I have is code running with people using it every day.",
     stackHeading: "Stack",
     paperTitle: (
       <>The impact of economic indicators <em>on consumption</em>: a neural network approach.</>
