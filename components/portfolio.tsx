@@ -357,9 +357,21 @@ export function Portfolio() {
       >
         <div className="w-full max-w-[1360px] mx-auto px-4 md:px-8 py-2 md:py-10 space-y-14 md:space-y-24">
 
-          {/* HERO. Layout family: bordered anchor card. */}
-          <motion.section ref={heroRef} id="hero" variants={sectionVariants} className="pt-2 md:pt-0">
-            <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
+          {/* HERO. Layout family: bordered anchor card.
+              The hero owns the first screen: its minimum height is the viewport
+              less everything already spoken for around it, so the next section
+              starts exactly at the fold instead of peeking above it.
+              Mobile subtracts main's 68px header offset + the container's 8px,
+              the 56px space-y gap to WORK, and the dock (56px row + 2px border
+              + its safe-area padding). Desktop subtracts main's 96px + the
+              container's 40px and the 96px gap; there is no dock. */}
+          <motion.section
+            ref={heroRef}
+            id="hero"
+            variants={sectionVariants}
+            className="flex flex-col pt-2 md:pt-0 min-h-[calc(100dvh-190px-max(12px,env(safe-area-inset-bottom,12px)))] md:min-h-[calc(100dvh-232px)]"
+          >
+            <div className="hidden md:block my-auto p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="space-y-4">
                 <motion.h1
                   variants={wordContainer}
@@ -406,7 +418,7 @@ export function Portfolio() {
               </div>
             </div>
 
-            <div className="md:hidden flex flex-col">
+            <div className="md:hidden my-auto flex flex-col">
               <motion.h1
                 variants={wordContainer}
                 initial={reduce ? false : "hidden"}
@@ -446,6 +458,22 @@ export function Portfolio() {
                   <ArrowRight size={16} strokeWidth={2.5} className="rotate-90" />
                 </a>
               </div>
+            </div>
+
+            {/* In flow, pushed down by mt-auto rather than positioned: the
+                section's own height already stops above the dock, so the cue
+                can never end up under it. */}
+            <div className="mt-auto pt-8 flex items-center gap-2" aria-hidden>
+              <motion.span
+                animate={reduce ? undefined : { y: [0, 6, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                className="flex text-[#0038FF]"
+              >
+                <ArrowRight size={17} strokeWidth={3} className="rotate-90" />
+              </motion.span>
+              <span className="font-code text-[11px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-black">
+                {t.scrollCue}
+              </span>
             </div>
           </motion.section>
 
