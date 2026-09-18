@@ -14,41 +14,24 @@ export const SITE = {
 
 export const COPY: Record<Lang, {
   role: string;
-  availability: string;
   positioning: string;
   nav: { work: string; research: string; about: string; stack: string; contact: string };
-  sections: { featured: string; about: string; stack: string; contact: string };
-  year: string;
-  role_col: string;
-  caseStudy: string;
-  viewLive: string;
-  footer: string;
-  langToggle: string;
   contactLead: string;
+  sections: { featured: string; about: string; stack: string; contact: string };
   contactHeading: React.ReactNode;
   researchHeading: string;
   stackHeading: string;
   paperTitle: React.ReactNode;
   paperAbstract: string;
   paperKind: string;
-  nextProjects: string;
 }> = {
   pt: {
-    role: "Engenheiro fullstack & IA",
-    availability:
-      "Aberto a conversas sobre produtos de IA sob medida e plataformas fullstack — segundo semestre de 2026",
+    role: "Desenvolvedor fullstack",
     positioning:
-      "Escrevo o código, faço o produto fazer sentido e garanto que a entrega não seja algo pelo qual pedir desculpas.",
+      "Construo sistemas que rodam em produção para marcas de CPG — Heineken, Ambev, FEMSA. Cheguei ao código pela modelagem estatística, com artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
     sections: { featured: "Trabalho", about: "Sobre", stack: "Stack", contact: "Contato" },
-    year: "Ano",
-    role_col: "Função",
-    caseStudy: "Estudo de caso",
-    viewLive: "Ver ao vivo",
-    footer: "Composto à mão em São Paulo. Tipografia em Fraunces e Inter.",
-    langToggle: "EN",
-    contactLead:
-      "Aberto a conversas sobre produtos de IA, plataformas fullstack e projetos sob medida.",
+    contactLead: "Se quiser falar sobre um projeto, me escreva.",
     contactHeading: (
       <>Vamos construir <em>algo</em>.</>
     ),
@@ -60,24 +43,14 @@ export const COPY: Record<Lang, {
     paperAbstract:
       "Uma arquitetura de rede neural (duas camadas densas de 64 neurônios, TensorFlow + Keras) para modelar relações não-lineares entre variáveis econômicas e comportamento do consumidor. Os modelos atingiram R² > 0,90 para a maioria dos indicadores, superando limitações de modelos econométricos tradicionais como ARIMA.",
     paperKind: "Artigo científico",
-    nextProjects: "projetos",
   },
   en: {
-    role: "Fullstack & AI engineer",
-    availability:
-      "Open to conversations about bespoke AI products and fullstack platforms — H2 2026",
+    role: "Fullstack developer",
     positioning:
-      "I write the code, make the product make sense, and make sure the delivery isn't something to apologize for.",
+      "I build systems that run in production for CPG brands — Heineken, Ambev, FEMSA. I came to code through statistical modelling, with an indexed paper on neural networks applied to Brazilian economic indices.",
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
     sections: { featured: "Work", about: "About", stack: "Stack", contact: "Contact" },
-    year: "Year",
-    role_col: "Role",
-    caseStudy: "Case study",
-    viewLive: "View live",
-    footer: "Hand-set in São Paulo. Typography in Fraunces and Inter.",
-    langToggle: "PT",
-    contactLead:
-      "Open to conversations about AI products, fullstack platforms and bespoke work.",
+    contactLead: "If you want to talk about a project, write to me.",
     contactHeading: (
       <>Let&apos;s build <em>something</em>.</>
     ),
@@ -89,7 +62,6 @@ export const COPY: Record<Lang, {
     paperAbstract:
       "A neural-network architecture (two dense layers of 64 neurons, TensorFlow + Keras) for modelling nonlinear relationships between economic variables and consumer behaviour. The models achieve R² > 0.90 for most indicators, addressing limitations of traditional econometric approaches such as ARIMA.",
     paperKind: "Peer-reviewed article",
-    nextProjects: "projects",
   },
 };
 

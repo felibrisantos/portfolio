@@ -22,13 +22,13 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Felipe Brigagão — Fullstack & AI Engineer",
+  title: "Felipe Brigagão — Desenvolvedor fullstack",
   description:
-    "Felipe Brigagão — fullstack & AI engineer. São Paulo. Work for Heineken, FEMSA and others through Abdou.",
+    "Desenvolvedor fullstack na Abdou, em Jacareí. Sistemas em produção para Heineken, Ambev e FEMSA. Artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
   openGraph: {
-    title: "Felipe Brigagão — Fullstack & AI Engineer",
+    title: "Felipe Brigagão — Desenvolvedor fullstack",
     description:
-      "Fullstack & AI engineer. São Paulo. Work for Heineken, FEMSA and others through Abdou.",
+      "Sistemas em produção para marcas de CPG. Artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
     url: "https://brigagao.dev",
     siteName: "Felipe Brigagão",
     locale: "pt_BR",

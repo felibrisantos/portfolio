@@ -146,49 +146,28 @@ export function Portfolio() {
               FB//01
             </div>
 
-            <div className="md:hidden relative z-10 self-start inline-flex items-center gap-1.5 px-2.5 py-1 bg-white neo-border neo-shadow-dark-sm mb-3">
-              <span className="w-2 h-2 bg-[#0038FF] shrink-0"></span>
-              <span className="font-code text-[9px] tracking-wider text-black font-bold uppercase leading-tight">
-                [{lang === "pt" ? "ARQUITETURA DE SISTEMAS CRÍTICOS & MODELOS GENERATIVOS" : "CRITICAL SYSTEMS ARCHITECTURE & GENERATIVE MODELS"}]
-              </span>
-            </div>
-
             <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] relative overflow-hidden transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="absolute -right-10 -top-12 opacity-[0.07] pointer-events-none select-none font-display text-[220px] font-bold leading-none text-[#0038FF] transition-transform duration-500 hover:scale-105">
                 FB//01
               </div>
               <div className="space-y-4 relative z-10">
-                <div className="inline-block px-3 py-1 bg-[#eff6ff] border-[2px] border-black font-code text-xs text-[#0038FF] tracking-widest uppercase font-bold [box-shadow:2px_2px_0px_#0038FF]">
-                  {lang === "pt" ? "ARQUITETURA DE SISTEMAS CRÍTICOS & MODELOS GENERATIVOS" : "CRITICAL SYSTEMS ARCHITECTURE & GENERATIVE MODELS"}
-                </div>
                 <h1 className="font-display text-6xl md:text-7xl uppercase tracking-tight text-[#0f172a] font-bold leading-none break-words">
                   FELIPE <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block transition-transform duration-200 hover:-rotate-1">BRIGAGÃO</span>
                 </h1>
                 <p className="font-display text-3xl text-[#0038FF] font-bold tracking-tight uppercase">
                   — {t.role}
                 </p>
+                <p className="font-body text-lg text-[#334155] leading-relaxed max-w-3xl pt-2">
+                  {t.positioning}
+                </p>
               </div>
 
-              <div className="mt-8 pt-8 border-t-[2.5px] border-black grid grid-cols-12 gap-6 items-center">
-                <div className="col-span-8 bg-[#f8fafc] border-[2px] border-black p-6 [box-shadow:4px_4px_0px_#0038FF] transition-transform duration-200 hover:-translate-y-0.5 relative">
-                  <div className="absolute -top-3.5 right-6 bg-[#0038FF] text-white font-code text-xs font-bold px-3 py-0.5 border-[1.5px] border-black [box-shadow:2px_2px_0px_#000]">
-                    MANIFESTO // 01
-                  </div>
-                  <p className="font-body text-lg text-[#0f172a] font-semibold leading-relaxed">
-                    “{t.positioning}”
-                  </p>
-                  <p className="mt-3 font-body text-base text-[#334155] leading-relaxed">
-                    {lang === "pt" 
-                      ? <>Engenharia de ponta a ponta: pipelines multi-agente, telemetria em tempo real e orquestração de microsserviços em produção ativa para <strong className="text-[#0038FF] font-bold">Heineken</strong>, <strong className="text-[#0038FF] font-bold">FEMSA</strong> e ecossistemas B2B de alta escala.</>
-                      : <>End-to-end engineering: multi-agent pipelines, real-time telemetry, and microservices orchestration in active production for <strong className="text-[#0038FF] font-bold">Heineken</strong>, <strong className="text-[#0038FF] font-bold">FEMSA</strong>, and high-scale B2B ecosystems.</>
-                    }
-                  </p>
-                </div>
-                <div className="col-span-4 flex flex-col gap-3">
-                  <a className="btn-mechanical flex items-center justify-center gap-2 w-full py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF]" href="#contact">
+              <div className="mt-8 pt-8 border-t-[2.5px] border-black">
+                <div className="flex flex-wrap items-center gap-3">
+                  <a className="btn-mechanical flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF]" href="#contact">
                     {lang === "pt" ? "INICIAR CONVERSA" : "START A CONVERSATION"} <ArrowRight size={18} strokeWidth={2.5} />
                   </a>
-                  <a className="btn-mechanical w-full text-center py-3 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold hover:bg-[#eff6ff] [box-shadow:3px_3px_0px_#0038FF]" href="#work">
+                  <a className="btn-mechanical text-center py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold hover:bg-[#eff6ff] [box-shadow:3px_3px_0px_#0038FF]" href="#work">
                     {lang === "pt" ? "EXPLORAR PROJETOS" : "EXPLORE PROJECTS"}
                   </a>
                 </div>
@@ -204,33 +183,9 @@ export function Portfolio() {
                 — {t.role}.
               </p>
               
-              <div className="w-full bg-white neo-border-blue p-2.5 flex items-center justify-between font-code text-[10px] font-bold text-black mb-4 neo-shadow-blue-sm">
-                <span className="flex items-center gap-1 text-[#0038FF]">
-                  <span className="h-1.5 w-1.5 bg-[#0038FF]"></span>
-                  <span>{lang === 'pt' ? 'DISPONÍVEL Q3-Q4 2026' : 'AVAILABLE H2 2026'}</span>
-                </span>
-                <span className="text-black/60 font-semibold">SÃO PAULO // BR</span>
-              </div>
-
-              <div className="bg-white neo-border neo-shadow-blue p-4 flex flex-col gap-3 mb-4 rounded-none">
-                <div className="self-start -mt-6 ml-auto mr-0 bg-[#0038FF] text-white font-code text-[9.5px] font-bold px-2.5 py-0.5 border border-black shadow-[2px_2px_0px_0px_#000]">
-                  MANIFESTO // 01
-                </div>
-                <p className="font-display font-bold italic text-[16px] leading-snug text-black">
-                  “{t.positioning}”
-                </p>
-                <div className="h-[1.5px] w-full bg-black/10"></div>
-                <p className="font-body text-[13px] leading-relaxed text-black/85 font-normal">
-                  {lang === "pt" 
-                    ? <>Engenharia de ponta a ponta: pipelines multi-agente, telemetria em tempo real e orquestração de microsserviços em produção ativa para Heineken, FEMSA e ecossistemas B2B de alta escala.</>
-                    : <>End-to-end engineering: multi-agent pipelines, real-time telemetry, and microservices orchestration in active production for Heineken, FEMSA, and high-scale B2B ecosystems.</>
-                  }
-                </p>
-                <div className="pt-1 flex items-center justify-between font-code text-[9.5px] text-black/60 border-t border-black/10">
-                  <span>2026/S2 • SÃO PAULO, BR</span>
-                  <span className="text-[#0038FF] font-bold">FULL-CYCLE DEV</span>
-                </div>
-              </div>
+              <p className="font-body text-[13.5px] leading-relaxed text-black/85 mb-4">
+                {t.positioning}
+              </p>
 
               <div className="flex flex-col gap-2.5 w-full">
                 <a className="w-full h-11 flex items-center justify-center gap-2 bg-[#0038FF] text-white font-code text-[12px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href="#contact">
@@ -461,7 +416,7 @@ export function Portfolio() {
                   {t.contactHeading}
                 </h2>
                 <p className="font-body text-lg text-[#334155] max-w-2xl leading-relaxed">
-                  {t.availability}
+                  {t.contactLead}
                 </p>
               </div>
 
@@ -522,7 +477,7 @@ export function Portfolio() {
                   {t.contactHeading}
                 </h2>
                 <p className="font-body text-[13px] leading-relaxed text-black/80">
-                  {t.availability}
+                  {t.contactLead}
                 </p>
               </div>
 
