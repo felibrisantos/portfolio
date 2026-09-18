@@ -14,9 +14,14 @@ export const SITE = {
 
 export const COPY: Record<Lang, {
   role: string;
+  /** Desktop hero. Full positioning. */
   positioning: string;
+  /** Mobile hero. Stays under 20 words so the CTA survives the first fold. */
+  positioningShort: string;
   nav: { work: string; research: string; about: string; stack: string; contact: string };
-  contactLead: string;
+  /** One label per intent: every contact CTA uses cta.contact, every work CTA uses cta.work. */
+  cta: { contact: string; work: string };
+  availability: string;
   sections: { featured: string; about: string; stack: string; contact: string };
   researchHeading: string;
   aboutP1: string;
@@ -24,27 +29,37 @@ export const COPY: Record<Lang, {
   stackHeading: string;
   paperTitle: React.ReactNode;
   paperAbstract: string;
+  paperMetrics: { value: string; label: string }[];
   paperCredits: string;
   paperKind: string;
 }> = {
   pt: {
     role: "Desenvolvedor fullstack",
     positioning:
-      "Construo sistemas que rodam em produção para marcas de CPG — Heineken, Ambev, FEMSA. Cheguei ao código pela modelagem estatística, com artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
+      "Construo sistemas que rodam em produção para marcas de CPG: Heineken, Ambev, FEMSA. Cheguei ao código pela modelagem estatística, com artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
+    positioningShort:
+      "Sistemas em produção para Heineken, Ambev e FEMSA. Cheguei ao código pela modelagem estatística.",
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
+    cta: { contact: "Falar comigo", work: "Ver projetos" },
+    availability:
+      "Aberto a posições fullstack e a projetos de IA em produção. Me escreva.",
     sections: { featured: "Trabalho", about: "Sobre", stack: "Stack", contact: "Contato" },
-    contactLead: "Se quiser falar sobre um projeto, me escreva.",
     researchHeading: "Pesquisa",
     aboutP1:
       "Estudei Análise e Desenvolvimento de Sistemas no IFSP Jacareí, de 2022 a 2025. O que mais me formou ali foi o artigo: montar a rede, escolher as entradas, medir em conjunto de teste e relatar a faixa que saiu — não a melhor rodada.",
     aboutP2:
-      "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Escrevo front em React e Next.js, back em Django e PostgreSQL, e coloco IA em produção com Claude API, LangChain, RAG sobre pgvector e integrações via MCP, para clientes de CPG. Tenho pouco tempo de carreira. O que tenho é código rodando com gente usando todo dia.",
+      "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Escrevo front em React e Next.js, back em Django e PostgreSQL, e coloco IA em produção com Claude API, LangChain, RAG sobre pgvector e integrações via MCP, para clientes de CPG. Pouco tempo de carreira, e código rodando com gente usando todo dia.",
     stackHeading: "Stack",
     paperTitle: (
       <>O impacto dos indicadores econômicos <em>no consumo</em>: uma abordagem com redes neurais.</>
     ),
     paperAbstract:
-      "Modelei oito índices econômicos setoriais brasileiros com uma rede neural densa: duas camadas de 64 neurônios com ReLU, saída de regressão, TensorFlow/Keras, RMSprop e Early Stopping sobre conjunto de validação. As entradas vêm de IBGE, FGV, Bacen, FecomercioSP, CNC, B3, MDIC e Fipe. Em teste, o R² ficou entre 0,82 e 0,96 — acima de 0,90 em cinco dos oito índices. O RMAE ficou entre 3,8% e 9,2%.",
+      "Modelei oito índices econômicos setoriais brasileiros com uma rede neural densa: duas camadas de 64 neurônios com ReLU, saída de regressão, TensorFlow/Keras, RMSprop e Early Stopping sobre conjunto de validação. As entradas vêm de IBGE, FGV, Bacen, FecomercioSP, CNC, B3, MDIC e Fipe.",
+    paperMetrics: [
+      { value: "0,82-0,96", label: "R² em conjunto de teste" },
+      { value: "5 de 8", label: "índices com R² acima de 0,90" },
+      { value: "3,8-9,2%", label: "RMAE em conjunto de teste" },
+    ],
     paperCredits:
       "Escrito com Tardelli Ronan Coelho Stekel (IFSP). Pesquisa financiada em parte pela FAPESP, processo #2023/14073-1.",
     paperKind: "Artigo científico",
@@ -52,24 +67,33 @@ export const COPY: Record<Lang, {
   en: {
     role: "Fullstack developer",
     positioning:
-      "I build systems that run in production for CPG brands — Heineken, Ambev, FEMSA. I came to code through statistical modelling, with an indexed paper on neural networks applied to Brazilian economic indices.",
+      "I build systems that run in production for CPG brands: Heineken, Ambev, FEMSA. I came to code through statistical modelling, with an indexed paper on neural networks applied to Brazilian economic indices.",
+    positioningShort:
+      "Systems in production for Heineken, Ambev and FEMSA. I came to code through statistical modelling.",
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
+    cta: { contact: "Get in touch", work: "See the work" },
+    availability:
+      "Open to fullstack roles and AI-in-production projects. Write to me.",
     sections: { featured: "Work", about: "About", stack: "Stack", contact: "Contact" },
-    contactLead: "If you want to talk about a project, write to me.",
     researchHeading: "Research",
     aboutP1:
       "I studied Systems Analysis and Development at IFSP Jacareí, from 2022 to 2025. What taught me most there was the paper: build the network, pick the inputs, measure on a test set and report the range that came out — not the best run.",
     aboutP2:
-      "Today I am a fullstack developer at Abdou, in Jacareí. I write front end in React and Next.js, back end in Django and PostgreSQL, and put AI into production with the Claude API, LangChain, RAG over pgvector and MCP integrations, for CPG clients. I am early in my career. What I have is code running with people using it every day.",
+      "Today I am a fullstack developer at Abdou, in Jacareí. I write front end in React and Next.js, back end in Django and PostgreSQL, and put AI into production with the Claude API, LangChain, RAG over pgvector and MCP integrations, for CPG clients. Early in my career, and code running with people using it every day.",
     stackHeading: "Stack",
     paperTitle: (
       <>The impact of economic indicators <em>on consumption</em>: a neural network approach.</>
     ),
     paperAbstract:
-      "I modelled eight Brazilian sectoral economic indices with a dense neural network: two 64-neuron ReLU layers, a regression output, TensorFlow/Keras, RMSprop and early stopping on a validation set. Inputs come from IBGE, FGV, Bacen, FecomercioSP, CNC, B3, MDIC and Fipe. On the test set, R² landed between 0.82 and 0.96 — above 0.90 for five of the eight indices. RMAE landed between 3.8% and 9.2%.",
+      "I modelled eight Brazilian sectoral economic indices with a dense neural network: two 64-neuron ReLU layers, a regression output, TensorFlow/Keras, RMSprop and early stopping on a validation set. Inputs come from IBGE, FGV, Bacen, FecomercioSP, CNC, B3, MDIC and Fipe.",
+    paperMetrics: [
+      { value: "0.82-0.96", label: "R² on the test set" },
+      { value: "5 of 8", label: "indices with R² above 0.90" },
+      { value: "3.8-9.2%", label: "RMAE on the test set" },
+    ],
     paperCredits:
       "Written with Tardelli Ronan Coelho Stekel (IFSP). Research partly funded by FAPESP, grant #2023/14073-1.",
-    paperKind: "Peer-reviewed article",
+    paperKind: "Scientific article",
   },
 };
 
@@ -87,7 +111,32 @@ export interface Project {
   stack: string[];
 }
 
+/** First entry renders as the featured card (full grid width). */
 export const PROJECTS: Project[] = [
+  {
+    id: "portal-tm-hnk",
+    year: "2025-2026",
+    client: {
+      pt: "Na Abdou, para Heineken Brasil",
+      en: "At Abdou, for Heineken Brasil",
+    },
+    title: { pt: "Portal TM-HNK", en: "TM-HNK Portal" },
+    tag: { pt: "Ferramenta interna", en: "Internal tool" },
+    role: { pt: "Engenharia de produto", en: "Product engineering" },
+    problem: {
+      pt: "Projeto Tailor Made passa por aprovação em vários níveis, com assets e sistemas internos em lugares separados.",
+      en: "A Tailor Made project goes through several approval levels, with assets and internal systems living apart.",
+    },
+    decision: {
+      pt: "Central única em Django e PostgreSQL: o fluxo de aprovação virou estado explícito, com assets no S3 e integração com os sistemas internos.",
+      en: "A single hub in Django and PostgreSQL: the approval flow became explicit state, with assets on S3 and integration with the internal systems.",
+    },
+    outcome: {
+      pt: "Uso diário em projetos OPP, Especiais, Key Account e Spin, por BAs e gerentes regionais da Heineken.",
+      en: "Daily use across OPP, Especiais, Key Account and Spin projects, by Heineken BAs and regional managers.",
+    },
+    stack: ["Django", "Python", "AWS S3", "PostgreSQL"],
+  },
   {
     id: "cyma-architect",
     year: "2025-2026",
@@ -108,23 +157,6 @@ export const PROJECTS: Project[] = [
       en: "In production, used by Heineken, FEMSA and partner architects.",
     },
     stack: ["React 19", "Zustand", "Vite", "OpenAI", "Gemini"],
-  },
-  {
-    id: "cymatrix",
-    year: "2026",
-    client: { pt: "Na Abdou, para CYMA Digital", en: "At Abdou, for CYMA Digital" },
-    title: { pt: "CYMATRIX", en: "CYMATRIX" },
-    tag: { pt: "Operações em tempo real", en: "Real-time operations" },
-    role: { pt: "Frontend & integração de dados", en: "Frontend & data integration" },
-    problem: {
-      pt: "Quem opera uma frota de painéis LED precisa do estado de cada painel agora, não no relatório seguinte.",
-      en: "Whoever runs a fleet of LED panels needs each panel's state now, not in the next report.",
-    },
-    decision: {
-      pt: "Dashboards com estado ao vivo por WebSocket, agendamento e diagnóstico na mesma tela do operador.",
-      en: "Live-state dashboards over WebSocket, with scheduling and diagnostics on the same screen the operator already uses.",
-    },
-    stack: ["React 19", "Radix", "TanStack Query", "WebSockets"],
   },
   {
     id: "cymadisplay",
@@ -148,28 +180,21 @@ export const PROJECTS: Project[] = [
     stack: ["Next.js", "Prisma", "Stripe", "SendGrid"],
   },
   {
-    id: "portal-tm-hnk",
-    year: "2025–2026",
-    client: {
-      pt: "Na Abdou, para Heineken Brasil",
-      en: "At Abdou, for Heineken Brasil",
-    },
-    title: { pt: "Portal TM-HNK", en: "TM-HNK Portal" },
-    tag: { pt: "Ferramenta interna", en: "Internal tool" },
-    role: { pt: "Engenharia de produto", en: "Product engineering" },
+    id: "cymatrix",
+    year: "2026",
+    client: { pt: "Na Abdou, para CYMA Digital", en: "At Abdou, for CYMA Digital" },
+    title: { pt: "CYMATRIX", en: "CYMATRIX" },
+    tag: { pt: "Operações em tempo real", en: "Real-time operations" },
+    role: { pt: "Frontend & integração de dados", en: "Frontend & data integration" },
     problem: {
-      pt: "Projeto Tailor Made passa por aprovação em vários níveis, com assets e sistemas internos em lugares separados.",
-      en: "A Tailor Made project goes through several approval levels, with assets and internal systems living apart.",
+      pt: "Quem opera uma frota de painéis LED precisa do estado de cada painel agora, não no relatório seguinte.",
+      en: "Whoever runs a fleet of LED panels needs the state of each panel now, not in the next report.",
     },
     decision: {
-      pt: "Central única em Django e PostgreSQL: o fluxo de aprovação virou estado explícito, com assets no S3 e integração com os sistemas internos.",
-      en: "A single hub in Django and PostgreSQL: the approval flow became explicit state, with assets on S3 and integration with the internal systems.",
+      pt: "Dashboards com estado ao vivo por WebSocket, agendamento e diagnóstico na mesma tela do operador.",
+      en: "Live-state dashboards over WebSocket, with scheduling and diagnostics on the same screen the operator already uses.",
     },
-    outcome: {
-      pt: "Uso diário em projetos OPP, Especiais, Key Account e Spin, por BAs e gerentes regionais da Heineken.",
-      en: "Daily use across OPP, Especiais, Key Account and Spin projects, by Heineken BAs and regional managers.",
-    },
-    stack: ["Django", "Python", "AWS S3", "PostgreSQL"],
+    stack: ["React 19", "Radix", "TanStack Query", "WebSockets"],
   },
 ];
 

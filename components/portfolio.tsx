@@ -3,7 +3,23 @@
 import { useLang } from "@/lib/use-lang";
 import { COPY, PROJECTS, SITE, STACK } from "@/lib/content";
 import { motion, Variants } from "framer-motion";
-import { User, ArrowUpRight, ArrowRight, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
+
+const CONTACT_LINKS = [
+  { label: "Email", value: SITE.email, href: `mailto:${SITE.email}`, external: false },
+  { label: "LinkedIn", value: "/in/felibrisantos", href: SITE.social.linkedin, external: true },
+  { label: "GitHub", value: "@felibrisantos", href: SITE.social.github, external: true },
+];
+
+const NAV_LINKS = ["work", "research", "about", "stack", "contact"] as const;
+
+function SectionHead({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-display text-[22px] md:text-4xl uppercase text-black tracking-tight font-extrabold border-b-[2.5px] border-black pb-3 md:pb-4">
+      {children}
+    </h2>
+  );
+}
 
 export function Portfolio() {
   const { lang, toggle } = useLang();
@@ -28,56 +44,45 @@ export function Portfolio() {
 
   return (
     <>
-
       {/* DESKTOP HEADER */}
       <header className="hidden md:flex fixed top-0 left-0 w-full z-50 bg-white border-b-[2.5px] border-black [box-shadow:0px_3px_0px_#0038FF]">
         <div className="h-16 w-full max-w-[1400px] mx-auto px-4 md:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-4 md:gap-6">
-            <a
-              className="font-display text-lg md:text-xl uppercase tracking-tight text-[#0038FF] hover:text-[#0028c2] transition-colors font-bold"
-              href="#top"
-            >
-              Felipe Brigagão
-            </a>
-            <span className="hidden lg:block font-code text-xs uppercase text-slate-500 font-bold tracking-wider">
-              Jacareí, SP
-            </span>
-          </div>
-          <div className="flex items-center gap-4 md:gap-6">
-            <nav className="hidden md:flex items-center gap-6">
-              <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#work">
-                {t.nav.work}
-              </a>
-              <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#research">
-                {t.nav.research}
-              </a>
-              <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#about">
-                {t.nav.about}
-              </a>
-              <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#stack">
-                {t.nav.stack}
-              </a>
-              <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#contact">
-                {t.nav.contact}
-              </a>
+          <a
+            className="font-display text-lg md:text-xl uppercase tracking-tight text-[#0038FF] hover:text-[#0028c2] transition-colors font-bold"
+            href="#top"
+          >
+            Felipe Brigagão
+          </a>
+          <div className="flex items-center gap-6">
+            <nav className="flex items-center gap-6">
+              {NAV_LINKS.map((key) => (
+                <a
+                  key={key}
+                  className="font-code text-xs uppercase font-bold text-black hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider"
+                  href={`#${key}`}
+                >
+                  {t.nav[key]}
+                </a>
+              ))}
             </nav>
             <div className="flex items-center border-l-[2px] border-black pl-4 gap-2 font-code text-xs uppercase font-bold">
               <button
-                className={`${lang === "pt" ? "text-[#0038FF]" : "text-slate-500"} hover:text-[#0f172a] transition-colors cursor-pointer`}
+                aria-pressed={lang === "pt"}
+                className={`${lang === "pt" ? "text-[#0038FF]" : "text-slate-600"} hover:text-black transition-colors`}
                 onClick={() => lang !== "pt" && toggle()}
+                type="button"
               >
                 PT
               </button>
               <span className="text-slate-400">/</span>
               <button
-                className={`${lang === "en" ? "text-[#0038FF]" : "text-slate-500"} hover:text-[#0f172a] transition-colors cursor-pointer`}
+                aria-pressed={lang === "en"}
+                className={`${lang === "en" ? "text-[#0038FF]" : "text-slate-600"} hover:text-black transition-colors`}
                 onClick={() => lang !== "en" && toggle()}
+                type="button"
               >
                 EN
               </button>
-            </div>
-            <div className="w-8 h-8 rounded-none border-[2px] border-black bg-[#0038FF] flex items-center justify-center shrink-0 [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer" onClick={() => document.getElementById('contact')?.scrollIntoView()} role="button">
-              <User size={18} className="text-white" strokeWidth={2.5} />
             </div>
           </div>
         </div>
@@ -86,302 +91,300 @@ export function Portfolio() {
       {/* MOBILE HEADER */}
       <header className="md:hidden fixed top-0 inset-x-0 z-50 pt-safe bg-white/95 backdrop-blur-md border-b-2 border-black">
         <div className="h-12 px-3 flex items-center justify-between border-b border-black/10">
-          <a className="flex items-center gap-2 group" href="#top">
-            <span className="font-display font-extrabold text-[14.5px] tracking-tight uppercase text-black">
-              FELIPE BRIGAGÃO
-            </span>
+          <a className="font-display font-extrabold text-[14.5px] tracking-tight uppercase text-black" href="#top">
+            FELIPE BRIGAGÃO
           </a>
-          <div className="flex items-center gap-1.5">
-            <button 
-              onClick={toggle}
-              aria-label="Idioma" 
-              className="h-7 px-1.5 bg-white neo-border-sm font-code text-[10px] font-bold text-black hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 transition-all" 
-              type="button"
-            >
-              PT / EN
-            </button>
-            <a className="h-7 px-2.5 bg-[#0038FF] text-white neo-border-sm border-black neo-shadow-dark-sm font-code text-[10px] font-bold uppercase flex items-center gap-1 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all" href="#contact">
-              <span>{lang === 'pt' ? 'CONTATO' : 'CONTACT'}</span>
-            </a>
-          </div>
+          {/* No contact CTA here: the hero and the bottom dock already carry it. */}
+          <button
+            onClick={toggle}
+            aria-label={lang === "pt" ? "Mudar para inglês" : "Switch to Portuguese"}
+            className="h-7 px-2.5 bg-white neo-border-sm neo-shadow-dark-sm font-code text-[11px] font-bold text-black hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            type="button"
+          >
+            {lang === "pt" ? "EN" : "PT"}
+          </button>
         </div>
       </header>
 
       {/* MOBILE BOTTOM DOCK */}
       <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-white/95 backdrop-blur-md border-t-2 border-black">
         <div className="h-14 max-w-[430px] mx-auto px-2 flex items-center justify-between gap-1.5">
-          <a className="flex-1 h-10 flex flex-col items-center justify-center gap-0.5 bg-[#0038FF] text-white neo-border-sm border-black neo-shadow-dark-sm font-code text-[9.5px] font-bold uppercase active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href="#work">
-            <Terminal size={16} strokeWidth={2.5} />
-            <span className="tracking-tight">{t.nav.work}</span>
-          </a>
-          <a className="flex-1 h-10 flex flex-col items-center justify-center gap-0.5 bg-white text-black neo-border-sm border-black font-code text-[9.5px] font-bold uppercase hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 transition-all rounded-none" href="#research">
-            <FlaskConical size={16} strokeWidth={2.5} />
-            <span className="tracking-tight">{t.nav.research}</span>
-          </a>
-          <a className="flex-1 h-10 flex flex-col items-center justify-center gap-0.5 bg-white text-black neo-border-sm border-black font-code text-[9.5px] font-bold uppercase hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 transition-all rounded-none" href="#stack">
-            <Layers size={16} strokeWidth={2.5} />
-            <span className="tracking-tight">{t.nav.stack}</span>
-          </a>
-          <a className="flex-1 h-10 flex flex-col items-center justify-center gap-0.5 bg-white text-black neo-border-sm border-black font-code text-[9.5px] font-bold uppercase hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 transition-all rounded-none" href="#contact">
-            <AtSign size={16} strokeWidth={2.5} />
-            <span className="tracking-tight">{t.nav.contact}</span>
-          </a>
+          {([
+            { key: "work", Icon: Terminal },
+            { key: "research", Icon: FlaskConical },
+            { key: "stack", Icon: Layers },
+            { key: "contact", Icon: AtSign },
+          ] as const).map(({ key, Icon }, i) => (
+            <a
+              key={key}
+              className={`flex-1 h-10 flex flex-col items-center justify-center gap-0.5 neo-border-sm border-black font-code text-[10.5px] font-bold uppercase active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all ${
+                i === 0
+                  ? "bg-[#0038FF] text-white neo-shadow-dark-sm"
+                  : "bg-white text-black hover:bg-slate-100"
+              }`}
+              href={`#${key}`}
+            >
+              <Icon size={16} strokeWidth={2.5} />
+              <span className="tracking-tight">{t.nav[key]}</span>
+            </a>
+          ))}
         </div>
       </nav>
 
       {/* MAIN WRAPPER */}
-      <motion.main 
-        variants={containerVariants} 
-        initial="hidden" 
-        animate="show" 
-        className="w-full pt-[68px] md:pt-24 pb-[80px] md:pb-12 min-h-screen" 
+      <motion.main
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="w-full pt-[68px] md:pt-24 pb-[80px] md:pb-12 min-h-[100dvh]"
         id="top"
       >
-        <div className="w-full max-w-[1360px] mx-auto px-4 md:px-8 py-2 md:py-10 space-y-12 md:space-y-24">
-          
-          {/* HERO SECTION */}
-          <motion.section variants={sectionVariants} className="space-y-6 md:space-y-8 relative flex flex-col md:block pt-2 md:pt-0">
-            
-            <div className="md:hidden pointer-events-none select-none absolute right-[-8px] top-0 font-display font-black text-[76px] leading-none text-black/[0.04] z-0 tracking-tighter">
-              FB//01
-            </div>
+        <div className="w-full max-w-[1360px] mx-auto px-4 md:px-8 py-2 md:py-10 space-y-14 md:space-y-24">
 
-            <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] relative overflow-hidden transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
-              <div className="absolute -right-10 -top-12 opacity-[0.07] pointer-events-none select-none font-display text-[220px] font-bold leading-none text-[#0038FF] transition-transform duration-500 hover:scale-105">
-                FB//01
-              </div>
-              <div className="space-y-4 relative z-10">
-                <h1 className="font-display text-6xl md:text-7xl uppercase tracking-tight text-[#0f172a] font-bold leading-none break-words">
-                  FELIPE <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block transition-transform duration-200 hover:-rotate-1">BRIGAGÃO</span>
+          {/* HERO. Layout family: bordered anchor card. */}
+          <motion.section variants={sectionVariants} className="pt-2 md:pt-0">
+            <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
+              <div className="space-y-4">
+                <h1 className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words">
+                  FELIPE{" "}
+                  <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1">
+                    BRIGAGÃO
+                  </span>
                 </h1>
                 <p className="font-display text-3xl text-[#0038FF] font-bold tracking-tight uppercase">
-                  — {t.role}
+                  {t.role}
                 </p>
-                <p className="font-body text-lg text-[#334155] leading-relaxed max-w-3xl pt-2">
+                <p className="font-body text-lg text-black/85 leading-relaxed max-w-3xl pt-2">
                   {t.positioning}
                 </p>
               </div>
 
-              <div className="mt-8 pt-8 border-t-[2.5px] border-black">
-                <div className="flex flex-wrap items-center gap-3">
-                  <a className="btn-mechanical flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF]" href="#contact">
-                    {lang === "pt" ? "FALAR COMIGO" : "GET IN TOUCH"} <ArrowRight size={18} strokeWidth={2.5} />
-                  </a>
-                  <a className="btn-mechanical text-center py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold hover:bg-[#eff6ff] [box-shadow:3px_3px_0px_#0038FF]" href="#work">
-                    {lang === "pt" ? "VER PROJETOS" : "SEE THE WORK"}
-                  </a>
-                </div>
+              <div className="mt-8 pt-8 border-t-[2.5px] border-black flex flex-wrap items-center gap-3">
+                <a
+                  className="btn-mechanical flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF] whitespace-nowrap"
+                  href="#contact"
+                >
+                  {t.cta.contact} <ArrowRight size={18} strokeWidth={2.5} />
+                </a>
+                <a
+                  className="btn-mechanical py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-black font-bold hover:bg-slate-100 [box-shadow:3px_3px_0px_#0038FF] whitespace-nowrap"
+                  href="#work"
+                >
+                  {t.cta.work}
+                </a>
               </div>
             </div>
 
-            <div className="md:hidden relative z-10 flex flex-col">
+            <div className="md:hidden flex flex-col">
               <h1 className="font-display font-extrabold text-[36px] leading-[1.04] tracking-tight uppercase text-black mb-1.5">
-                FELIPE <br/>
-                <span className="italic text-[#0038FF] font-black">BRIGAGÃO</span>
+                FELIPE <br />
+                <span className="italic text-[#0038FF] font-black leading-[1.1] inline-block pb-1">BRIGAGÃO</span>
               </h1>
               <p className="font-display font-semibold text-[16.5px] tracking-tight text-black mb-3.5 uppercase">
-                — {t.role}.
+                {t.role}
               </p>
-              
-              <p className="font-body text-[13.5px] leading-relaxed text-black/85 mb-4">
-                {t.positioning}
+              <p className="font-body text-[14px] leading-relaxed text-black/85 mb-4">
+                {t.positioningShort}
               </p>
 
               <div className="flex flex-col gap-2.5 w-full">
-                <a className="w-full h-11 flex items-center justify-center gap-2 bg-[#0038FF] text-white font-code text-[12px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href="#contact">
-                  <span>{lang === 'pt' ? 'FALAR COMIGO' : 'GET IN TOUCH'}</span>
+                <a
+                  className="w-full h-11 flex items-center justify-center gap-2 bg-[#0038FF] text-white font-code text-[12.5px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+                  href="#contact"
+                >
+                  <span>{t.cta.contact}</span>
                   <ArrowRight size={16} strokeWidth={2.5} />
                 </a>
-                <a className="w-full h-11 flex items-center justify-center gap-2 bg-white text-black font-code text-[12px] font-bold tracking-wider uppercase neo-border neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href="#work">
-                  <span>{lang === 'pt' ? 'VER PROJETOS' : 'SEE THE WORK'}</span>
+                <a
+                  className="w-full h-11 flex items-center justify-center gap-2 bg-white text-black font-code text-[12.5px] font-bold tracking-wider uppercase neo-border neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+                  href="#work"
+                >
+                  <span>{t.cta.work}</span>
                   <ArrowRight size={16} strokeWidth={2.5} className="rotate-90" />
                 </a>
               </div>
             </div>
           </motion.section>
 
-          {/* PROJECTS SECTION */}
-          <motion.section 
-            initial="hidden" 
-            whileInView="show" 
+          {/* WORK. Layout family: asymmetric card grid, first entry featured. */}
+          {/* TODO: one cropped screenshot per project (16:10). Needs cleared assets. */}
+          <motion.section
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants} 
-            className="space-y-4 md:space-y-8" 
+            variants={containerVariants}
+            className="space-y-5 md:space-y-8"
             id="work"
           >
-            <motion.div variants={sectionVariants} className="hidden md:flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-[2.5px] border-black pb-4">
-              <div>
-                <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.sections.featured}</h2>
-              </div>
+            <motion.div variants={sectionVariants}>
+              <SectionHead>{t.sections.featured}</SectionHead>
             </motion.div>
 
-            <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-1.5 pt-4">
-              <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                {t.sections.featured}
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 relative z-30">
-              {PROJECTS.map((p) => (
-                <motion.article 
-                  key={p.id}
-                  variants={sectionVariants}
-                  className="project-card card-mechanical cursor-none bg-white neo-border md:border-[2.5px] border-black md:border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col justify-between rounded-none hover:bg-slate-50 transition-colors"
-                >
-                  <div className="border-b-2 md:border-b-[2px] border-black md:border-black bg-slate-100 md:bg-[#eff6ff] px-3 py-2 md:p-3.5 flex items-center justify-between gap-2 font-code text-xs uppercase">
-                    <span className="text-black md:text-[#0038FF] font-bold text-[11px] md:text-xs">{p.title[lang]}</span>
-                    <span className="px-2 md:px-2.5 py-0.5 text-white font-bold text-[9px] md:text-xs border border-black md:border-black md:[box-shadow:1.5px_1.5px_0px_#0038FF] bg-[#0038FF]">
-                      {p.tag[lang]}
-                    </span>
-                  </div>
-                  <div className="p-3.5 md:p-6 space-y-4 md:space-y-5 flex-1 bg-transparent">
-                    <div className="flex flex-wrap gap-1 md:gap-2">
-                      {p.stack.map((s, idx) => (
-                        <span key={s} className={`font-code text-[9.5px] md:text-[11px] font-bold px-1.5 md:px-2 py-0.5 md:py-1 uppercase cursor-default ${idx === p.stack.length - 1 ? 'bg-[#0038FF] text-white border border-black' : 'bg-slate-50 md:bg-[#f8fafc] border-[1.5px] border-black/30 md:border-black text-black md:text-[#0f172a]'}`}>
-                          {s}
-                        </span>
-                      ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
+              {PROJECTS.map((p, i) => {
+                const featured = i === 0;
+                return (
+                  <motion.article
+                    key={p.id}
+                    variants={sectionVariants}
+                    className={`card-mechanical bg-white neo-border md:border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col ${
+                      featured ? "lg:col-span-2" : ""
+                    }`}
+                  >
+                    <div className="border-b-2 border-black bg-slate-100 px-3 py-2 md:px-5 md:py-3 flex items-center justify-between gap-3 font-code text-[10.5px] md:text-xs uppercase">
+                      <span className="px-2 py-0.5 bg-[#0038FF] text-white font-bold border border-black">
+                        {p.tag[lang]}
+                      </span>
+                      <span className="text-black/70 font-bold shrink-0">{p.year}</span>
                     </div>
-                    <h3 className="font-display text-[15.5px] md:text-2xl uppercase text-black font-bold leading-snug">
-                      <span className="md:text-[#0038FF]">{p.role[lang]}</span>
-                    </h3>
-                    <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
-                      {p.problem[lang]}
-                    </p>
-                    <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
-                      {p.decision[lang]}
-                    </p>
-                    {p.outcome && (
-                      <div className="p-2.5 md:p-3.5 bg-white md:bg-[#eff6ff] neo-border-sm md:border-[1.5px] md:border-l-[4px] border-black/40 md:border-black font-code text-[12.5px] md:text-sm text-black transition-all duration-200 md:hover:bg-[#e0edff]">
-                        <span className="font-semibold">{p.outcome[lang]}</span>
+
+                    <div className="p-3.5 md:p-6 space-y-3.5 md:space-y-5 flex-1">
+                      <h3 className="font-display text-[20px] md:text-3xl uppercase text-black font-extrabold leading-none tracking-tight">
+                        {p.title[lang]}
+                      </h3>
+
+                      <div className="flex flex-wrap gap-1.5">
+                        {p.stack.map((s) => (
+                          <span
+                            key={s}
+                            className="font-code text-[10.5px] md:text-[11px] font-bold px-2 py-0.5 md:py-1 uppercase bg-slate-50 border-[1.5px] border-black text-black"
+                          >
+                            {s}
+                          </span>
+                        ))}
                       </div>
-                    )}
-                  </div>
-                  <div className="border-t-2 md:border-t-[2px] border-black md:border-black px-3 py-1.5 md:p-3.5 bg-slate-100 md:bg-[#f8fafc] flex items-center justify-between font-code text-[9.5px] md:text-xs">
-                    <div className="flex items-center gap-1 md:gap-2 text-black md:text-[#0038FF] font-extrabold md:font-bold">
-                      <span>{p.client[lang]}</span>
+
+                      <div className={featured ? "space-y-3 lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0" : "space-y-3"}>
+                        <p className="font-body text-[13.5px] md:text-base text-black/85 leading-relaxed">
+                          {p.problem[lang]}
+                        </p>
+                        <p className="font-body text-[13.5px] md:text-base text-black/85 leading-relaxed">
+                          {p.decision[lang]}
+                        </p>
+                      </div>
+
+                      {p.outcome && (
+                        <p className="p-2.5 md:p-3.5 bg-slate-50 border-l-[4px] border-[#0038FF] font-code text-[12.5px] md:text-sm text-black font-semibold leading-snug">
+                          {p.outcome[lang]}
+                        </p>
+                      )}
                     </div>
-                    <span className="text-black/60 md:text-[#0f172a] font-bold">{p.year}</span>
-                  </div>
-                </motion.article>
-              ))}
+
+                    <div className="border-t-2 border-black px-3 py-2 md:px-5 md:py-3 bg-slate-100 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-code text-[10.5px] md:text-xs uppercase">
+                      <span className="text-black font-extrabold">{p.client[lang]}</span>
+                      <span className="text-black/70 font-bold">{p.role[lang]}</span>
+                    </div>
+                  </motion.article>
+                );
+              })}
             </div>
           </motion.section>
 
-          {/* RESEARCH SECTION */}
-          <motion.section 
-            initial="hidden" 
-            whileInView="show" 
+          {/* RESEARCH. Layout family: inverted block with display metrics.
+              This is the page's single deliberate theme inversion. */}
+          <motion.section
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            variants={sectionVariants} 
-            className="space-y-4 md:space-y-6 relative z-30" 
+            variants={sectionVariants}
+            className="space-y-5 md:space-y-8"
             id="research"
           >
-            <div className="hidden md:block border-b-[2.5px] border-black pb-4">
-              <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.researchHeading}</h2>
-            </div>
-            <div className="md:hidden flex flex-col gap-1.5 pt-4">
-              <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                {t.researchHeading}
-              </h2>
-            </div>
+            <SectionHead>{t.researchHeading}</SectionHead>
 
-            <div className="bg-white neo-border md:border-[2.5px] border-black md:border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-10 space-y-4 md:space-y-8 rounded-none md:transition-shadow md:hover:[box-shadow:8px_8px_0px_#0038FF]">
-              <div className="flex flex-wrap md:grid md:grid-cols-4 gap-1.5 md:gap-2 font-code text-[9px] md:text-xs uppercase md:border-b-[2px] border-black md:border-black md:pb-5">
-                <div className="px-2 py-0.5 md:p-2.5 bg-slate-100 md:bg-[#f8fafc] neo-border-sm md:border-[1.5px] md:border-black text-black md:text-[#0f172a] font-bold text-center">
-                  [ ICMR — VOL. 05, № 03 ]
-                </div>
-                <div className="px-2 py-0.5 md:p-2.5 bg-slate-100 md:bg-[#f8fafc] neo-border-sm md:border-[1.5px] md:border-black text-black md:text-[#0f172a] font-bold text-center">
-                  [ {lang === "pt" ? "DEZEMBRO / 2024" : "DECEMBER / 2024"} ]
-                </div>
-                <div className="px-2 py-0.5 md:p-2.5 bg-[#0038FF] text-white neo-border-sm md:border-[1.5px] border-black md:border-black font-bold text-center md:[box-shadow:1.5px_1.5px_0px_#0038FF]">
-                  [ {t.paperKind} ]
-                </div>
-                <a className="md:hidden self-start inline-flex items-center gap-1 px-2.5 py-1 bg-slate-50 font-code text-[10.5px] font-bold text-[#0038FF] border border-black/40 active:underline" href="https://doi.org/10.54033/icmrv5n3-043" rel="noopener noreferrer" target="_blank">
-                  <span>DOI: 10.54033/icmrv5n3-043</span>
+            <div className="bg-[#0d0f14] text-white border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-10 space-y-5 md:space-y-8">
+              <div className="flex flex-wrap items-center gap-1.5 md:gap-2 font-code text-[10.5px] md:text-xs uppercase font-bold">
+                <span className="px-2.5 py-1 border border-white/35 text-white/80">ICMR, Vol. 05, № 03</span>
+                <span className="px-2.5 py-1 border border-white/35 text-white/80">
+                  {lang === "pt" ? "Dezembro / 2024" : "December / 2024"}
+                </span>
+                <span className="px-2.5 py-1 bg-[#0038FF] text-white border border-[#0038FF]">{t.paperKind}</span>
+                <a
+                  className="md:ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 border border-[#5B8CFF] text-[#5B8CFF] hover:bg-[#5B8CFF] hover:text-[#0d0f14] transition-colors"
+                  href="https://doi.org/10.54033/icmrv5n3-043"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  DOI: 10.54033/icmrv5n3-043
                   <ArrowUpRight size={13} strokeWidth={3} />
                 </a>
-                <a className="hidden md:flex btn-mechanical-sm p-2.5 bg-white border-[1.5px] border-black text-[#0038FF] font-bold hover:bg-[#0038FF] hover:text-white items-center justify-center gap-1 [box-shadow:2px_2px_0px_#0038FF]" href="https://doi.org/10.54033/icmrv5n3-043" rel="noopener noreferrer" target="_blank">
-                  DOI: 10.54033/icmrv5n3-043 <ArrowUpRight size={14} strokeWidth={3} />
-                </a>
               </div>
-              
-              <div className="space-y-3 md:space-y-4">
-                <h3 className="font-display font-extrabold md:font-bold text-[16.5px] md:text-3xl uppercase text-black md:text-[#0f172a] leading-tight">
-                  {t.paperTitle}
-                </h3>
-                <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
+
+              <h3 className="font-display font-extrabold text-[18px] md:text-3xl uppercase leading-tight">
+                {t.paperTitle}
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/20 border border-white/20">
+                {t.paperMetrics.map((m) => (
+                  <div key={m.label} className="bg-[#0d0f14] p-3.5 md:p-5">
+                    <p className="font-display text-[32px] md:text-5xl font-extrabold text-[#5B8CFF] leading-none tracking-tight">
+                      {m.value}
+                    </p>
+                    <p className="mt-2 font-code text-[10.5px] md:text-xs uppercase text-white/75 leading-snug">
+                      {m.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-3">
+                <p className="font-body text-[13.5px] md:text-base text-white/85 leading-relaxed max-w-3xl">
                   {t.paperAbstract}
                 </p>
-                <p className="font-code text-[10.5px] md:text-sm text-[#334155] leading-snug">
-                  {t.paperCredits}
-                </p>
+                <p className="font-code text-[11px] md:text-sm text-white/65 leading-snug">{t.paperCredits}</p>
               </div>
             </div>
           </motion.section>
 
-          {/* ABOUT SECTION */}
-          <motion.section 
-            initial="hidden" 
-            whileInView="show" 
+          {/* ABOUT. Layout family: bare prose column, no container. */}
+          {/* TODO: black and white portrait, 4:5, sitting left of this column at md+. */}
+          <motion.section
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            variants={sectionVariants} 
-            className="space-y-4 md:space-y-6 relative z-30" 
+            variants={sectionVariants}
+            className="space-y-5 md:space-y-8"
             id="about"
           >
-            <div className="hidden md:block border-b-[2.5px] border-black pb-4">
-              <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.sections.about}</h2>
-            </div>
-            <div className="md:hidden pt-4">
-              <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                {t.sections.about}
-              </h2>
-            </div>
-
-            <div className="bg-white neo-border md:border-[2.5px] border-black md:border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-10 space-y-3 md:space-y-5 rounded-none">
-              <p className="font-body text-[13px] md:text-lg text-black/80 md:text-[#334155] leading-relaxed max-w-3xl">
-                {t.aboutP1}
-              </p>
-              <p className="font-body text-[13px] md:text-lg text-black/80 md:text-[#334155] leading-relaxed max-w-3xl">
-                {t.aboutP2}
-              </p>
+            <SectionHead>{t.sections.about}</SectionHead>
+            <div className="max-w-[62ch] space-y-4 md:space-y-6">
+              <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP1}</p>
+              <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP2}</p>
             </div>
           </motion.section>
 
-          {/* STACK SECTION */}
-          <motion.section 
-            initial="hidden" 
-            whileInView="show" 
+          {/* STACK. Layout family: ruled columns, no container. */}
+          <motion.section
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants} 
-            className="space-y-4 md:space-y-6 relative z-30" 
+            variants={containerVariants}
+            className="space-y-5 md:space-y-8"
             id="stack"
           >
-            <motion.div variants={sectionVariants} className="hidden md:block border-b-[2.5px] border-black pb-4">
-              <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.stackHeading}</h2>
+            <motion.div variants={sectionVariants}>
+              <SectionHead>{t.stackHeading}</SectionHead>
             </motion.div>
 
-            <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-1.5 pt-4">
-              <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                {t.stackHeading}
-              </h2>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-6">
+            <div className="grid grid-cols-1 gap-y-7 md:grid-cols-3 md:gap-y-0 md:divide-x-2 md:divide-black">
               {STACK.map((s) => (
-                <motion.div variants={sectionVariants} key={s.category.en} className="bg-white p-3.5 md:p-0 neo-border md:border-[2.5px] md:border-black neo-shadow-blue md:[box-shadow:5px_5px_0px_#0038FF] flex flex-col gap-1 md:gap-0 rounded-none md:card-interactive-subtle">
-                  <div className="flex items-center justify-between md:p-3 md:bg-[#eff6ff] md:border-b-[2px] md:border-black">
-                    <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase">{s.category[lang]}</span>
-                  </div>
-                  
-                  <p className="md:hidden font-body text-[13px] text-black font-medium leading-snug">
+                <motion.div
+                  variants={sectionVariants}
+                  key={s.category.en}
+                  className="flex flex-col gap-2 md:px-7 md:first:pl-0 md:last:pr-0"
+                >
+                  <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase tracking-wider">
+                    {s.category[lang]}
+                  </span>
+                  {/* Mobile keeps one line per category. The ruled list is tall enough
+                      at 390px to push contact far below the fold. */}
+                  <p className="md:hidden font-code text-[13px] text-black font-medium leading-relaxed">
                     {s.items.join(", ")}
                   </p>
-
-                  <ul className="hidden md:flex p-5 space-y-3 font-code text-sm text-[#0f172a] font-medium flex-col flex-1">
-                    {s.items.map((item, i) => (
-                      <li key={item} className={`flex items-center gap-2 ${i !== s.items.length - 1 ? 'border-b border-slate-200 pb-2' : ''} transition-transform duration-150 hover:translate-x-1`}>
-                        <span className="w-2 h-2 bg-[#0038FF]"></span> {item}
+                  <ul className="hidden md:block font-code text-sm text-black font-medium">
+                    {s.items.map((item) => (
+                      <li key={item} className="py-2 border-b border-black/15 last:border-b-0">
+                        {item}
                       </li>
                     ))}
                   </ul>
@@ -390,116 +393,55 @@ export function Portfolio() {
             </div>
           </motion.section>
 
-          {/* CONTACT SECTION */}
-          <motion.section 
-            initial="hidden" 
-            whileInView="show" 
+          {/* CONTACT. Layout family: closing anchor card. */}
+          <motion.section
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants} 
-            className="space-y-4 md:space-y-6 md:pb-12 relative z-30" 
+            variants={containerVariants}
+            className="space-y-5 md:space-y-8 md:pb-12"
             id="contact"
           >
-            <motion.div variants={sectionVariants} className="hidden md:block bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] p-12 space-y-8 transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
-              <div className="space-y-2">
-                <h2 className="font-display text-5xl uppercase tracking-tight text-[#0f172a] font-bold">
-                  {t.sections.contact}
-                </h2>
-                <p className="font-body text-lg text-[#334155] max-w-2xl leading-relaxed">
-                  {t.contactLead}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-3 gap-6 pt-4">
-                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={`mailto:${SITE.email}`}>
-                  <div>
-                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">EMAIL</span>
-                    <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold break-all">
-                      {SITE.email}
-                    </span>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-end text-[#0038FF] font-code text-xs font-bold">
-                    <span className="transition-transform duration-150 group-hover:translate-x-1"><ArrowRight size={14} strokeWidth={3} /></span>
-                  </div>
-                </a>
-                
-                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.linkedin} rel="noreferrer" target="_blank">
-                  <div>
-                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">LINKEDIN</span>
-                    <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold">
-                      /in/felibrisantos
-                    </span>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-end text-[#0038FF] font-code text-xs font-bold">
-                    <span className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><ArrowUpRight size={14} strokeWidth={3} /></span>
-                  </div>
-                </a>
-                
-                <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.github} rel="noreferrer" target="_blank">
-                  <div>
-                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">GITHUB</span>
-                    <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold">
-                      @felibrisantos
-                    </span>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-end text-[#0038FF] font-code text-xs font-bold">
-                    <span className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><ArrowUpRight size={14} strokeWidth={3} /></span>
-                  </div>
-                </a>
-              </div>
-
-              <div className="pt-6 border-t-[2px] border-black flex items-center justify-between font-code text-sm text-[#334155]">
-                <div className="font-bold text-[#0f172a]">
-                  © {new Date().getFullYear()} FELIPE BRIGAGÃO · {t.role.toUpperCase()}
-                </div>
-                <div className="flex items-center gap-4 font-bold">
-                  <span className="text-[#0f172a]">{lang === "pt" ? "Jacareí, SP" : "Jacareí, SP, Brazil"}</span>
-                </div>
-              </div>
+            <motion.div variants={sectionVariants}>
+              <SectionHead>{t.sections.contact}</SectionHead>
             </motion.div>
 
-            <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-3.5 pt-4">
-              <div className="flex flex-col gap-1.5">
-                <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                  {t.sections.contact}
-                </h2>
-                <p className="font-body text-[13px] leading-relaxed text-black/80">
-                  {t.contactLead}
-                </p>
+            <motion.div
+              variants={sectionVariants}
+              className="bg-white border-[2.5px] md:border-[3px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-12 space-y-5 md:space-y-8"
+            >
+              <p className="font-body text-[14px] md:text-lg text-black/85 max-w-2xl leading-relaxed">
+                {t.availability}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-6">
+                {CONTACT_LINKS.map(({ label, value, href, external }) => (
+                  <a
+                    key={label}
+                    className="btn-mechanical group bg-white border-[2px] md:border-[2.5px] border-black hover:bg-slate-50 neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_#0038FF] p-3 md:p-5 flex items-center md:flex-col md:items-stretch justify-between gap-3 md:gap-0"
+                    href={href}
+                    {...(external ? { rel: "noopener noreferrer", target: "_blank" } : {})}
+                  >
+                    <span className="flex flex-col min-w-0">
+                      <span className="font-code text-[10.5px] md:text-xs text-black/70 uppercase tracking-wider font-bold">
+                        {label}
+                      </span>
+                      <span className="font-display text-[15px] md:text-xl text-black group-hover:text-[#0038FF] transition-colors font-bold truncate md:mt-2 md:break-all md:whitespace-normal">
+                        {value}
+                      </span>
+                    </span>
+                    <span className="shrink-0 text-[#0038FF] md:mt-4 md:pt-3 md:border-t md:border-slate-200 md:self-stretch md:flex md:justify-end">
+                      {external ? (
+                        <ArrowUpRight size={16} strokeWidth={3} />
+                      ) : (
+                        <ArrowRight size={16} strokeWidth={3} />
+                      )}
+                    </span>
+                  </a>
+                ))}
               </div>
 
-              <div className="flex flex-col gap-2.5">
-                <a className="bg-white p-3 neo-border neo-shadow-blue flex items-center justify-between group active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href={`mailto:${SITE.email}`}>
-                  <div className="flex flex-col min-w-0 pr-2">
-                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">EMAIL</span>
-                    <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">{SITE.email}</span>
-                  </div>
-                  <div className="bg-[#0038FF] text-white px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
-                    <ArrowUpRight size={14} strokeWidth={3} />
-                  </div>
-                </a>
-                
-                <a className="bg-white p-3 neo-border neo-shadow-blue flex items-center justify-between group active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href={SITE.social.linkedin} rel="noopener noreferrer" target="_blank">
-                  <div className="flex flex-col min-w-0 pr-2">
-                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">LINKEDIN</span>
-                    <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">/in/felibrisantos</span>
-                  </div>
-                  <div className="bg-slate-200 text-black px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
-                    <ArrowUpRight size={14} strokeWidth={3} />
-                  </div>
-                </a>
-
-                <a className="bg-white p-3 neo-border neo-shadow-blue flex items-center justify-between group active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href={SITE.social.github} rel="noopener noreferrer" target="_blank">
-                  <div className="flex flex-col min-w-0 pr-2">
-                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">GITHUB</span>
-                    <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">@felibrisantos</span>
-                  </div>
-                  <div className="bg-slate-200 text-black px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
-                    <ArrowUpRight size={14} strokeWidth={3} />
-                  </div>
-                </a>
-              </div>
-
-              <p className="font-code text-[9.5px] text-black/60 uppercase mt-1">
+              <p className="md:hidden font-code text-[10.5px] text-black/70 uppercase">
                 © {new Date().getFullYear()} Felipe Brigagão · {t.role} · Jacareí, SP
               </p>
             </motion.div>
@@ -509,18 +451,22 @@ export function Portfolio() {
 
       {/* DESKTOP FOOTER */}
       <footer className="hidden md:flex w-full bg-white border-t-[2.5px] border-black [box-shadow:0px_-2px_0px_#0038FF]">
-        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-code text-xs uppercase text-[#334155]">
-          <div className="font-bold text-[#0f172a]">
-            <span>© {new Date().getFullYear()} Felipe Brigagão. {lang === "pt" ? "Todos os direitos reservados." : "All rights reserved."}</span>
-          </div>
+        <div className="w-full max-w-[1400px] mx-auto px-8 py-4 flex items-center justify-between gap-4 font-code text-xs uppercase text-black/80">
+          <span className="font-bold text-black">© {new Date().getFullYear()} Felipe Brigagão</span>
           <div className="flex flex-wrap items-center gap-4 font-bold">
-            <span className="text-[#0f172a]">Jacareí, SP</span>
-            <span className="text-slate-300 hidden md:inline">/</span>
-            <a className="text-[#0038FF] hover:underline underline-offset-4 transition-colors" href={SITE.social.github} rel="noreferrer" target="_blank">GitHub</a>
-            <span className="text-slate-300 hidden md:inline">/</span>
-            <a className="text-[#0038FF] hover:underline underline-offset-4 transition-colors" href={SITE.social.linkedin} rel="noreferrer" target="_blank">LinkedIn</a>
-            <span className="text-slate-300 hidden md:inline">/</span>
-            <a className="text-[#0038FF] hover:underline underline-offset-4 transition-colors" href={`mailto:${SITE.email}`}>Email</a>
+            <span className="text-black">Jacareí, SP</span>
+            <span className="text-slate-400">/</span>
+            <a className="text-[#0038FF] hover:underline underline-offset-4" href={SITE.social.github} rel="noopener noreferrer" target="_blank">
+              GitHub
+            </a>
+            <span className="text-slate-400">/</span>
+            <a className="text-[#0038FF] hover:underline underline-offset-4" href={SITE.social.linkedin} rel="noopener noreferrer" target="_blank">
+              LinkedIn
+            </a>
+            <span className="text-slate-400">/</span>
+            <a className="text-[#0038FF] hover:underline underline-offset-4" href={`mailto:${SITE.email}`}>
+              Email
+            </a>
           </div>
         </div>
       </footer>

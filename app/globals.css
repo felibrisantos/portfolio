@@ -31,7 +31,23 @@
   main > :first-child { margin-top: 0 !important; }
   main > :last-child { margin-bottom: 0 !important; }
 }
-::-webkit-scrollbar { display: none; }
+
+/* KEYBOARD FOCUS: black outline reads on both white and #0038FF surfaces */
+:focus-visible {
+  outline: 3px solid #0d0f14;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgb(0 56 255 / 0.3) !important;
+}
+
+/* SCROLLBAR: styled, not hidden - position feedback is orientation */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0038FF #e2e8f0;
+}
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+::-webkit-scrollbar-thumb { background: #0038FF; border: 2px solid #e2e8f0; }
+
 .bg-grid-pattern {
   background-color: #f8fafc;
   background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
@@ -49,11 +65,11 @@
 }
 .btn-mechanical:hover {
   transform: translate(-3px, -3px);
-  box-shadow: 6px 6px 0px #0038FF !important;
+  box-shadow: 6px 6px 0px #0038FF;
 }
 .btn-mechanical:active {
   transform: translate(2px, 2px);
-  box-shadow: 0px 0px 0px transparent !important;
+  box-shadow: 0px 0px 0px transparent;
 }
 
 .btn-mechanical-sm {
@@ -61,11 +77,11 @@
 }
 .btn-mechanical-sm:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px #0038FF !important;
+  box-shadow: 4px 4px 0px #0038FF;
 }
 .btn-mechanical-sm:active {
   transform: translate(1.5px, 1.5px);
-  box-shadow: 0px 0px 0px transparent !important;
+  box-shadow: 0px 0px 0px transparent;
 }
 
 /* CARD LIFT ON HOVER */
@@ -74,15 +90,7 @@
 }
 .card-mechanical:hover {
   transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0px #0038FF !important;
-}
-
-.card-interactive-subtle {
-  transition: transform 0.2s var(--mechanical-ease), box-shadow 0.2s var(--mechanical-ease);
-}
-.card-interactive-subtle:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #0038FF !important;
+  box-shadow: 9px 9px 0px #0038FF;
 }
 
 /* TAG PILLS INVERT ON HOVER */
@@ -90,9 +98,32 @@
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .tag-pill:hover {
-  background-color: #0038FF !important;
-  color: #ffffff !important;
-  border-color: #0038FF !important;
+  background-color: #0038FF;
+  color: #ffffff;
+  border-color: #0038FF;
+}
+
+/* MOBILE UTILITIES */
+.pb-safe { padding-bottom: max(12px, env(safe-area-inset-bottom, 12px)); }
+.pt-safe { padding-top: max(10px, env(safe-area-inset-top, 10px)); }
+.neo-shadow-blue { box-shadow: 4px 4px 0px 0px #0038FF; }
+.neo-shadow-blue-sm { box-shadow: 2.5px 2.5px 0px 0px #0038FF; }
+.neo-shadow-dark { box-shadow: 3.5px 3.5px 0px 0px #0d0f14; }
+.neo-shadow-dark-sm { box-shadow: 2px 2px 0px 0px #0d0f14; }
+.neo-border { border: 2px solid #0d0f14; }
+.neo-border-blue { border: 2px solid #0038FF; }
+.neo-border-sm { border: 1.5px solid #0d0f14; }
+
+/* ACCESSIBILITY: REDUCED MOTION.
+   Only animation and transition are neutralised. `transform: none` is NOT
+   applied globally, because transform also carries layout here. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* STAGGERED PAGE ENTRANCE KEYFRAMES */
@@ -106,32 +137,3 @@
 .animate-rise-3 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.20s both; }
 .animate-rise-4 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.28s both; }
 .animate-rise-5 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.36s both; }
-
-  /* MOBILE UTILITIES */
-  .pb-safe { padding-bottom: max(12px, env(safe-area-inset-bottom, 12px)); }
-  .pt-safe { padding-top: max(10px, env(safe-area-inset-top, 10px)); }
-  .neo-shadow-blue { box-shadow: 4px 4px 0px 0px #0038FF; }
-  .neo-shadow-blue-sm { box-shadow: 2.5px 2.5px 0px 0px #0038FF; }
-  .neo-shadow-dark { box-shadow: 3.5px 3.5px 0px 0px #0d0f14; }
-  .neo-shadow-dark-sm { box-shadow: 2px 2px 0px 0px #0d0f14; }
-  .neo-border { border: 2px solid #0d0f14; }
-  .neo-border-blue { border: 2px solid #0038FF; }
-  .neo-border-sm { border: 1.5px solid #0d0f14; }
-  
-  /* BRUTALIST CUSTOM CURSOR PREP */
-  @media (pointer: fine) {
-    * {
-      cursor: none !important;
-    }
-  }
-
-
-/* ACCESSIBILITY: REDUCED MOTION */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001s !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001s !important;
-    transform: none !important;
-  }
-}
