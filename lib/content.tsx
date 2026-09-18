@@ -196,6 +196,25 @@ export const PROJECTS: Project[] = [
     },
     stack: ["React 19", "Express 5", "Prisma", "WebSockets", "Leaflet"],
   },
+  {
+    id: "iot-metrics",
+    year: "2026",
+    client: { pt: "Na Abdou, para CYMA Digital", en: "At Abdou, for CYMA Digital" },
+    title: { pt: "IoT Metrics", en: "IoT Metrics" },
+    tag: { pt: "Telemetria e chamados", en: "Telemetry and tickets" },
+    /* Narrow on purpose. This is a long-running team platform and the slice
+       below is the part that is mine. */
+    role: { pt: "Ocorrências & sessão", en: "Occurrences & session" },
+    problem: {
+      pt: "A telemetria de um aparelho em campo diz que algo caiu. Não diz o que já foi feito a respeito.",
+      en: "Telemetry from a device in the field says something went down. It does not say what has already been done about it.",
+    },
+    decision: {
+      pt: "Cada ocorrência virou registro com comentário e histórico, em página própria e na tela do aparelho. A sessão sobrevive ao token expirado por um refresh que dedupe as chamadas concorrentes.",
+      en: "Every occurrence became a record with comments and history, on its own page and on the device screen. The session survives an expired token through a refresh that dedupes concurrent calls.",
+    },
+    stack: ["React", "TanStack Query", "Recharts", "Leaflet", "Django", "DRF"],
+  },
 ];
 
 /** Product names stay as plain strings; anything that reads differently per language is a `Bi`. */
