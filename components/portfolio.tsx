@@ -2,8 +2,18 @@
 
 import { useLang } from "@/lib/use-lang";
 import { COPY, PROJECTS, SITE, STACK, stackLabel } from "@/lib/content";
-import { motion, Variants } from "framer-motion";
+import {
+  animate,
+  motion,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+  Variants,
+} from "framer-motion";
 import { ArrowUpRight, ArrowRight, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const CONTACT_LINKS = [
   { label: "Email", value: SITE.email, href: `mailto:${SITE.email}`, external: false },
@@ -21,24 +31,113 @@ function SectionHead({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Words of the hero headline rise in sequence. */
+const wordContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.14, delayChildren: 0.18 } },
+};
+
+const wordRise: Variants = {
+  hidden: { opacity: 0, y: "0.3em" },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 210, damping: 24 } },
+};
+
+/**
+ * Counts every number inside `value` up from zero, keeping whatever sits
+ * between them. Works for "0,82-0,96", "5 de 8" and "3.8-9.2%" alike, and
+ * keeps the decimal separator the string arrived with.
+ */
+function scaleNumbers(value: string, progress: number) {
+  return value.replace(/\d+(?:[.,]\d+)?/g, (raw) => {
+    const separator = raw.includes(",") ? "," : ".";
+    const decimals = raw.includes(separator) ? raw.split(separator)[1].length : 0;
+    const scaled = parseFloat(raw.replace(",", ".")) * progress;
+    return scaled.toFixed(decimals).replace(".", separator);
+  });
+}
+
+function CountUp({ value }: { value: string }) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const progress = useMotionValue(reduce ? 1 : 0);
+  const text = useTransform(progress, (p) => scaleNumbers(value, p));
+
+  useEffect(() => {
+    if (reduce || !inView) return;
+    const controls = animate(progress, 1, { duration: 1.1, ease: [0.16, 1, 0.3, 1] });
+    return () => controls.stop();
+  }, [inView, reduce, progress]);
+
+  return <motion.span ref={ref}>{text}</motion.span>;
+}
+
+/** Desktop-only: the CTA leans toward the pointer. Touch never fires mousemove. */
+function MagneticCta({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className: string;
+  children: React.ReactNode;
+}) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 260, damping: 18, mass: 0.6 });
+  const springY = useSpring(y, { stiffness: 260, damping: 18, mass: 0.6 });
+
+  const pull = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (reduce || !ref.current) return;
+    const box = ref.current.getBoundingClientRect();
+    x.set((event.clientX - (box.left + box.width / 2)) * 0.22);
+    y.set((event.clientY - (box.top + box.height / 2)) * 0.34);
+  };
+
+  const release = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className={className}
+      style={{ x: springX, y: springY }}
+      onMouseMove={pull}
+      onMouseLeave={release}
+    >
+      {children}
+    </motion.a>
+  );
+}
+
 export function Portfolio() {
   const { lang, toggle } = useLang();
   const t = COPY[lang];
+  const reduce = useReducedMotion();
 
+  /* Motion runs in JS, so the reduced-motion block in globals.css does not
+     reach it. Collapsing the variants here is what actually honours it. */
   const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 280, damping: 24, mass: 0.8 },
+      transition: reduce
+        ? { duration: 0 }
+        : { type: "spring", stiffness: 280, damping: 24, mass: 0.8 },
     },
   };
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: reduce ? { opacity: 1 } : { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+      transition: reduce ? { duration: 0 } : { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
 
@@ -145,12 +244,21 @@ export function Portfolio() {
           <motion.section variants={sectionVariants} className="pt-2 md:pt-0">
             <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="space-y-4">
-                <h1 className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words">
-                  FELIPE{" "}
-                  <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1">
-                    BRIGAGÃO
-                  </span>
-                </h1>
+                <motion.h1
+                  variants={wordContainer}
+                  initial={reduce ? false : "hidden"}
+                  animate="show"
+                  className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words"
+                >
+                  <motion.span variants={wordRise} className="inline-block">
+                    FELIPE
+                  </motion.span>{" "}
+                  <motion.span variants={wordRise} className="inline-block">
+                    <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
+                      BRIGAGÃO
+                    </span>
+                  </motion.span>
+                </motion.h1>
                 <p className="font-display text-3xl text-[#0038FF] font-bold tracking-tight uppercase">
                   {t.role}
                 </p>
@@ -160,12 +268,12 @@ export function Portfolio() {
               </div>
 
               <div className="mt-8 pt-8 border-t-[2.5px] border-black flex flex-wrap items-center gap-3">
-                <a
-                  className="btn-mechanical flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF] whitespace-nowrap"
+                <MagneticCta
+                  className="btn-magnetic flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF] whitespace-nowrap"
                   href="#contact"
                 >
                   {t.cta.contact} <ArrowRight size={18} strokeWidth={2.5} />
-                </a>
+                </MagneticCta>
                 <a
                   className="btn-mechanical py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-black font-bold hover:bg-slate-100 [box-shadow:3px_3px_0px_#0038FF] whitespace-nowrap"
                   href="#work"
@@ -176,10 +284,22 @@ export function Portfolio() {
             </div>
 
             <div className="md:hidden flex flex-col">
-              <h1 className="font-display font-extrabold text-[36px] leading-[1.04] tracking-tight uppercase text-black mb-1.5">
-                FELIPE <br />
-                <span className="italic text-[#0038FF] font-black leading-[1.1] inline-block pb-1">BRIGAGÃO</span>
-              </h1>
+              <motion.h1
+                variants={wordContainer}
+                initial={reduce ? false : "hidden"}
+                animate="show"
+                className="font-display font-extrabold text-[36px] leading-[1.04] tracking-tight uppercase text-black mb-1.5"
+              >
+                <motion.span variants={wordRise} className="inline-block">
+                  FELIPE
+                </motion.span>{" "}
+                <br />
+                <motion.span variants={wordRise} className="inline-block">
+                  <span className="italic text-[#0038FF] font-black leading-[1.1] inline-block pb-1">
+                    BRIGAGÃO
+                  </span>
+                </motion.span>
+              </motion.h1>
               <p className="font-display font-semibold text-[16.5px] tracking-tight text-black mb-3.5 uppercase">
                 {t.role}
               </p>
@@ -317,8 +437,8 @@ export function Portfolio() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/20 border border-white/20">
                 {t.paperMetrics.map((m) => (
                   <div key={m.label} className="bg-[#0d0f14] p-3.5 md:p-5">
-                    <p className="font-display text-[32px] md:text-5xl font-extrabold text-[#5B8CFF] leading-none tracking-tight">
-                      {m.value}
+                    <p className="font-display text-[32px] md:text-5xl font-extrabold text-[#5B8CFF] leading-none tracking-tight tabular-nums">
+                      <CountUp value={m.value} />
                     </p>
                     <p className="mt-2 font-code text-[10.5px] md:text-xs uppercase text-white/75 leading-snug">
                       {m.label}
@@ -387,7 +507,10 @@ export function Portfolio() {
                     {s.items.map((item) => {
                       const label = stackLabel(item, lang);
                       return (
-                        <li key={label} className="py-2 border-b border-black/15 last:border-b-0">
+                        <li
+                          key={label}
+                          className="py-2 border-b border-black/15 last:border-b-0 transition-transform duration-150 hover:translate-x-1"
+                        >
                           {label}
                         </li>
                       );
@@ -439,9 +562,17 @@ export function Portfolio() {
                     </span>
                     <span className="shrink-0 text-[#0038FF] lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:flex lg:justify-end">
                       {external ? (
-                        <ArrowUpRight size={16} strokeWidth={3} />
+                        <ArrowUpRight
+                          size={16}
+                          strokeWidth={3}
+                          className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
                       ) : (
-                        <ArrowRight size={16} strokeWidth={3} />
+                        <ArrowRight
+                          size={16}
+                          strokeWidth={3}
+                          className="transition-transform duration-150 group-hover:translate-x-1"
+                        />
                       )}
                     </span>
                   </a>

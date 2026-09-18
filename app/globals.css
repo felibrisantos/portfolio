@@ -84,6 +84,18 @@
   box-shadow: 0px 0px 0px transparent;
 }
 
+/* MAGNETIC CTA: shadow only. The transform belongs to Motion, which writes it
+   inline; a CSS hover transform here would be overwritten mid-drag. */
+.btn-magnetic {
+  transition: box-shadow 0.16s var(--mechanical-ease), background-color 0.16s ease;
+}
+.btn-magnetic:hover {
+  box-shadow: 7px 7px 0px #0038FF;
+}
+.btn-magnetic:active {
+  box-shadow: 2px 2px 0px #0038FF;
+}
+
 /* CARD LIFT ON HOVER */
 .card-mechanical {
   transition: transform 0.22s var(--mechanical-ease), box-shadow 0.22s var(--mechanical-ease), border-color 0.2s ease;
