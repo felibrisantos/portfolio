@@ -357,8 +357,17 @@ export function Portfolio() {
       >
         <div className="w-full max-w-[1360px] mx-auto px-4 md:px-8 py-2 md:py-10 space-y-14 md:space-y-24">
 
-          {/* HERO. Layout family: bordered anchor card. */}
-          <motion.section ref={heroRef} id="hero" variants={sectionVariants} className="pt-2 md:pt-0">
+          {/* HERO. Layout family: bordered anchor card.
+              The card owns the first screen, so work starts below the fold. The
+              subtracted values are what the layout already reserves around it:
+              mobile is main's 68px header offset + 80px bottom-nav offset + the
+              container's 8px; desktop is main's 96px + the container's 40px. */}
+          <motion.section
+            ref={heroRef}
+            id="hero"
+            variants={sectionVariants}
+            className="relative pt-2 md:pt-0 pb-9 md:pb-11 min-h-[calc(100dvh-156px)] md:min-h-[calc(100dvh-136px)] flex flex-col justify-center"
+          >
             <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="space-y-4">
                 <motion.h1
@@ -446,6 +455,21 @@ export function Portfolio() {
                   <ArrowRight size={16} strokeWidth={2.5} className="rotate-90" />
                 </a>
               </div>
+            </div>
+
+            {/* Absolute so the card stays centred in the section; the section's
+                bottom padding reserves this strip, so the two never overlap. */}
+            <div className="absolute inset-x-0 bottom-3 md:bottom-4 flex items-center gap-2" aria-hidden>
+              <motion.span
+                animate={reduce ? undefined : { y: [0, 6, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                className="flex text-[#0038FF]"
+              >
+                <ArrowRight size={17} strokeWidth={3} className="rotate-90" />
+              </motion.span>
+              <span className="font-code text-[11px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-black">
+                {t.scrollCue}
+              </span>
             </div>
           </motion.section>
 

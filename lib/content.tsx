@@ -21,6 +21,8 @@ export const COPY: Record<Lang, {
   nav: { work: string; research: string; about: string; stack: string; contact: string };
   /** One label per intent: every contact CTA uses cta.contact, every work CTA uses cta.work. */
   cta: { contact: string; work: string };
+  /** Hint under the hero that the page continues below the fold. */
+  scrollCue: string;
   /** Labels for the two explicit actions on the email card. */
   contactActions: { copy: string; copied: string; compose: string };
   availability: string;
@@ -46,6 +48,7 @@ export const COPY: Record<Lang, {
       "Sistemas em produção para Heineken e FEMSA. Cheguei ao código pela modelagem estatística.",
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
     cta: { contact: "Falar comigo", work: "Ver projetos" },
+    scrollCue: "Role",
     contactActions: { copy: "Copiar", copied: "Copiado", compose: "Escrever" },
     availability:
       "Aberto a posições fullstack e a projetos de IA em produção.",
@@ -81,6 +84,7 @@ export const COPY: Record<Lang, {
       "Systems in production for Heineken and FEMSA. I came to code through statistical modelling.",
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
     cta: { contact: "Get in touch", work: "See the work" },
+    scrollCue: "Scroll",
     contactActions: { copy: "Copy", copied: "Copied", compose: "Compose" },
     availability:
       "Open to fullstack roles and AI-in-production projects.",
