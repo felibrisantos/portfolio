@@ -5,7 +5,7 @@ type Bi = { pt: string; en: string };
 export const SITE = {
   name: "Felipe Brigagão",
   email: "felibrisantos@gmail.com",
-  location: "São Paulo, Brasil",
+  location: "Jacareí, SP",
   social: {
     linkedin: "https://linkedin.com/in/felibrisantos",
     github: "https://github.com/felibrisantos",
@@ -16,8 +16,8 @@ export const COPY: Record<Lang, {
   role: string;
   availability: string;
   positioning: string;
-  nav: { work: string; research: string; stack: string; contact: string };
-  sections: { featured: string; stack: string; contact: string };
+  nav: { work: string; research: string; about: string; stack: string; contact: string };
+  sections: { featured: string; about: string; stack: string; contact: string };
   year: string;
   role_col: string;
   caseStudy: string;
@@ -39,8 +39,8 @@ export const COPY: Record<Lang, {
       "Aberto a conversas sobre produtos de IA sob medida e plataformas fullstack — segundo semestre de 2026",
     positioning:
       "Escrevo o código, faço o produto fazer sentido e garanto que a entrega não seja algo pelo qual pedir desculpas.",
-    nav: { work: "Trabalho", research: "Pesquisa", stack: "Stack", contact: "Contato" },
-    sections: { featured: "Trabalho em destaque", stack: "Stack", contact: "Contato" },
+    nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
+    sections: { featured: "Trabalho", about: "Sobre", stack: "Stack", contact: "Contato" },
     year: "Ano",
     role_col: "Função",
     caseStudy: "Estudo de caso",
@@ -68,8 +68,8 @@ export const COPY: Record<Lang, {
       "Open to conversations about bespoke AI products and fullstack platforms — H2 2026",
     positioning:
       "I write the code, make the product make sense, and make sure the delivery isn't something to apologize for.",
-    nav: { work: "Work", research: "Research", stack: "Stack", contact: "Contact" },
-    sections: { featured: "Featured work", stack: "Stack", contact: "Contact" },
+    nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
+    sections: { featured: "Work", about: "About", stack: "Stack", contact: "Contact" },
     year: "Year",
     role_col: "Role",
     caseStudy: "Case study",

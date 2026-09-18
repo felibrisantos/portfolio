@@ -95,25 +95,6 @@
   border-color: #0038FF !important;
 }
 
-/* BEACON RADAR PULSE ANIMATION */
-@keyframes beacon-ping {
-  0% { transform: scale(1); opacity: 0.9; }
-  70%, 100% { transform: scale(2.8); opacity: 0; }
-}
-.beacon-pulse {
-  position: relative;
-}
-.beacon-pulse::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: #0038FF;
-  border-radius: 0;
-  animation: beacon-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* STAGGERED PAGE ENTRANCE KEYFRAMES */
 @keyframes mechanical-rise {
   from { opacity: 0; transform: translateY(22px); }
@@ -144,17 +125,6 @@
     }
   }
 
-  /* TICKER ANIMATION */
-  @keyframes marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
-  }
-  .animate-marquee {
-    animation: marquee 25s linear infinite;
-    display: flex;
-    white-space: nowrap;
-  }
-
 
 /* ACCESSIBILITY: REDUCED MOTION */
 @media (prefers-reduced-motion: reduce) {
@@ -164,5 +134,4 @@
     transition-duration: 0.001s !important;
     transform: none !important;
   }
-  .beacon-pulse::after { display: none !important; }
 }

@@ -39,26 +39,26 @@ export function Portfolio() {
             >
               Felipe Brigagão
             </a>
-            <div className="hidden lg:flex items-center gap-2 border-[2px] border-black px-2.5 py-1 bg-[#eff6ff] [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-y-0.5">
-              <span className="w-2 h-2 bg-[#0038FF] beacon-pulse relative"></span>
-              <span className="font-code text-xs uppercase text-[#0038FF] font-bold tracking-wider">
-                {lang === "pt" ? "Disponível Q3-Q4 2026 / São Paulo" : "Available H2 2026 / São Paulo"}
-              </span>
-            </div>
+            <span className="hidden lg:block font-code text-xs uppercase text-slate-500 font-bold tracking-wider">
+              Jacareí, SP
+            </span>
           </div>
           <div className="flex items-center gap-4 md:gap-6">
             <nav className="hidden md:flex items-center gap-6">
               <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#work">
-                [01] {t.nav.work}
+                {t.nav.work}
               </a>
               <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#research">
-                [02] {t.nav.research}
+                {t.nav.research}
+              </a>
+              <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#about">
+                {t.nav.about}
               </a>
               <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#stack">
-                [03] {t.nav.stack}
+                {t.nav.stack}
               </a>
               <a className="font-code text-xs uppercase font-bold text-[#0f172a] hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider" href="#contact">
-                [04] {t.nav.contact}
+                {t.nav.contact}
               </a>
             </nav>
             <div className="flex items-center border-l-[2px] border-black pl-4 gap-2 font-code text-xs uppercase font-bold">
@@ -90,13 +90,6 @@ export function Portfolio() {
             <span className="font-display font-extrabold text-[14.5px] tracking-tight uppercase text-black">
               FELIPE BRIGAGÃO
             </span>
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#0038FF]/10 border border-black/40 font-code text-[8.5px] font-bold text-[#0038FF] uppercase">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0038FF] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#0038FF]"></span>
-              </span>
-              <span>SYS_LIVE</span>
-            </span>
           </a>
           <div className="flex items-center gap-1.5">
             <button 
@@ -108,19 +101,8 @@ export function Portfolio() {
               PT / EN
             </button>
             <a className="h-7 px-2.5 bg-[#0038FF] text-white neo-border-sm border-black neo-shadow-dark-sm font-code text-[10px] font-bold uppercase flex items-center gap-1 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all" href="#contact">
-              <span>[04] {lang === 'pt' ? 'CONTATO' : 'CONTACT'}</span>
+              <span>{lang === 'pt' ? 'CONTATO' : 'CONTACT'}</span>
             </a>
-          </div>
-        </div>
-        <div className="bg-[#f0edec]/90 px-3 py-1.5 flex items-center justify-between font-code text-[9.5px] font-bold text-black border-t border-black/5 overflow-hidden">
-          <div className="flex items-center gap-1.5 truncate">
-            <span className="text-[#0038FF] font-black">■</span>
-            <span className="truncate">№ 001 — INDEX</span>
-            <span className="text-black/30">|</span>
-            <span className="text-black/70">SP [UTC-3]</span>
-          </div>
-          <div className="flex items-center gap-1 shrink-0 font-bold text-[#0038FF] bg-white px-1.5 py-0.5 border border-black/30">
-            <span>STATUS: ■ {lang === 'pt' ? 'OPERACIONAL' : 'OPERATIONAL'}</span>
           </div>
         </div>
       </header>
@@ -152,70 +134,14 @@ export function Portfolio() {
         variants={containerVariants} 
         initial="hidden" 
         animate="show" 
-        className="w-full pt-[96px] md:pt-24 pb-[80px] md:pb-12 min-h-screen" 
+        className="w-full pt-[68px] md:pt-24 pb-[80px] md:pb-12 min-h-screen" 
         id="top"
       >
         <div className="w-full max-w-[1360px] mx-auto px-4 md:px-8 py-2 md:py-10 space-y-12 md:space-y-24">
           
-          {/* DESKTOP LIVE TELEMETRY TICKER BAR */}
-          <motion.header variants={sectionVariants} className="hidden md:flex w-full bg-white border-[2.5px] border-black p-2 [box-shadow:4px_4px_0px_#0038FF] items-center justify-between gap-3 overflow-hidden">
-            <div className="flex-1 overflow-hidden bg-[#0038FF] text-white border-[2px] border-black flex items-center relative h-10">
-              {/* Infinite Marquee */}
-              <div className="animate-marquee flex items-center absolute left-0 h-full">
-                <div className="flex items-center whitespace-nowrap">
-                  {[...Array(6)].map((_, i) => (
-                    <span key={i} className="flex items-center font-code text-[11px] tracking-[0.1em] uppercase font-bold mx-6">
-                      [SYS_LIVE] // {lang === "pt" ? "TELEMETRIA ATIVA / SÃO PAULO, BR / LATÊNCIA < 40MS" : "ACTIVE TELEMETRY / SÃO PAULO, BR / LATENCY < 40MS"}
-                      <span className="w-2 h-2 bg-white beacon-pulse shrink-0 ml-12"></span>
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center whitespace-nowrap">
-                  {[...Array(6)].map((_, i) => (
-                    <span key={`dup-${i}`} className="flex items-center font-code text-[11px] tracking-[0.1em] uppercase font-bold mx-6">
-                      [SYS_LIVE] // {lang === "pt" ? "TELEMETRIA ATIVA / SÃO PAULO, BR / LATÊNCIA < 40MS" : "ACTIVE TELEMETRY / SÃO PAULO, BR / LATENCY < 40MS"}
-                      <span className="w-2 h-2 bg-white beacon-pulse shrink-0 ml-12"></span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            {/* Nav anchors on desktop ticket bar */}
-            <div className="flex flex-wrap items-center gap-2 shrink-0 relative z-10 bg-white pl-2">
-              <a className="btn-mechanical-sm px-3 py-1.5 bg-white border-[2px] border-black hover:bg-[#eff6ff] hover:text-[#0038FF] font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold [box-shadow:2px_2px_0px_#0038FF]" href="#work">
-                [01] {t.nav.work}
-              </a>
-              <a className="btn-mechanical-sm px-3 py-1.5 bg-[#0038FF] border-[2px] border-black font-code text-xs uppercase tracking-wider text-white hover:bg-[#0028c2] [box-shadow:2px_2px_0px_#0038FF] font-bold" href="#contact">
-                [04] {t.nav.contact}
-              </a>
-            </div>
-          </motion.header>
-
           {/* HERO SECTION */}
           <motion.section variants={sectionVariants} className="space-y-6 md:space-y-8 relative flex flex-col md:block pt-2 md:pt-0">
             
-            <div className="hidden md:grid w-full bg-white border-[2.5px] border-black [box-shadow:4px_4px_0px_#0038FF] grid-cols-4 divide-x divide-black font-code text-sm">
-              <div className="p-3.5 flex items-center justify-between bg-white transition-colors duration-150 hover:bg-[#eff6ff]">
-                <span className="text-[#0038FF] font-bold">{lang === "pt" ? "№ REGISTRO" : "REGISTRY №"}</span>
-                <span className="text-[#0f172a] font-bold">001 — INDEX</span>
-              </div>
-              <div className="p-3.5 flex items-center justify-between bg-white transition-colors duration-150 hover:bg-[#eff6ff]">
-                <span className="text-[#0038FF] font-bold">{lang === "pt" ? "ESPECIALIDADE" : "SPECIALTY"}</span>
-                <span className="text-[#0f172a] font-bold">FULLSTACK & AI ENG</span>
-              </div>
-              <div className="p-3.5 flex items-center justify-between bg-white transition-colors duration-150 hover:bg-[#eff6ff]">
-                <span className="text-[#0038FF] font-bold">BASE</span>
-                <span className="text-[#0f172a] font-bold">SÃO PAULO [UTC-3]</span>
-              </div>
-              <div className="p-3.5 flex items-center justify-between bg-[#eff6ff]">
-                <span className="text-[#0038FF] font-bold">STATUS</span>
-                <span className="text-[#0038FF] font-bold uppercase tracking-wider flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 bg-[#0038FF] beacon-pulse inline-block shrink-0"></span>
-                  {lang === "pt" ? "OPERACIONAL" : "OPERATIONAL"}
-                </span>
-              </div>
-            </div>
-
             <div className="md:hidden pointer-events-none select-none absolute right-[-8px] top-0 font-display font-black text-[76px] leading-none text-black/[0.04] z-0 tracking-tighter">
               FB//01
             </div>
@@ -263,7 +189,7 @@ export function Portfolio() {
                     {lang === "pt" ? "INICIAR CONVERSA" : "START A CONVERSATION"} <ArrowRight size={18} strokeWidth={2.5} />
                   </a>
                   <a className="btn-mechanical w-full text-center py-3 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold hover:bg-[#eff6ff] [box-shadow:3px_3px_0px_#0038FF]" href="#work">
-                    {lang === "pt" ? "EXPLORAR PROJETOS" : "EXPLORE PROJECTS"} [04] ↓
+                    {lang === "pt" ? "EXPLORAR PROJETOS" : "EXPLORE PROJECTS"}
                   </a>
                 </div>
               </div>
@@ -312,7 +238,7 @@ export function Portfolio() {
                   <ArrowRight size={16} strokeWidth={2.5} />
                 </a>
                 <a className="w-full h-11 flex items-center justify-center gap-2 bg-white text-black font-code text-[12px] font-bold tracking-wider uppercase neo-border neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href="#work">
-                  <span>{lang === 'pt' ? 'EXPLORAR PROJETOS' : 'EXPLORE PROJECTS'} [04]</span>
+                  <span>{lang === 'pt' ? 'EXPLORAR PROJETOS' : 'EXPLORE PROJECTS'}</span>
                   <ArrowRight size={16} strokeWidth={2.5} className="rotate-90" />
                 </a>
               </div>
@@ -330,36 +256,25 @@ export function Portfolio() {
           >
             <motion.div variants={sectionVariants} className="hidden md:flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-[2.5px] border-black pb-4">
               <div>
-                <span className="font-code text-xs text-[#0038FF] uppercase tracking-widest block font-bold">§ 01 // {lang === "pt" ? "TELEMETRIA DE CASOS" : "CASE TELEMETRY"}</span>
                 <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.sections.featured}</h2>
-              </div>
-              <div className="flex items-center gap-2 font-code text-sm text-[#0f172a] font-bold border-[2px] border-black px-3 py-1.5 bg-[#eff6ff] [box-shadow:2px_2px_0px_#0038FF] transition-transform duration-150 hover:-translate-y-0.5">
-                <span className="w-2.5 h-2.5 bg-[#0038FF] beacon-pulse relative shrink-0"></span>
-                <span>{PROJECTS.length} {lang === "pt" ? "SISTEMAS HOMOLOGADOS EM PRODUÇÃO" : "SYSTEMS IN PRODUCTION"}</span>
               </div>
             </motion.div>
 
             <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-1.5 pt-4">
-              <div className="self-start inline-flex items-center gap-1.5 px-2 py-0.5 bg-[#0038FF]/10 neo-border-sm border-black">
-                <span className="w-1.5 h-1.5 bg-[#0038FF] shrink-0"></span>
-                <span className="font-code text-[9px] font-bold text-[#0038FF] uppercase tracking-wide">
-                  ■ {PROJECTS.length} {lang === "pt" ? "SISTEMAS EM PRODUÇÃO" : "SYSTEMS IN PRODUCTION"}
-                </span>
-              </div>
               <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                § 01 // {lang === "pt" ? "TELEMETRIA DE CASOS: TRABALHO EM DESTAQUE" : "CASE TELEMETRY: FEATURED WORK"}
+                {t.sections.featured}
               </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 relative z-30">
-              {PROJECTS.map((p, i) => (
+              {PROJECTS.map((p) => (
                 <motion.article 
                   key={p.id}
                   variants={sectionVariants}
                   className="project-card card-mechanical cursor-none bg-white neo-border md:border-[2.5px] border-black md:border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col justify-between rounded-none hover:bg-slate-50 transition-colors"
                 >
                   <div className="border-b-2 md:border-b-[2px] border-black md:border-black bg-slate-100 md:bg-[#eff6ff] px-3 py-2 md:p-3.5 flex items-center justify-between gap-2 font-code text-xs uppercase">
-                    <span className="text-black md:text-[#0038FF] font-bold text-[11px] md:text-xs">[{String(i + 1).padStart(2, "0")}] {p.title[lang]}</span>
+                    <span className="text-black md:text-[#0038FF] font-bold text-[11px] md:text-xs">{p.title[lang]}</span>
                     <span className="px-2 md:px-2.5 py-0.5 text-white font-bold text-[9px] md:text-xs border border-black md:border-black md:[box-shadow:1.5px_1.5px_0px_#0038FF] bg-[#0038FF]">
                       {p.tag[lang]}
                     </span>
@@ -379,16 +294,15 @@ export function Portfolio() {
                       {p.summary[lang]}
                     </p>
                     <div className="p-2.5 md:p-3.5 bg-white md:bg-[#eff6ff] neo-border-sm md:border-[1.5px] md:border-l-[4px] border-black/40 md:border-black font-code text-[12.5px] md:text-sm text-black transition-all duration-200 md:hover:bg-[#e0edff]">
-                      <span className="text-black md:text-[#0038FF] font-bold text-[9.5px] md:text-xs block md:inline mb-0.5 md:mb-0">{lang === "pt" ? "IMPACTO:" : "IMPACT:"}</span> <span className="font-semibold">{p.outcome[lang]}</span>
+                      <span className="font-semibold">{p.outcome[lang]}</span>
                     </div>
                   </div>
                   <div className="border-t-2 md:border-t-[2px] border-black md:border-black px-3 py-1.5 md:p-3.5 bg-slate-100 md:bg-[#f8fafc] flex items-center justify-between font-code text-[9.5px] md:text-xs">
                     <div className="flex items-center gap-1 md:gap-2 text-black md:text-[#0038FF] font-extrabold md:font-bold">
-                      <span className="hidden md:inline-block w-2 h-2 bg-[#0038FF] beacon-pulse relative shrink-0"></span>
                       <span className="md:hidden">■</span>
                       <span>{p.client[lang]}</span>
                     </div>
-                    <span className="text-black/60 md:text-[#0f172a] font-bold">{p.year} // SYSTEM</span>
+                    <span className="text-black/60 md:text-[#0f172a] font-bold">{p.year}</span>
                   </div>
                 </motion.article>
               ))}
@@ -405,7 +319,6 @@ export function Portfolio() {
             id="research"
           >
             <div className="hidden md:block border-b-[2.5px] border-black pb-4">
-              <span className="font-code text-xs text-[#0038FF] uppercase tracking-widest block font-bold">§ 02 // {lang === "pt" ? "PRODUÇÃO CIENTÍFICA & MODELAGEM" : "SCIENTIFIC RESEARCH & MODELING"}</span>
               <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.researchHeading}</h2>
             </div>
             <div className="md:hidden flex flex-col gap-1.5 pt-4">
@@ -415,7 +328,7 @@ export function Portfolio() {
                 </span>
               </div>
               <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                § 02 // {lang === "pt" ? "PRODUÇÃO CIENTÍFICA: PESQUISA INDEXADA" : "SCIENTIFIC PRODUCTION: INDEXED RESEARCH"}
+                {t.researchHeading}
               </h2>
             </div>
 
@@ -493,7 +406,6 @@ export function Portfolio() {
             id="stack"
           >
             <motion.div variants={sectionVariants} className="hidden md:block border-b-[2.5px] border-black pb-4">
-              <span className="font-code text-xs text-[#0038FF] uppercase tracking-widest block font-bold">§ 03 // {lang === "pt" ? "MATRIZ TECNOLÓGICA" : "TECHNOLOGICAL MATRIX"}</span>
               <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.stackHeading}</h2>
             </motion.div>
 
@@ -504,16 +416,15 @@ export function Portfolio() {
                 </span>
               </div>
               <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                § 03 // {lang === "pt" ? "MATRIZ TECNOLÓGICA: STACK EM OPERAÇÃO (2026)" : "TECHNOLOGICAL MATRIX: STACK IN OPERATION (2026)"}
+                {t.stackHeading}
               </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-6">
-              {STACK.map((s, idx) => (
+              {STACK.map((s) => (
                 <motion.div variants={sectionVariants} key={s.category.en} className="bg-white p-3.5 md:p-0 neo-border md:border-[2.5px] md:border-black neo-shadow-blue md:[box-shadow:5px_5px_0px_#0038FF] flex flex-col gap-1 md:gap-0 rounded-none md:card-interactive-subtle">
                   <div className="flex items-center justify-between md:p-3 md:bg-[#eff6ff] md:border-b-[2px] md:border-black">
-                    <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase">[{String(idx + 1).padStart(2, '0')}] {s.category[lang]}</span>
-                    <span className="font-code text-[9px] md:text-xs text-black/60 md:text-slate-500 font-bold uppercase md:font-semibold">CLI_0{idx + 1}</span>
+                    <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase">{s.category[lang]}</span>
                   </div>
                   
                   <p className="md:hidden font-body text-[13px] text-black font-medium leading-snug">
@@ -544,7 +455,7 @@ export function Portfolio() {
             <motion.div variants={sectionVariants} className="hidden md:block bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] p-12 space-y-8 transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="space-y-2">
                 <span className="font-code text-xs text-[#0038FF] tracking-widest uppercase font-bold">
-                  § 04 // {lang === "pt" ? "PROTOCOLO DE CONEXÃO DIRETA" : "DIRECT CONNECTION PROTOCOL"}
+                  {t.sections.contact}
                 </span>
                 <h2 className="font-display text-5xl uppercase tracking-tight text-[#0f172a] font-bold">
                   {t.contactHeading}
@@ -557,7 +468,7 @@ export function Portfolio() {
               <div className="grid grid-cols-3 gap-6 pt-4">
                 <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={`mailto:${SITE.email}`}>
                   <div>
-                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">CANAL_01 // EMAIL</span>
+                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">EMAIL</span>
                     <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold break-all">
                       {SITE.email}
                     </span>
@@ -570,7 +481,7 @@ export function Portfolio() {
                 
                 <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.linkedin} rel="noreferrer" target="_blank">
                   <div>
-                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">CANAL_02 // LINKEDIN</span>
+                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">LINKEDIN</span>
                     <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold">
                       /in/felibrisantos
                     </span>
@@ -583,7 +494,7 @@ export function Portfolio() {
                 
                 <a className="btn-mechanical p-5 bg-white border-[2.5px] border-black hover:bg-[#eff6ff] [box-shadow:4px_4px_0px_#0038FF] flex flex-col justify-between group" href={SITE.social.github} rel="noreferrer" target="_blank">
                   <div>
-                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">CANAL_03 // GITHUB</span>
+                    <span className="font-code text-xs text-[#0038FF] uppercase tracking-wider block font-bold">GITHUB</span>
                     <span className="font-display text-xl text-[#0f172a] group-hover:text-[#0038FF] transition-colors block mt-2 font-bold">
                       @felibrisantos
                     </span>
@@ -600,25 +511,15 @@ export function Portfolio() {
                   © {new Date().getFullYear()} FELIPE BRIGAGÃO · {t.role.toUpperCase()}
                 </div>
                 <div className="flex items-center gap-4 font-bold">
-                  <span className="text-[#0038FF] flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-[#0038FF] beacon-pulse inline-block shrink-0"></span>
-                    {lang === "pt" ? "SISTEMA ATIVO" : "SYSTEM ACTIVE"}
-                  </span>
-                  <span className="text-slate-400">/</span>
-                  <span className="text-[#0f172a]">{lang === "pt" ? "COMPOSTO EM SÃO PAULO, BRASIL" : "TYPESET IN SÃO PAULO, BRAZIL"}</span>
+                  <span className="text-[#0f172a]">{lang === "pt" ? "Jacareí, SP" : "Jacareí, SP, Brazil"}</span>
                 </div>
               </div>
             </motion.div>
 
             <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-3.5 pt-4">
               <div className="flex flex-col gap-1.5">
-                <div className="self-start inline-flex items-center px-2 py-0.5 bg-[#0038FF]/10 neo-border-sm border-black">
-                  <span className="font-code text-[9px] font-bold text-[#0038FF] uppercase">
-                    {lang === "pt" ? "SESSÃO ABERTA // 2026" : "OPEN SESSION // 2026"}
-                  </span>
-                </div>
                 <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                  § 04 // PROTOCOLO DE CONEXÃO DIRETA: VAMOS CONSTRUIR <span className="italic text-[#0038FF] font-black">ALGO.</span>
+                  {t.contactHeading}
                 </h2>
                 <p className="font-body text-[13px] leading-relaxed text-black/80">
                   {t.availability}
@@ -628,7 +529,7 @@ export function Portfolio() {
               <div className="flex flex-col gap-2.5">
                 <a className="bg-white p-3 neo-border neo-shadow-blue flex items-center justify-between group active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href={`mailto:${SITE.email}`}>
                   <div className="flex flex-col min-w-0 pr-2">
-                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">CANAL_01 // EMAIL</span>
+                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">EMAIL</span>
                     <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">{SITE.email}</span>
                   </div>
                   <div className="bg-[#0038FF] text-white px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
@@ -639,7 +540,7 @@ export function Portfolio() {
                 
                 <a className="bg-white p-3 neo-border neo-shadow-blue flex items-center justify-between group active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href={SITE.social.linkedin} rel="noopener noreferrer" target="_blank">
                   <div className="flex flex-col min-w-0 pr-2">
-                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">CANAL_02 // LINKEDIN</span>
+                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">LINKEDIN</span>
                     <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">/in/felibrisantos</span>
                   </div>
                   <div className="bg-slate-200 text-black px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
@@ -650,7 +551,7 @@ export function Portfolio() {
 
                 <a className="bg-white p-3 neo-border neo-shadow-blue flex items-center justify-between group active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href={SITE.social.github} rel="noopener noreferrer" target="_blank">
                   <div className="flex flex-col min-w-0 pr-2">
-                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">CANAL_03 // GITHUB</span>
+                    <span className="font-code text-[9.5px] font-bold text-black/60 uppercase">GITHUB</span>
                     <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">@felibrisantos</span>
                   </div>
                   <div className="bg-slate-200 text-black px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
@@ -661,16 +562,12 @@ export function Portfolio() {
               </div>
 
               <div className="bg-black text-white p-4 neo-border neo-shadow-blue flex flex-col gap-2 mt-1 rounded-none border-black">
-                <div className="flex items-center justify-between">
-                  <span className="font-code text-[9.5px] text-[#dee0ff] uppercase tracking-wider font-bold">TERMINAL FOOTER // VER. 2026.04</span>
-                  <span className="inline-block w-2 h-2 bg-[#0038FF]"></span>
-                </div>
                 <p className="font-code text-[11.5px] font-bold uppercase text-white">
                   © {new Date().getFullYear()} FELIPE BRIGAGÃO • {lang === 'pt' ? 'ENGENHARIA DE PRODUTO & IA' : 'PRODUCT ENGINEERING & AI'}
                 </p>
                 <div className="h-px w-full bg-white/20"></div>
                 <p className="font-code text-[9.5px] text-white/70 uppercase">
-                  ■ {lang === 'pt' ? 'SISTEMA ATIVO // COMPOSTO EM SÃO PAULO, BRASIL' : 'ACTIVE SYSTEM // TYPESET IN SÃO PAULO, BRAZIL'}
+                  {lang === 'pt' ? 'Jacareí, SP' : 'Jacareí, SP, Brazil'}
                 </p>
               </div>
             </motion.div>
@@ -685,7 +582,7 @@ export function Portfolio() {
             <span>© {new Date().getFullYear()} Felipe Brigagão. {lang === "pt" ? "Todos os direitos reservados." : "All rights reserved."}</span>
           </div>
           <div className="flex flex-wrap items-center gap-4 font-bold">
-            <span className="text-[#0f172a]">São Paulo, BR [UTC -03:00]</span>
+            <span className="text-[#0f172a]">Jacareí, SP</span>
             <span className="text-slate-300 hidden md:inline">/</span>
             <a className="text-[#0038FF] hover:underline underline-offset-4 transition-colors" href={SITE.social.github} rel="noreferrer" target="_blank">GitHub</a>
             <span className="text-slate-300 hidden md:inline">/</span>
