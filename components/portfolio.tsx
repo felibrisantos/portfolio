@@ -321,8 +321,14 @@ export function Portfolio() {
         <ScrollRail className="absolute left-0 bottom-0 h-[2px] w-full bg-[#0038FF]" />
       </header>
 
-      {/* MOBILE BOTTOM DOCK */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-white/95 backdrop-blur-md border-t-2 border-black">
+      {/* MOBILE BOTTOM DOCK.
+          bottom-0 alone hides the dock's lower half behind the phone's URL bar:
+          a fixed element sits on the layout viewport, which Chrome sizes to the
+          tall state, so while the bar is out the dock's bottom is under it and
+          the dock only looks right once scrolling retracts the bar. lvh - dvh
+          is exactly the height of whatever browser chrome is currently out, and
+          it is 0 when nothing is, so the dock rides above it in both states. */}
+      <nav className="md:hidden fixed bottom-[calc(100lvh-100dvh)] inset-x-0 z-50 pb-safe bg-white/95 backdrop-blur-md border-t-2 border-black">
         <div className="h-14 max-w-[430px] mx-auto px-2 flex items-center justify-between gap-1.5">
           {([
             { key: "work", Icon: Terminal },
