@@ -407,11 +407,8 @@ export function Portfolio() {
           >
             <motion.div variants={sectionVariants} className="hidden md:block bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] p-12 space-y-8 transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="space-y-2">
-                <span className="font-code text-xs text-[#0038FF] tracking-widest uppercase font-bold">
-                  {t.sections.contact}
-                </span>
                 <h2 className="font-display text-5xl uppercase tracking-tight text-[#0f172a] font-bold">
-                  {t.contactHeading}
+                  {t.sections.contact}
                 </h2>
                 <p className="font-body text-lg text-[#334155] max-w-2xl leading-relaxed">
                   {t.contactLead}
@@ -426,8 +423,7 @@ export function Portfolio() {
                       {SITE.email}
                     </span>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-[#0038FF] font-code text-xs font-bold">
-                    <span>{lang === "pt" ? "DISPARAR MENSAGEM" : "SEND MESSAGE"}</span>
+                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-end text-[#0038FF] font-code text-xs font-bold">
                     <span className="transition-transform duration-150 group-hover:translate-x-1"><ArrowRight size={14} strokeWidth={3} /></span>
                   </div>
                 </a>
@@ -439,8 +435,7 @@ export function Portfolio() {
                       /in/felibrisantos
                     </span>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-[#0038FF] font-code text-xs font-bold">
-                    <span>{lang === "pt" ? "REDE PROFISSIONAL" : "PROFESSIONAL NETWORK"}</span>
+                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-end text-[#0038FF] font-code text-xs font-bold">
                     <span className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><ArrowUpRight size={14} strokeWidth={3} /></span>
                   </div>
                 </a>
@@ -452,8 +447,7 @@ export function Portfolio() {
                       @felibrisantos
                     </span>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-[#0038FF] font-code text-xs font-bold">
-                    <span>{lang === "pt" ? "REPOSITÓRIOS & CÓDIGO" : "REPOS & CODE"}</span>
+                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-end text-[#0038FF] font-code text-xs font-bold">
                     <span className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><ArrowUpRight size={14} strokeWidth={3} /></span>
                   </div>
                 </a>
@@ -472,7 +466,7 @@ export function Portfolio() {
             <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-3.5 pt-4">
               <div className="flex flex-col gap-1.5">
                 <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
-                  {t.contactHeading}
+                  {t.sections.contact}
                 </h2>
                 <p className="font-body text-[13px] leading-relaxed text-black/80">
                   {t.contactLead}
@@ -486,7 +480,6 @@ export function Portfolio() {
                     <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">{SITE.email}</span>
                   </div>
                   <div className="bg-[#0038FF] text-white px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
-                    <span>{lang === 'pt' ? 'DISPARAR' : 'SEND'}</span>
                     <ArrowUpRight size={14} strokeWidth={3} />
                   </div>
                 </a>
@@ -497,7 +490,6 @@ export function Portfolio() {
                     <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">/in/felibrisantos</span>
                   </div>
                   <div className="bg-slate-200 text-black px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
-                    <span>{lang === 'pt' ? 'PERFIL' : 'PROFILE'}</span>
                     <ArrowUpRight size={14} strokeWidth={3} />
                   </div>
                 </a>
@@ -508,21 +500,14 @@ export function Portfolio() {
                     <span className="font-display font-bold text-[14.5px] text-black truncate group-hover:text-[#0038FF] transition-colors">@felibrisantos</span>
                   </div>
                   <div className="bg-slate-200 text-black px-2.5 py-1.5 neo-border-sm border-black flex items-center gap-1 shrink-0 font-code text-[9.5px] font-bold uppercase">
-                    <span>{lang === 'pt' ? 'REPOSITÓRIOS' : 'REPOS'}</span>
                     <ArrowUpRight size={14} strokeWidth={3} />
                   </div>
                 </a>
               </div>
 
-              <div className="bg-black text-white p-4 neo-border neo-shadow-blue flex flex-col gap-2 mt-1 rounded-none border-black">
-                <p className="font-code text-[11.5px] font-bold uppercase text-white">
-                  © {new Date().getFullYear()} FELIPE BRIGAGÃO • {lang === 'pt' ? 'ENGENHARIA DE PRODUTO & IA' : 'PRODUCT ENGINEERING & AI'}
-                </p>
-                <div className="h-px w-full bg-white/20"></div>
-                <p className="font-code text-[9.5px] text-white/70 uppercase">
-                  {lang === 'pt' ? 'Jacareí, SP' : 'Jacareí, SP, Brazil'}
-                </p>
-              </div>
+              <p className="font-code text-[9.5px] text-black/60 uppercase mt-1">
+                © {new Date().getFullYear()} Felipe Brigagão · {t.role} · Jacareí, SP
+              </p>
             </motion.div>
           </motion.section>
         </div>

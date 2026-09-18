@@ -18,7 +18,6 @@ export const COPY: Record<Lang, {
   nav: { work: string; research: string; about: string; stack: string; contact: string };
   contactLead: string;
   sections: { featured: string; about: string; stack: string; contact: string };
-  contactHeading: React.ReactNode;
   researchHeading: string;
   aboutP1: string;
   aboutP2: string;
@@ -35,9 +34,6 @@ export const COPY: Record<Lang, {
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
     sections: { featured: "Trabalho", about: "Sobre", stack: "Stack", contact: "Contato" },
     contactLead: "Se quiser falar sobre um projeto, me escreva.",
-    contactHeading: (
-      <>Vamos construir <em>algo</em>.</>
-    ),
     researchHeading: "Pesquisa",
     aboutP1:
       "Estudei Análise e Desenvolvimento de Sistemas no IFSP Jacareí, de 2022 a 2025. O que mais me formou ali foi o artigo: montar a rede, escolher as entradas, medir em conjunto de teste e relatar a faixa que saiu — não a melhor rodada.",
@@ -60,9 +56,6 @@ export const COPY: Record<Lang, {
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
     sections: { featured: "Work", about: "About", stack: "Stack", contact: "Contact" },
     contactLead: "If you want to talk about a project, write to me.",
-    contactHeading: (
-      <>Let&apos;s build <em>something</em>.</>
-    ),
     researchHeading: "Research",
     aboutP1:
       "I studied Systems Analysis and Development at IFSP Jacareí, from 2022 to 2025. What taught me most there was the paper: build the network, pick the inputs, measure on a test set and report the range that came out — not the best run.",
