@@ -23,6 +23,7 @@ export const COPY: Record<Lang, {
   stackHeading: string;
   paperTitle: React.ReactNode;
   paperAbstract: string;
+  paperCredits: string;
   paperKind: string;
 }> = {
   pt: {
@@ -41,7 +42,9 @@ export const COPY: Record<Lang, {
       <>O impacto dos indicadores econômicos <em>no consumo</em>: uma abordagem com redes neurais.</>
     ),
     paperAbstract:
-      "Uma arquitetura de rede neural (duas camadas densas de 64 neurônios, TensorFlow + Keras) para modelar relações não-lineares entre variáveis econômicas e comportamento do consumidor. Os modelos atingiram R² > 0,90 para a maioria dos indicadores, superando limitações de modelos econométricos tradicionais como ARIMA.",
+      "Modelei oito índices econômicos setoriais brasileiros com uma rede neural densa: duas camadas de 64 neurônios com ReLU, saída de regressão, TensorFlow/Keras, RMSprop e Early Stopping sobre conjunto de validação. As entradas vêm de IBGE, FGV, Bacen, FecomercioSP, CNC, B3, MDIC e Fipe. Em teste, o R² ficou entre 0,82 e 0,96 — acima de 0,90 em cinco dos oito índices. O RMAE ficou entre 3,8% e 9,2%.",
+    paperCredits:
+      "Escrito com Tardelli Ronan Coelho Stekel (IFSP). Pesquisa financiada em parte pela FAPESP, processo #2023/14073-1.",
     paperKind: "Artigo científico",
   },
   en: {
@@ -60,7 +63,9 @@ export const COPY: Record<Lang, {
       <>The impact of economic indicators <em>on consumption</em>: a neural network approach.</>
     ),
     paperAbstract:
-      "A neural-network architecture (two dense layers of 64 neurons, TensorFlow + Keras) for modelling nonlinear relationships between economic variables and consumer behaviour. The models achieve R² > 0.90 for most indicators, addressing limitations of traditional econometric approaches such as ARIMA.",
+      "I modelled eight Brazilian sectoral economic indices with a dense neural network: two 64-neuron ReLU layers, a regression output, TensorFlow/Keras, RMSprop and early stopping on a validation set. Inputs come from IBGE, FGV, Bacen, FecomercioSP, CNC, B3, MDIC and Fipe. On the test set, R² landed between 0.82 and 0.96 — above 0.90 for five of the eight indices. RMAE landed between 3.8% and 9.2%.",
+    paperCredits:
+      "Written with Tardelli Ronan Coelho Stekel (IFSP). Research partly funded by FAPESP, grant #2023/14073-1.",
     paperKind: "Peer-reviewed article",
   },
 };

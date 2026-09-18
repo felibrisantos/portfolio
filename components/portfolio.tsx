@@ -282,11 +282,6 @@ export function Portfolio() {
               <h2 className="font-display text-4xl uppercase text-[#0f172a] tracking-tight font-bold">{t.researchHeading}</h2>
             </div>
             <div className="md:hidden flex flex-col gap-1.5 pt-4">
-              <div className="self-start inline-flex items-center px-2 py-0.5 bg-slate-200 neo-border-sm">
-                <span className="font-code text-[9px] font-bold text-black uppercase">
-                  {lang === "pt" ? "INDEXAÇÃO ACADÊMICA INTERNACIONAL" : "INTERNATIONAL ACADEMIC INDEXING"}
-                </span>
-              </div>
               <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
                 {t.researchHeading}
               </h2>
@@ -312,46 +307,16 @@ export function Portfolio() {
                 </a>
               </div>
               
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8 items-center">
-                <div className="lg:col-span-8 space-y-3 md:space-y-4">
-                  <h3 className="font-display font-extrabold md:font-bold text-[16.5px] md:text-3xl uppercase text-black md:text-[#0f172a] leading-tight">
-                    {t.paperTitle}
-                  </h3>
-                  <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
-                    {t.paperAbstract}
-                  </p>
-                  <div className="md:hidden bg-slate-50 px-3 py-2 neo-border-sm">
-                    <p className="font-code text-[10.5px] font-bold text-black leading-snug">
-                      {lang === "pt" ? "AUTORES:" : "AUTHORS:"} Santos, F. B. • Stekel, T. R. C. // {lang === "pt" ? "Publicado e indexado internacionalmente." : "Internationally indexed and published."}
-                    </p>
-                  </div>
-                  <p className="hidden md:block font-code text-sm text-[#0038FF] font-bold">
-                    {lang === "pt" ? "AUTORES:" : "AUTHORS:"} Santos, F. B. · Stekel, T. R. C. // {lang === "pt" ? "Publicado e indexado internacionalmente." : "Internationally indexed and published."}
-                  </p>
-                </div>
-                
-                <div className="md:hidden bg-[#0038FF] text-white p-3.5 neo-border border-black neo-shadow-dark flex flex-col gap-1.5 rounded-none">
-                  <span className="font-code text-[9.5px] uppercase tracking-wider font-bold text-white/80">
-                    {lang === "pt" ? "MÉTRICA DE VALIDAÇÃO" : "VALIDATION METRIC"}
-                  </span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-display font-extrabold text-[34px] leading-none tracking-tight">R² &gt; 0.90</span>
-                    <span className="font-code text-[9.5px] font-bold uppercase bg-white text-[#0038FF] px-1.5 py-0.5 border border-black">{lang === 'pt' ? 'ESTIMADO' : 'ESTIMATED'}</span>
-                  </div>
-                  <p className="font-body text-[12px] text-white/90 font-medium leading-normal pt-1.5 border-t border-white/20">
-                    {lang === "pt" ? "Precisão superior estatisticamente comprovada em relação a modelos econométricos lineares clássicos e benchmarks ARIMA." : "Statistically proven superior accuracy compared to classical linear econometric models and ARIMA benchmarks."}
-                  </p>
-                </div>
-
-                <div className="hidden md:block card-interactive-subtle lg:col-span-4 bg-[#eff6ff] border-[2px] border-black p-6 [box-shadow:4px_4px_0px_#0038FF] space-y-3">
-                  <span className="font-code text-xs text-[#0f172a] uppercase block font-bold">{lang === "pt" ? "MÉTRICA DE VALIDAÇÃO" : "VALIDATION METRIC"}</span>
-                  <div className="font-display text-5xl text-[#0038FF] font-bold tracking-tight">
-                    R² &gt; 0.90
-                  </div>
-                  <p className="font-body text-sm text-[#334155] leading-relaxed">
-                    {lang === "pt" ? "Precisão superior estatisticamente comprovada em relação a modelos econométricos lineares clássicos e benchmarks ARIMA." : "Statistically proven superior accuracy compared to classical linear econometric models and ARIMA benchmarks."}
-                  </p>
-                </div>
+              <div className="space-y-3 md:space-y-4">
+                <h3 className="font-display font-extrabold md:font-bold text-[16.5px] md:text-3xl uppercase text-black md:text-[#0f172a] leading-tight">
+                  {t.paperTitle}
+                </h3>
+                <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
+                  {t.paperAbstract}
+                </p>
+                <p className="font-code text-[10.5px] md:text-sm text-[#334155] leading-snug">
+                  {t.paperCredits}
+                </p>
               </div>
             </div>
           </motion.section>
