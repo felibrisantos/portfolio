@@ -12,14 +12,28 @@ import {
   useTransform,
   Variants,
 } from "framer-motion";
-import { ArrowUpRight, ArrowRight, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { ArrowUpRight, ArrowRight, Check, Copy, Mail, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-const CONTACT_LINKS = [
-  { label: "Email", value: SITE.email, href: `mailto:${SITE.email}`, external: false },
-  { label: "LinkedIn", value: "/in/felibrisantos", href: SITE.social.linkedin, external: true },
-  { label: "GitHub", value: "@felibrisantos", href: SITE.social.github, external: true },
+/* Email is not in here: it is not a link. A mailto opens whatever desktop mail
+   client happens to be registered, which is usually not the one the reader
+   uses, so the address gets its own card with copy and compose as separate
+   explicit actions. */
+const SOCIAL_LINKS = [
+  { label: "LinkedIn", value: "/in/felibrisantos", href: SITE.social.linkedin },
+  { label: "GitHub", value: "@felibrisantos", href: SITE.social.github },
 ];
+
+const CARD_SHELL =
+  "bg-white border-[2px] md:border-[2.5px] border-black neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_#0038FF] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0";
+const CARD_LABEL =
+  "font-code text-[10.5px] md:text-xs text-black/70 uppercase tracking-wider font-bold";
+const CARD_VALUE =
+  "font-display text-[15px] md:text-xl text-black font-bold truncate lg:mt-2 lg:break-all lg:whitespace-normal";
+const CARD_FOOT =
+  "shrink-0 flex items-center gap-1.5 lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:justify-end";
+const CARD_ACTION =
+  "inline-flex items-center gap-1.5 px-2 py-1.5 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase transition-colors";
 
 const NAV_LINKS = ["work", "research", "about", "stack", "contact"] as const;
 
@@ -140,6 +154,33 @@ export function Portfolio() {
       transition: reduce ? { duration: 0 } : { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
+
+  const [copied, setCopied] = useState(false);
+  const emailRef = useRef<HTMLSpanElement>(null);
+
+  /* writeText needs a secure context and can still be refused by permissions.
+     When it is, select the address so Ctrl+C keeps working instead of leaving
+     the reader with a button that silently did nothing. */
+  const copyEmail = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(SITE.email);
+      setCopied(true);
+    } catch {
+      const node = emailRef.current;
+      if (!node) return;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const selection = window.getSelection();
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!copied) return;
+    const timer = window.setTimeout(() => setCopied(false), 2200);
+    return () => window.clearTimeout(timer);
+  }, [copied]);
 
   return (
     <>
@@ -545,35 +586,61 @@ export function Portfolio() {
               {/* Three across only at lg. At md the columns are too narrow for the
                   email, which then breaks mid-domain. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 md:gap-6">
-                {CONTACT_LINKS.map(({ label, value, href, external }) => (
+                <div className={CARD_SHELL}>
+                  <span className="flex flex-col min-w-0">
+                    <span className={CARD_LABEL}>Email</span>
+                    {/* select-all: one click grabs the whole address for readers
+                        who would rather not trust a copy button. */}
+                    <span ref={emailRef} className={`${CARD_VALUE} select-all`}>
+                      {SITE.email}
+                    </span>
+                  </span>
+                  <span className={CARD_FOOT}>
+                    <button
+                      type="button"
+                      onClick={copyEmail}
+                      aria-label={`${t.contactActions.copy} ${SITE.email}`}
+                      className={`${CARD_ACTION} ${
+                        copied ? "bg-black text-white" : "bg-[#0038FF] text-white hover:bg-[#0028c2]"
+                      }`}
+                    >
+                      {copied ? <Check size={13} strokeWidth={3} /> : <Copy size={13} strokeWidth={2.5} />}
+                      <span>{copied ? t.contactActions.copied : t.contactActions.copy}</span>
+                    </button>
+                    <a
+                      href={`mailto:${SITE.email}`}
+                      aria-label={`${t.contactActions.compose} ${SITE.email}`}
+                      className={`${CARD_ACTION} bg-white text-black hover:bg-slate-100`}
+                    >
+                      <Mail size={13} strokeWidth={2.5} />
+                      <span>{t.contactActions.compose}</span>
+                    </a>
+                  </span>
+                  <span aria-live="polite" className="sr-only">
+                    {copied ? t.contactActions.copied : ""}
+                  </span>
+                </div>
+
+                {SOCIAL_LINKS.map(({ label, value, href }) => (
                   <a
                     key={label}
-                    className="btn-mechanical group bg-white border-[2px] md:border-[2.5px] border-black hover:bg-slate-50 neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_#0038FF] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0"
+                    className={`btn-mechanical group hover:bg-slate-50 ${CARD_SHELL}`}
                     href={href}
-                    {...(external ? { rel: "noopener noreferrer", target: "_blank" } : {})}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
                     <span className="flex flex-col min-w-0">
-                      <span className="font-code text-[10.5px] md:text-xs text-black/70 uppercase tracking-wider font-bold">
-                        {label}
-                      </span>
-                      <span className="font-display text-[15px] md:text-xl text-black group-hover:text-[#0038FF] transition-colors font-bold truncate lg:mt-2 lg:break-all lg:whitespace-normal">
+                      <span className={CARD_LABEL}>{label}</span>
+                      <span className={`${CARD_VALUE} group-hover:text-[#0038FF] transition-colors`}>
                         {value}
                       </span>
                     </span>
-                    <span className="shrink-0 text-[#0038FF] lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:flex lg:justify-end">
-                      {external ? (
-                        <ArrowUpRight
-                          size={16}
-                          strokeWidth={3}
-                          className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                      ) : (
-                        <ArrowRight
-                          size={16}
-                          strokeWidth={3}
-                          className="transition-transform duration-150 group-hover:translate-x-1"
-                        />
-                      )}
+                    <span className={`${CARD_FOOT} text-[#0038FF]`}>
+                      <ArrowUpRight
+                        size={16}
+                        strokeWidth={3}
+                        className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
                     </span>
                   </a>
                 ))}
