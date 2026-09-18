@@ -373,7 +373,7 @@ export function Portfolio() {
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-6">
               {STACK.map((s) => (
                 <motion.div variants={sectionVariants} key={s.category.en} className="bg-white p-3.5 md:p-0 neo-border md:border-[2.5px] md:border-black neo-shadow-blue md:[box-shadow:5px_5px_0px_#0038FF] flex flex-col gap-1 md:gap-0 rounded-none md:card-interactive-subtle">
                   <div className="flex items-center justify-between md:p-3 md:bg-[#eff6ff] md:border-b-[2px] md:border-black">

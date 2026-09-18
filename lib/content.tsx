@@ -181,8 +181,16 @@ export const PROJECTS: Project[] = [
 ];
 
 export const STACK: { category: Bi; items: string[] }[] = [
-  { category: { pt: "Frontend", en: "Frontend" }, items: ["React 19 / Next.js", "TypeScript", "Tailwind CSS", "Motion (Framer)"] },
-  { category: { pt: "Backend", en: "Backend" }, items: ["Node.js", "Python / Django / FastAPI", "PostgreSQL / Prisma", "Redis"] },
-  { category: { pt: "Inteligência", en: "Intelligence" }, items: ["OpenAI, Anthropic, Gemini", "RAG, vector DBs", "MCP (Model Context Protocol)", "LangChain / Vercel AI SDK"] },
-  { category: { pt: "Infra", en: "Infra" }, items: ["Docker", "AWS, Vercel", "GitHub Actions", "Terraform"] },
+  {
+    category: { pt: "No produto", en: "In the product" },
+    items: ["React / Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui"],
+  },
+  {
+    category: { pt: "No servidor", en: "On the server" },
+    items: ["Django / Python", "PostgreSQL", "AWS S3 + CloudFront", "Vercel"],
+  },
+  {
+    category: { pt: "IA em produção", en: "AI in production" },
+    items: ["Claude API", "LangChain", "RAG com pgvector", "MCP"],
+  },
 ];
