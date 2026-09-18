@@ -33,7 +33,7 @@ const CARD_VALUE =
 const CARD_FOOT =
   "shrink-0 flex items-center gap-1.5 lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:justify-end";
 const CARD_ACTION =
-  "inline-flex items-center gap-1.5 px-2 py-1.5 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase transition-colors";
+  "btn-mechanical-sm inline-flex items-center gap-1.5 px-2 py-1.5 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase";
 
 const NAV_LINKS = ["work", "research", "about", "stack", "contact"] as const;
 
@@ -586,7 +586,7 @@ export function Portfolio() {
               {/* Three across only at lg. At md the columns are too narrow for the
                   email, which then breaks mid-domain. */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 md:gap-6">
-                <div className={CARD_SHELL}>
+                <div className={`btn-mechanical hover:bg-slate-50 ${CARD_SHELL}`}>
                   <span className="flex flex-col min-w-0">
                     <span className={CARD_LABEL}>Email</span>
                     {/* select-all: one click grabs the whole address for readers
