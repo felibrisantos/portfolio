@@ -366,12 +366,14 @@ export function Portfolio() {
               <SectionHead>{t.stackHeading}</SectionHead>
             </motion.div>
 
-            <div className="grid grid-cols-1 gap-y-7 md:grid-cols-3 md:gap-y-0 md:divide-x-2 md:divide-black">
+            {/* 2 columns at md, 4 in one ruled row at lg. The rules only appear at lg,
+                where every column shares a single row. */}
+            <div className="grid grid-cols-1 gap-y-7 md:grid-cols-2 md:gap-x-10 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0 lg:divide-x-2 lg:divide-black">
               {STACK.map((s) => (
                 <motion.div
                   variants={sectionVariants}
                   key={s.category.en}
-                  className="flex flex-col gap-2 md:px-7 md:first:pl-0 md:last:pr-0"
+                  className="flex flex-col gap-2 lg:px-6 lg:first:pl-0 lg:last:pr-0"
                 >
                   <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase tracking-wider">
                     {s.category[lang]}
@@ -417,11 +419,13 @@ export function Portfolio() {
                 {t.availability}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-6">
+              {/* Three across only at lg. At md the columns are too narrow for the
+                  email, which then breaks mid-domain. */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5 md:gap-6">
                 {CONTACT_LINKS.map(({ label, value, href, external }) => (
                   <a
                     key={label}
-                    className="btn-mechanical group bg-white border-[2px] md:border-[2.5px] border-black hover:bg-slate-50 neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_#0038FF] p-3 md:p-5 flex items-center md:flex-col md:items-stretch justify-between gap-3 md:gap-0"
+                    className="btn-mechanical group bg-white border-[2px] md:border-[2.5px] border-black hover:bg-slate-50 neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_#0038FF] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0"
                     href={href}
                     {...(external ? { rel: "noopener noreferrer", target: "_blank" } : {})}
                   >
@@ -429,11 +433,11 @@ export function Portfolio() {
                       <span className="font-code text-[10.5px] md:text-xs text-black/70 uppercase tracking-wider font-bold">
                         {label}
                       </span>
-                      <span className="font-display text-[15px] md:text-xl text-black group-hover:text-[#0038FF] transition-colors font-bold truncate md:mt-2 md:break-all md:whitespace-normal">
+                      <span className="font-display text-[15px] md:text-xl text-black group-hover:text-[#0038FF] transition-colors font-bold truncate lg:mt-2 lg:break-all lg:whitespace-normal">
                         {value}
                       </span>
                     </span>
-                    <span className="shrink-0 text-[#0038FF] md:mt-4 md:pt-3 md:border-t md:border-slate-200 md:self-stretch md:flex md:justify-end">
+                    <span className="shrink-0 text-[#0038FF] lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:flex lg:justify-end">
                       {external ? (
                         <ArrowUpRight size={16} strokeWidth={3} />
                       ) : (

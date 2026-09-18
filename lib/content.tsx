@@ -223,4 +223,15 @@ export const STACK: { category: Bi; items: StackItem[] }[] = [
       { pt: "Gate de avaliação", en: "Evaluation gate" },
     ],
   },
+  /* Kept separate from the column above on purpose: these run in personal
+     projects that are not published yet, so they cannot claim production. */
+  {
+    category: { pt: "Em projetos pessoais", en: "In personal projects" },
+    items: [
+      "Claude API",
+      "LangChain",
+      { pt: "RAG com pgvector", en: "RAG over pgvector" },
+      "MCP",
+    ],
+  },
 ];
