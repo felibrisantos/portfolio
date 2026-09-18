@@ -29,6 +29,11 @@
      measuring a target's offset against an element it never reaches. */
   html {
     position: relative;
+    /* Cards enter from ±30px off their own column, which is wider than the
+       4px gutter the phone layout leaves, so their hidden state would push the
+       document sideways until they animated in. Clip, not hidden: hidden makes
+       a scroll container and takes sticky and scroll anchoring with it. */
+    overflow-x: clip;
   }
   body {
     overscroll-behavior: none;
