@@ -28,6 +28,9 @@ export const COPY: Record<Lang, {
   researchHeading: string;
   aboutP1: string;
   aboutP2: string;
+  aboutP3: string;
+  /** Alt text for the about portrait. */
+  portraitAlt: string;
   stackHeading: string;
   paperTitle: React.ReactNode;
   paperAbstract: string;
@@ -38,20 +41,23 @@ export const COPY: Record<Lang, {
   pt: {
     role: "Desenvolvedor fullstack",
     positioning:
-      "Construo sistemas que rodam em produção para marcas de CPG: Heineken, Ambev, FEMSA. Cheguei ao código pela modelagem estatística, com artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
+      "Construo sistemas que rodam em produção para marcas de CPG. Cheguei ao código pela modelagem estatística, com artigo indexado sobre redes neurais.",
     positioningShort:
-      "Sistemas em produção para Heineken, Ambev e FEMSA. Cheguei ao código pela modelagem estatística.",
+      "Sistemas em produção para Heineken e FEMSA. Cheguei ao código pela modelagem estatística.",
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
     cta: { contact: "Falar comigo", work: "Ver projetos" },
     contactActions: { copy: "Copiar", copied: "Copiado", compose: "Escrever" },
     availability:
-      "Aberto a posições fullstack e a projetos de IA em produção. Me escreva.",
+      "Aberto a posições fullstack e a projetos de IA em produção.",
     sections: { featured: "Trabalho", about: "Sobre", stack: "Stack", contact: "Contato" },
     researchHeading: "Pesquisa",
     aboutP1:
-      "Estudei Análise e Desenvolvimento de Sistemas no IFSP Jacareí, de 2022 a 2025. O que mais me formou ali foi o artigo: montar a rede, escolher as entradas, medir em conjunto de teste e relatar a faixa que saiu — não a melhor rodada.",
+      "Fiz Análise e Desenvolvimento de Sistemas no IFSP Jacareí, de 2022 a 2025. O que mais me formou ali foi escrever um artigo aplicando redes neurais a índices econômicos setoriais. Ele me obrigou a defender um número de verdade: escolher as entradas com critério, medir em conjunto de teste e relatar a faixa que saiu, não a rodada mais bonita.",
     aboutP2:
-      "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Escrevo front em React e Next.js, back em Django e Express sobre PostgreSQL, e coloco IA em produção com OpenAI e Gemini, com os prompts versionados em arquivo e um gate de avaliação antes de trocar a versão ativa. Pouco tempo de carreira, e código rodando com gente usando todo dia.",
+      "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Trabalho nas duas pontas, e a parte de IA foi a que me cobrou esse mesmo rigor: cada prompt é um arquivo versionado, e nenhuma versão nova substitui a ativa sem passar por um gate de avaliação. Sem medir, o que sobra é impressão de que melhorou.",
+    aboutP3:
+      "Tenho pouco tempo de carreira. O que escrevi já está em produção, com gente usando todo dia.",
+    portraitAlt: "Retrato em preto e branco de Felipe Brigagão.",
     stackHeading: "Stack",
     paperTitle: (
       <>O impacto dos indicadores econômicos <em>no consumo</em>: uma abordagem com redes neurais.</>
@@ -70,20 +76,23 @@ export const COPY: Record<Lang, {
   en: {
     role: "Fullstack developer",
     positioning:
-      "I build systems that run in production for CPG brands: Heineken, Ambev, FEMSA. I came to code through statistical modelling, with an indexed paper on neural networks applied to Brazilian economic indices.",
+      "I build systems that run in production for CPG brands. I came to code through statistical modelling, with an indexed paper on neural networks.",
     positioningShort:
-      "Systems in production for Heineken, Ambev and FEMSA. I came to code through statistical modelling.",
+      "Systems in production for Heineken and FEMSA. I came to code through statistical modelling.",
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
     cta: { contact: "Get in touch", work: "See the work" },
     contactActions: { copy: "Copy", copied: "Copied", compose: "Compose" },
     availability:
-      "Open to fullstack roles and AI-in-production projects. Write to me.",
+      "Open to fullstack roles and AI-in-production projects.",
     sections: { featured: "Work", about: "About", stack: "Stack", contact: "Contact" },
     researchHeading: "Research",
     aboutP1:
-      "I studied Systems Analysis and Development at IFSP Jacareí, from 2022 to 2025. What taught me most there was the paper: build the network, pick the inputs, measure on a test set and report the range that came out — not the best run.",
+      "I studied Systems Analysis and Development at IFSP Jacareí, from 2022 to 2025. What taught me most there was writing a paper applying neural networks to sectoral economic indices. It forced me to defend a real number: pick the inputs with a reason, measure on a test set, and report the range that came out, not the best-looking run.",
     aboutP2:
-      "Today I am a fullstack developer at Abdou, in Jacareí. I write front end in React and Next.js, back end in Django and Express over PostgreSQL, and put AI into production with OpenAI and Gemini, with prompts versioned as files and an evaluation gate before the active version changes. Early in my career, and code running with people using it every day.",
+      "Today I am a fullstack developer at Abdou, in Jacareí. I work on both ends, and the AI side is the one that demanded that same rigour: every prompt is a versioned file, and no new version replaces the active one without passing an evaluation gate. Without measuring, all you have is the impression that it got better.",
+    aboutP3:
+      "I am early in my career. What I wrote is already in production, with people using it every day.",
+    portraitAlt: "Black and white portrait of Felipe Brigagão.",
     stackHeading: "Stack",
     paperTitle: (
       <>The impact of economic indicators <em>on consumption</em>: a neural network approach.</>
@@ -153,8 +162,8 @@ export const PROJECTS: Project[] = [
       en: "A redesign proposal has to start from an image of the room without what is already in it.",
     },
     decision: {
-      pt: "Separei em dois agentes — um limpa a entrada, outro gera a proposta — com orquestração que mantém o estado da conversa entre iterações. Os prompts ficam versionados em arquivo e passam por um gate de avaliação antes de virar a versão ativa.",
-      en: "I split it into two agents — one cleans the input, the other generates the proposal — with orchestration that keeps conversation state across iterations. Prompts are versioned as files and pass an evaluation gate before becoming the active version.",
+      pt: "Separei em dois agentes (um limpa a entrada, outro gera a proposta) com orquestração que mantém o estado da conversa entre iterações. Os prompts ficam versionados em arquivo e passam por um gate de avaliação antes de virar a versão ativa.",
+      en: "I split it into two agents (one cleans the input, the other generates the proposal) with orchestration that keeps conversation state across iterations. Prompts are versioned as files and pass an evaluation gate before becoming the active version.",
     },
     outcome: {
       pt: "Em produção, em uso por Heineken, FEMSA e arquitetos parceiros.",
@@ -192,7 +201,7 @@ export const PROJECTS: Project[] = [
     role: { pt: "Fullstack", en: "Fullstack" },
     problem: {
       pt: "Quem opera uma frota de painéis LED precisa do estado de cada painel agora, não no relatório seguinte.",
-      en: "Whoever runs a fleet of LED panels needs the state of each panel now, not in the next report.",
+      en: "Anyone running a fleet of LED panels needs the state of each panel now, not in the next report.",
     },
     decision: {
       pt: "Dashboards com estado ao vivo por WebSocket, agendamento e diagnóstico na mesma tela do operador. A frota aparece no mapa, e um painel pode ser alvo de agendamento sozinho ou dentro de um grupo.",

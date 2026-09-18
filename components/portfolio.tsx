@@ -8,11 +8,23 @@ import {
   useInView,
   useMotionValue,
   useReducedMotion,
+  useScroll,
   useSpring,
   useTransform,
   Variants,
 } from "framer-motion";
+import {
+  listStagger,
+  maskRise,
+  metricRise,
+  metricStagger,
+  RowWipe,
+  ruleDraw,
+  ScrollRail,
+  useActiveSection,
+} from "@/components/scroll-fx";
 import { ArrowUpRight, ArrowRight, Check, Copy, Mail, Terminal, FlaskConical, Layers, AtSign } from "lucide-react";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /* Email is not in here: it is not a link. A mailto opens whatever desktop mail
@@ -37,11 +49,35 @@ const CARD_ACTION =
 
 const NAV_LINKS = ["work", "research", "about", "stack", "contact"] as const;
 
+/* The hero is watched too, so that while it is on screen no nav item is lit
+   rather than "work" being lit before the reader has reached it. */
+const SPY_IDS = ["hero", ...NAV_LINKS] as const;
+
+/* The heading is the section announcing itself: the words rise behind a mask
+   and the rule draws itself across. The rule is an element rather than a
+   border-b so it can be animated with transform alone. */
 function SectionHead({ children }: { children: React.ReactNode }) {
+  const reduce = useReducedMotion();
+
   return (
-    <h2 className="font-display text-[22px] md:text-4xl uppercase text-black tracking-tight font-extrabold border-b-[2.5px] border-black pb-3 md:pb-4">
-      {children}
-    </h2>
+    <motion.h2
+      initial={reduce ? false : "hidden"}
+      whileInView="show"
+      viewport={{ once: true, amount: 0.8 }}
+      className="relative font-display text-[22px] md:text-4xl uppercase text-black tracking-tight font-extrabold pb-3 md:pb-4"
+    >
+      {/* pb reserve: the mask would otherwise clip the tail of a Ç or a Q. */}
+      <span className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+        <motion.span variants={maskRise} className="block">
+          {children}
+        </motion.span>
+      </span>
+      <motion.span
+        aria-hidden
+        variants={ruleDraw}
+        className="absolute bottom-0 left-0 h-[2.5px] w-full bg-black origin-left"
+      />
+    </motion.h2>
   );
 }
 
@@ -155,6 +191,35 @@ export function Portfolio() {
     },
   };
 
+  /* Project cards lock into the grid from alternating sides instead of all
+     drifting up together, so the grid reads as blocks being set rather than a
+     list fading in. The featured card is full width and always comes first. */
+  const cardVariants: Variants = {
+    hidden: (index: number) =>
+      reduce ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: index % 2 === 0 ? -30 : 30, y: 14 },
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: reduce
+        ? { duration: 0 }
+        : { type: "spring", stiffness: 320, damping: 26, mass: 0.7 },
+    },
+  };
+
+  const activeSection = useActiveSection(SPY_IDS);
+
+  /* The two halves of the name pull apart as the hero leaves. Desktop only in
+     practice: the markup this drives is display:none below md, so the
+     transform never reaches the phone layout. */
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const driftLeft = useTransform(heroProgress, [0, 1], [0, reduce ? 0 : -34]);
+  const driftRight = useTransform(heroProgress, [0, 1], [0, reduce ? 0 : 34]);
+
   const [copied, setCopied] = useState(false);
   const emailRef = useRef<HTMLSpanElement>(null);
 
@@ -198,7 +263,12 @@ export function Portfolio() {
               {NAV_LINKS.map((key) => (
                 <a
                   key={key}
-                  className="font-code text-xs uppercase font-bold text-black hover:text-[#0038FF] transition-all hover:translate-y-[-1px] tracking-wider"
+                  aria-current={activeSection === key ? "true" : undefined}
+                  className={`font-code text-xs uppercase font-bold tracking-wider transition-all hover:translate-y-[-1px] ${
+                    activeSection === key
+                      ? "text-[#0038FF] underline decoration-[#0038FF] decoration-2 underline-offset-[7px]"
+                      : "text-black hover:text-[#0038FF]"
+                  }`}
                   href={`#${key}`}
                 >
                   {t.nav[key]}
@@ -226,6 +296,9 @@ export function Portfolio() {
             </div>
           </div>
         </div>
+        {/* Progress rail. The header already casts a 3px blue line below itself,
+            so the rail is black and reads as that line being consumed. */}
+        <ScrollRail className="absolute left-0 -bottom-[3px] h-[3px] w-full bg-black" />
       </header>
 
       {/* MOBILE HEADER */}
@@ -244,6 +317,8 @@ export function Portfolio() {
             {lang === "pt" ? "EN" : "PT"}
           </button>
         </div>
+        {/* No blue line under the mobile header, so here the rail is the blue. */}
+        <ScrollRail className="absolute left-0 bottom-0 h-[2px] w-full bg-[#0038FF]" />
       </header>
 
       {/* MOBILE BOTTOM DOCK */}
@@ -254,11 +329,12 @@ export function Portfolio() {
             { key: "research", Icon: FlaskConical },
             { key: "stack", Icon: Layers },
             { key: "contact", Icon: AtSign },
-          ] as const).map(({ key, Icon }, i) => (
+          ] as const).map(({ key, Icon }) => (
             <a
               key={key}
+              aria-current={activeSection === key ? "true" : undefined}
               className={`flex-1 h-10 flex flex-col items-center justify-center gap-0.5 neo-border-sm border-black font-code text-[10.5px] font-bold uppercase active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all ${
-                i === 0
+                activeSection === key
                   ? "bg-[#0038FF] text-white neo-shadow-dark-sm"
                   : "bg-white text-black hover:bg-slate-100"
               }`}
@@ -282,7 +358,7 @@ export function Portfolio() {
         <div className="w-full max-w-[1360px] mx-auto px-4 md:px-8 py-2 md:py-10 space-y-14 md:space-y-24">
 
           {/* HERO. Layout family: bordered anchor card. */}
-          <motion.section variants={sectionVariants} className="pt-2 md:pt-0">
+          <motion.section ref={heroRef} id="hero" variants={sectionVariants} className="pt-2 md:pt-0">
             <div className="hidden md:block p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
               <div className="space-y-4">
                 <motion.h1
@@ -291,13 +367,19 @@ export function Portfolio() {
                   animate="show"
                   className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words"
                 >
-                  <motion.span variants={wordRise} className="inline-block">
-                    FELIPE
+                  {/* Outer span carries the scroll drift, inner one the entrance:
+                      two motion values on one element would fight over x. */}
+                  <motion.span style={{ x: driftLeft }} className="inline-block">
+                    <motion.span variants={wordRise} className="inline-block">
+                      FELIPE
+                    </motion.span>
                   </motion.span>{" "}
-                  <motion.span variants={wordRise} className="inline-block">
-                    <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
-                      BRIGAGÃO
-                    </span>
+                  <motion.span style={{ x: driftRight }} className="inline-block">
+                    <motion.span variants={wordRise} className="inline-block">
+                      <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
+                        BRIGAGÃO
+                      </span>
+                    </motion.span>
                   </motion.span>
                 </motion.h1>
                 <p className="font-display text-3xl text-[#0038FF] font-bold tracking-tight uppercase">
@@ -377,9 +459,7 @@ export function Portfolio() {
             className="space-y-5 md:space-y-8"
             id="work"
           >
-            <motion.div variants={sectionVariants}>
-              <SectionHead>{t.sections.featured}</SectionHead>
-            </motion.div>
+            <SectionHead>{t.sections.featured}</SectionHead>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
               {PROJECTS.map((p, i) => {
@@ -387,7 +467,8 @@ export function Portfolio() {
                 return (
                   <motion.article
                     key={p.id}
-                    variants={sectionVariants}
+                    custom={i}
+                    variants={cardVariants}
                     className={`card-mechanical bg-white neo-border md:border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col ${
                       featured ? "lg:col-span-2" : ""
                     }`}
@@ -444,7 +525,7 @@ export function Portfolio() {
           {/* RESEARCH. Layout family: inverted block with display metrics.
               This is the page's single deliberate theme inversion. */}
           <motion.section
-            initial="hidden"
+            initial={reduce ? false : "hidden"}
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
             variants={sectionVariants}
@@ -475,18 +556,32 @@ export function Portfolio() {
                 {t.paperTitle}
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/20 border border-white/20">
-                {t.paperMetrics.map((m) => (
-                  <div key={m.label} className="bg-[#0d0f14] p-3.5 md:p-5">
-                    <p className="font-display text-[32px] md:text-5xl font-extrabold text-[#5B8CFF] leading-none tracking-tight tabular-nums">
+              {/* Only the contents move. The cells themselves are opaque over a
+                  1px rule grid, and sliding them would flash that grid. */}
+              <motion.div
+                variants={metricStagger}
+                className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/20 border border-white/20"
+              >
+                {/* Keyed by position, not by label: the label is translated, and a
+                    changing key would remount the cell into a variant tree that has
+                    already finished animating, leaving it stuck at `hidden`. */}
+                {t.paperMetrics.map((m, index) => (
+                  <div key={index} className="bg-[#0d0f14] p-3.5 md:p-5">
+                    <motion.p
+                      variants={metricRise}
+                      className="font-display text-[32px] md:text-5xl font-extrabold text-[#5B8CFF] leading-none tracking-tight tabular-nums"
+                    >
                       <CountUp value={m.value} />
-                    </p>
-                    <p className="mt-2 font-code text-[10.5px] md:text-xs uppercase text-white/75 leading-snug">
+                    </motion.p>
+                    <motion.p
+                      variants={metricRise}
+                      className="mt-2 font-code text-[10.5px] md:text-xs uppercase text-white/75 leading-snug"
+                    >
                       {m.label}
-                    </p>
+                    </motion.p>
                   </div>
                 ))}
-              </div>
+              </motion.div>
 
               <div className="space-y-3">
                 <p className="font-body text-[13.5px] md:text-base text-white/85 leading-relaxed max-w-3xl">
@@ -497,8 +592,7 @@ export function Portfolio() {
             </div>
           </motion.section>
 
-          {/* ABOUT. Layout family: bare prose column, no container. */}
-          {/* TODO: black and white portrait, 4:5, sitting left of this column at md+. */}
+          {/* ABOUT. Layout family: bare prose column, portrait ruled off to its left at md+. */}
           <motion.section
             initial="hidden"
             whileInView="show"
@@ -508,9 +602,53 @@ export function Portfolio() {
             id="about"
           >
             <SectionHead>{t.sections.about}</SectionHead>
-            <div className="max-w-[62ch] space-y-4 md:space-y-6">
-              <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP1}</p>
-              <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP2}</p>
+            <div className="md:grid md:grid-cols-[280px_minmax(0,1fr)] md:gap-10 md:items-start">
+              {/* Mobile keeps the portrait small: full width at 4:5 costs a whole
+                  viewport and pushes the prose under the fold. The block is capped
+                  at the portrait width there so the meta list lines up under it. */}
+              <div className="w-44 md:w-auto mb-5 md:mb-0">
+                <Image
+                  src="/foto-felipe.jpg"
+                  alt={t.portraitAlt}
+                  width={1000}
+                  height={1250}
+                  sizes="(min-width: 768px) 280px, 176px"
+                  className="w-full h-auto border-[2.5px] md:border-[3px] border-black [box-shadow:4px_4px_0px_#0038FF] md:[box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 md:hover:[box-shadow:8px_8px_0px_#0038FF]"
+                />
+                <p className="mt-3 md:mt-4 font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase tracking-wider">
+                  {SITE.location}
+                </p>
+                {/* Ruled rows, not the contact cards: contact already renders these
+                    two as cards, and repeating that idiom here would read as a
+                    second contact block. */}
+                <ul className="mt-2 font-code text-[11px] md:text-xs">
+                  {SOCIAL_LINKS.map(({ label, value, href }) => (
+                    <li key={label} className="border-b border-black/15 last:border-b-0">
+                      <a
+                        className="group flex flex-col md:flex-row md:items-center md:justify-between md:gap-3 py-2 transition-transform duration-150 hover:translate-x-1"
+                        href={href}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <span className="text-black/70 uppercase tracking-wider font-bold">{label}</span>
+                        <span className="flex items-center gap-1 min-w-0 text-black font-medium group-hover:text-[#0038FF] transition-colors">
+                          <span className="truncate">{value}</span>
+                          <ArrowUpRight
+                            size={12}
+                            strokeWidth={3}
+                            className="shrink-0 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          />
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="max-w-[62ch] space-y-4 md:space-y-6">
+                <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP1}</p>
+                <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP2}</p>
+                <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP3}</p>
+              </div>
             </div>
           </motion.section>
 
@@ -523,9 +661,7 @@ export function Portfolio() {
             className="space-y-5 md:space-y-8"
             id="stack"
           >
-            <motion.div variants={sectionVariants}>
-              <SectionHead>{t.stackHeading}</SectionHead>
-            </motion.div>
+            <SectionHead>{t.stackHeading}</SectionHead>
 
             {/* 2 columns at md, 4 in one ruled row at lg. The rules only appear at lg,
                 where every column shares a single row. */}
@@ -544,19 +680,22 @@ export function Portfolio() {
                   <p className="md:hidden font-code text-[13px] text-black font-medium leading-relaxed">
                     {s.items.map((item) => stackLabel(item, lang)).join(", ")}
                   </p>
-                  <ul className="hidden md:block font-code text-sm text-black font-medium">
+                  <motion.ul
+                    variants={listStagger}
+                    className="hidden md:block font-code text-sm text-black font-medium"
+                  >
                     {s.items.map((item) => {
                       const label = stackLabel(item, lang);
                       return (
                         <li
-                          key={label}
+                          key={stackLabel(item, "en")}
                           className="py-2 border-b border-black/15 last:border-b-0 transition-transform duration-150 hover:translate-x-1"
                         >
-                          {label}
+                          <RowWipe>{label}</RowWipe>
                         </li>
                       );
                     })}
-                  </ul>
+                  </motion.ul>
                 </motion.div>
               ))}
             </div>
@@ -571,9 +710,7 @@ export function Portfolio() {
             className="space-y-5 md:space-y-8 md:pb-12"
             id="contact"
           >
-            <motion.div variants={sectionVariants}>
-              <SectionHead>{t.sections.contact}</SectionHead>
-            </motion.div>
+            <SectionHead>{t.sections.contact}</SectionHead>
 
             <motion.div
               variants={sectionVariants}
@@ -647,7 +784,7 @@ export function Portfolio() {
               </div>
 
               <p className="md:hidden font-code text-[10.5px] text-black/70 uppercase">
-                © {new Date().getFullYear()} Felipe Brigagão · {t.role} · Jacareí, SP
+                © {new Date().getFullYear()} Felipe Brigagão · {t.role} · {SITE.location}
               </p>
             </motion.div>
           </motion.section>
@@ -659,7 +796,7 @@ export function Portfolio() {
         <div className="w-full max-w-[1400px] mx-auto px-8 py-4 flex items-center justify-between gap-4 font-code text-xs uppercase text-black/80">
           <span className="font-bold text-black">© {new Date().getFullYear()} Felipe Brigagão</span>
           <div className="flex flex-wrap items-center gap-4 font-bold">
-            <span className="text-black">Jacareí, SP</span>
+            <span className="text-black">{SITE.location}</span>
             <span className="text-slate-400">/</span>
             <a className="text-[#0038FF] hover:underline underline-offset-4" href={SITE.social.github} rel="noopener noreferrer" target="_blank">
               GitHub

@@ -25,6 +25,11 @@
     padding: 0;
     background-color: #f8fafc;
   }
+  /* The scroll container for useScroll(). Static would leave framer-motion
+     measuring a target's offset against an element it never reaches. */
+  html {
+    position: relative;
+  }
   body {
     overscroll-behavior: none;
   }
