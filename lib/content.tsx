@@ -72,8 +72,10 @@ export interface Project {
   title: Bi;
   tag: Bi;
   role: Bi;
-  summary: Bi;
-  outcome: Bi;
+  problem: Bi;
+  decision: Bi;
+  /** Omitted when there is nothing measured to report. */
+  outcome?: Bi;
   stack: string[];
 }
 
@@ -81,51 +83,59 @@ export const PROJECTS: Project[] = [
   {
     id: "cyma-architect",
     year: "2025-2026",
-    client: { pt: "CYMA Digital", en: "CYMA Digital" },
+    client: { pt: "Na Abdou, para CYMA Digital", en: "At Abdou, for CYMA Digital" },
     title: { pt: "CYMA Architect Agent", en: "CYMA Architect Agent" },
     tag: { pt: "Orquestração de agentes", en: "Agent orchestration" },
     role: { pt: "Arquitetura & implementação", en: "Architecture & implementation" },
-    summary: {
-      pt: "Sistema multi-agente para redesenho de ambientes em tempo real. Um agente limpa a imagem de entrada, outro gera a proposta; a orquestração mantém a conversa coerente entre iterações.",
-      en: "Multi-agent system for real-time environment redesign. One agent cleans the input image, another generates the proposal; orchestration keeps the conversation coherent across iterations.",
+    problem: {
+      pt: "Uma proposta de redesenho precisa partir da imagem do ambiente sem o que já está lá dentro.",
+      en: "A redesign proposal has to start from an image of the room without what is already in it.",
+    },
+    decision: {
+      pt: "Separei em dois agentes — um limpa a entrada, outro gera a proposta — com orquestração que mantém o estado da conversa entre iterações.",
+      en: "I split it into two agents — one cleans the input, the other generates the proposal — with orchestration that keeps conversation state across iterations.",
     },
     outcome: {
-      pt: "Em produção — em uso por Heineken, FEMSA e arquitetos parceiros.",
-      en: "In production — used by Heineken, FEMSA and partner architects.",
+      pt: "Em produção, em uso por Heineken, FEMSA e arquitetos parceiros.",
+      en: "In production, used by Heineken, FEMSA and partner architects.",
     },
     stack: ["React 19", "Zustand", "Vite", "OpenAI", "Gemini"],
   },
   {
     id: "cymatrix",
     year: "2026",
-    client: { pt: "CYMA Digital", en: "CYMA Digital" },
+    client: { pt: "Na Abdou, para CYMA Digital", en: "At Abdou, for CYMA Digital" },
     title: { pt: "CYMATRIX", en: "CYMATRIX" },
     tag: { pt: "Operações em tempo real", en: "Real-time operations" },
     role: { pt: "Frontend & integração de dados", en: "Frontend & data integration" },
-    summary: {
-      pt: "Centro de controle para frota de painéis LED. Dashboards com estado ao vivo, fluxos de agendamento e ferramentas de diagnóstico usadas por operadores em campo.",
-      en: "Control center for a fleet of LED panels. Live-state dashboards, scheduling flows and diagnostic tools used by field operators.",
+    problem: {
+      pt: "Quem opera uma frota de painéis LED precisa do estado de cada painel agora, não no relatório seguinte.",
+      en: "Whoever runs a fleet of LED panels needs each panel's state now, not in the next report.",
     },
-    outcome: {
-      pt: "Lançamento interno e para clientes iniciais em 2026.",
-      en: "Internal launch and early-access clients rolling out in 2026.",
+    decision: {
+      pt: "Dashboards com estado ao vivo por WebSocket, agendamento e diagnóstico na mesma tela do operador.",
+      en: "Live-state dashboards over WebSocket, with scheduling and diagnostics on the same screen the operator already uses.",
     },
     stack: ["React 19", "Radix", "TanStack Query", "WebSockets"],
   },
   {
     id: "cymadisplay",
     year: "2025-2026",
-    client: { pt: "CYMA Digital", en: "CYMA Digital" },
+    client: { pt: "Na Abdou, para CYMA Digital", en: "At Abdou, for CYMA Digital" },
     title: { pt: "CYMADISPLAY", en: "CYMADISPLAY" },
     tag: { pt: "Plataforma comercial", en: "Commerce platform" },
     role: { pt: "Fullstack", en: "Fullstack" },
-    summary: {
-      pt: "Plataforma completa de catálogo, conteúdo e checkout para digital signage em telas. SEO técnico, pagamentos com Stripe e pipeline de email transacional.",
-      en: "Catalog, content and checkout platform for screen-based digital signage. Technical SEO, Stripe payments and a transactional email pipeline.",
+    problem: {
+      pt: "Vender digital signage exigia catálogo, conteúdo e checkout no mesmo lugar.",
+      en: "Selling digital signage meant catalog, content and checkout in one place.",
+    },
+    decision: {
+      pt: "Next.js com Prisma, pagamento via Stripe, pipeline de e-mail transacional e SEO técnico tratado na estrutura, não depois.",
+      en: "Next.js with Prisma, Stripe payments, a transactional email pipeline and technical SEO handled in the structure, not after it.",
     },
     outcome: {
-      pt: "Produto ativo — telas instaladas em todo o Brasil.",
-      en: "Shipped product — screens installed across Brazil.",
+      pt: "Produto ativo, com telas instaladas em todo o Brasil.",
+      en: "Shipped product, with screens installed across Brazil.",
     },
     stack: ["Next.js", "Prisma", "Stripe", "SendGrid"],
   },
@@ -133,19 +143,23 @@ export const PROJECTS: Project[] = [
     id: "portal-tm-hnk",
     year: "2025–2026",
     client: {
-      pt: "Desenvolvido na Abdou para Heineken Brasil",
-      en: "Developed at Abdou for Heineken Brasil",
+      pt: "Na Abdou, para Heineken Brasil",
+      en: "At Abdou, for Heineken Brasil",
     },
     title: { pt: "Portal TM-HNK", en: "TM-HNK Portal" },
     tag: { pt: "Ferramenta interna", en: "Internal tool" },
     role: { pt: "Engenharia de produto", en: "Product engineering" },
-    summary: {
-      pt: "Central de operações para projetos Tailor Made. Fluxo de aprovações em múltiplos níveis, orquestração de assets e integração com sistemas internos.",
-      en: "Operations hub for Tailor Made projects. Multi-level approval flow, asset orchestration and integration with internal systems.",
+    problem: {
+      pt: "Projeto Tailor Made passa por aprovação em vários níveis, com assets e sistemas internos em lugares separados.",
+      en: "A Tailor Made project goes through several approval levels, with assets and internal systems living apart.",
+    },
+    decision: {
+      pt: "Central única em Django e PostgreSQL: o fluxo de aprovação virou estado explícito, com assets no S3 e integração com os sistemas internos.",
+      en: "A single hub in Django and PostgreSQL: the approval flow became explicit state, with assets on S3 and integration with the internal systems.",
     },
     outcome: {
-      pt: "Uso diário em projetos OPP, Especiais, Key Account e Spin — BAs e gerentes regionais da Heineken em todo o Brasil.",
-      en: "Daily use across OPP, Especiais, Key Account and Spin projects — Heineken BAs and regional managers nationwide.",
+      pt: "Uso diário em projetos OPP, Especiais, Key Account e Spin, por BAs e gerentes regionais da Heineken.",
+      en: "Daily use across OPP, Especiais, Key Account and Spin projects, by Heineken BAs and regional managers.",
     },
     stack: ["Django", "Python", "AWS S3", "PostgreSQL"],
   },

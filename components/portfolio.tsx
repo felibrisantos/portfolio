@@ -246,11 +246,16 @@ export function Portfolio() {
                       <span className="md:text-[#0038FF]">{p.role[lang]}</span>
                     </h3>
                     <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
-                      {p.summary[lang]}
+                      {p.problem[lang]}
                     </p>
-                    <div className="p-2.5 md:p-3.5 bg-white md:bg-[#eff6ff] neo-border-sm md:border-[1.5px] md:border-l-[4px] border-black/40 md:border-black font-code text-[12.5px] md:text-sm text-black transition-all duration-200 md:hover:bg-[#e0edff]">
-                      <span className="font-semibold">{p.outcome[lang]}</span>
-                    </div>
+                    <p className="font-body text-[13px] md:text-base text-black/80 md:text-[#334155] leading-relaxed">
+                      {p.decision[lang]}
+                    </p>
+                    {p.outcome && (
+                      <div className="p-2.5 md:p-3.5 bg-white md:bg-[#eff6ff] neo-border-sm md:border-[1.5px] md:border-l-[4px] border-black/40 md:border-black font-code text-[12.5px] md:text-sm text-black transition-all duration-200 md:hover:bg-[#e0edff]">
+                        <span className="font-semibold">{p.outcome[lang]}</span>
+                      </div>
+                    )}
                   </div>
                   <div className="border-t-2 md:border-t-[2px] border-black md:border-black px-3 py-1.5 md:p-3.5 bg-slate-100 md:bg-[#f8fafc] flex items-center justify-between font-code text-[9.5px] md:text-xs">
                     <div className="flex items-center gap-1 md:gap-2 text-black md:text-[#0038FF] font-extrabold md:font-bold">
