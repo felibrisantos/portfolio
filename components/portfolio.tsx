@@ -165,10 +165,10 @@ export function Portfolio() {
               <div className="mt-8 pt-8 border-t-[2.5px] border-black">
                 <div className="flex flex-wrap items-center gap-3">
                   <a className="btn-mechanical flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF]" href="#contact">
-                    {lang === "pt" ? "INICIAR CONVERSA" : "START A CONVERSATION"} <ArrowRight size={18} strokeWidth={2.5} />
+                    {lang === "pt" ? "FALAR COMIGO" : "GET IN TOUCH"} <ArrowRight size={18} strokeWidth={2.5} />
                   </a>
                   <a className="btn-mechanical text-center py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-[#0f172a] font-bold hover:bg-[#eff6ff] [box-shadow:3px_3px_0px_#0038FF]" href="#work">
-                    {lang === "pt" ? "EXPLORAR PROJETOS" : "EXPLORE PROJECTS"}
+                    {lang === "pt" ? "VER PROJETOS" : "SEE THE WORK"}
                   </a>
                 </div>
               </div>
@@ -189,11 +189,11 @@ export function Portfolio() {
 
               <div className="flex flex-col gap-2.5 w-full">
                 <a className="w-full h-11 flex items-center justify-center gap-2 bg-[#0038FF] text-white font-code text-[12px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href="#contact">
-                  <span>{lang === 'pt' ? 'INICIAR CONVERSA' : 'START A CONVERSATION'}</span>
+                  <span>{lang === 'pt' ? 'FALAR COMIGO' : 'GET IN TOUCH'}</span>
                   <ArrowRight size={16} strokeWidth={2.5} />
                 </a>
                 <a className="w-full h-11 flex items-center justify-center gap-2 bg-white text-black font-code text-[12px] font-bold tracking-wider uppercase neo-border neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all rounded-none" href="#work">
-                  <span>{lang === 'pt' ? 'EXPLORAR PROJETOS' : 'EXPLORE PROJECTS'}</span>
+                  <span>{lang === 'pt' ? 'VER PROJETOS' : 'SEE THE WORK'}</span>
                   <ArrowRight size={16} strokeWidth={2.5} className="rotate-90" />
                 </a>
               </div>
@@ -259,7 +259,6 @@ export function Portfolio() {
                   </div>
                   <div className="border-t-2 md:border-t-[2px] border-black md:border-black px-3 py-1.5 md:p-3.5 bg-slate-100 md:bg-[#f8fafc] flex items-center justify-between font-code text-[9.5px] md:text-xs">
                     <div className="flex items-center gap-1 md:gap-2 text-black md:text-[#0038FF] font-extrabold md:font-bold">
-                      <span className="md:hidden">■</span>
                       <span>{p.client[lang]}</span>
                     </div>
                     <span className="text-black/60 md:text-[#0f172a] font-bold">{p.year}</span>
@@ -363,11 +362,6 @@ export function Portfolio() {
             </motion.div>
 
             <motion.div variants={sectionVariants} className="md:hidden flex flex-col gap-1.5 pt-4">
-              <div className="self-start inline-flex items-center px-2 py-0.5 bg-slate-200 neo-border-sm">
-                <span className="font-code text-[9px] font-bold text-black uppercase">
-                  {lang === "pt" ? "FRAMEWORKS & INFRAESTRUTURA" : "FRAMEWORKS & INFRASTRUCTURE"}
-                </span>
-              </div>
               <h2 className="font-display font-extrabold text-[21px] tracking-tight uppercase text-black leading-tight">
                 {t.stackHeading}
               </h2>
