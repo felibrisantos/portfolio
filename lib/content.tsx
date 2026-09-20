@@ -32,6 +32,8 @@ export const COPY: Record<Lang, {
   cta: { contact: string; work: string };
   /** Hint under the hero that the page continues below the fold. */
   scrollCue: string;
+  /** 404. The numeral itself is not copy, so it is not in here. */
+  notFound: { title: string; body: string; home: string };
   /** Labels for the two explicit actions on the email card. */
   contactActions: { copy: string; copied: string; compose: string };
   availability: string;
@@ -58,6 +60,11 @@ export const COPY: Record<Lang, {
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
     cta: { contact: "Falar comigo", work: "Ver projetos" },
     scrollCue: "Role",
+    notFound: {
+      title: "Página não encontrada",
+      body: "O endereço que você abriu não existe aqui. Ou foi removido, ou o link veio quebrado.",
+      home: "Voltar ao início",
+    },
     contactActions: { copy: "Copiar", copied: "Copiado", compose: "Escrever" },
     availability:
       "Aberto a posições fullstack e a projetos de IA em produção.",
@@ -94,6 +101,11 @@ export const COPY: Record<Lang, {
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
     cta: { contact: "Get in touch", work: "See the work" },
     scrollCue: "Scroll",
+    notFound: {
+      title: "Page not found",
+      body: "The address you opened does not exist here. It was either removed, or the link arrived broken.",
+      home: "Back to the start",
+    },
     contactActions: { copy: "Copy", copied: "Copied", compose: "Compose" },
     availability:
       "Open to fullstack roles and AI-in-production projects.",

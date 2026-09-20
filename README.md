@@ -23,6 +23,7 @@ Fonts: Inter (body), Space Grotesk (display), JetBrains Mono (code), all via `ne
 - `components/` — one file per section, composed by `app/page.tsx` (a server component). Only the hero and the two headers keep separate desktop/mobile trees (`hidden md:` / `md:hidden`); every other section is a single responsive tree, so most copy changes touch one place. Each section is its own `"use client"` boundary; `site-footer.tsx` and the page itself stay on the server.
 - `lib/use-lang.ts` — PT/EN toggle, persisted in `localStorage`, and keeps `<html lang>` in sync.
 - `app/layout.tsx` — metadata, OG tags and the JSON-LD graph: a `schema.org/Person` node and a `ScholarlyArticle` node for the paper, linked by `@id` so the article names the person as its author rather than minting a second one.
+- `app/not-found.tsx` / `components/not-found-view.tsx` — the 404. It sets its own title and overrides the layout's `index: true`; the view is client-side because its copy is bilingual.
 - `app/opengraph-image.tsx`, `app/sitemap.ts`, `app/robots.ts` — OG card and crawler routes.
 
 PT and EN are kept in parity by hand. Every string added in one language needs its pair.
