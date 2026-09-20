@@ -1,0 +1,209 @@
+"use client";
+
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  Variants,
+} from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { COPY } from "@/lib/content";
+import { useLang } from "@/lib/use-lang";
+import { useSectionVariants } from "@/components/scroll-fx";
+import { useRef } from "react";
+
+/** Words of the hero headline rise in sequence. */
+const wordContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.14, delayChildren: 0.18 } },
+};
+
+const wordRise: Variants = {
+  hidden: { opacity: 0, y: "0.3em" },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 210, damping: 24 } },
+};
+
+/** Desktop-only: the CTA leans toward the pointer. Touch never fires mousemove. */
+function MagneticCta({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className: string;
+  children: React.ReactNode;
+}) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 260, damping: 18, mass: 0.6 });
+  const springY = useSpring(y, { stiffness: 260, damping: 18, mass: 0.6 });
+
+  const pull = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (reduce || !ref.current) return;
+    const box = ref.current.getBoundingClientRect();
+    x.set((event.clientX - (box.left + box.width / 2)) * 0.22);
+    y.set((event.clientY - (box.top + box.height / 2)) * 0.34);
+  };
+
+  const release = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className={className}
+      style={{ x: springX, y: springY }}
+      onMouseMove={pull}
+      onMouseLeave={release}
+    >
+      {children}
+    </motion.a>
+  );
+}
+
+/* HERO. Layout family: bordered anchor card.
+   The hero owns the first screen: its minimum height is the viewport less
+   everything already spoken for around it, so the next section starts exactly
+   at the fold instead of peeking above it. Mobile subtracts main's 68px header
+   offset + the container's 8px, the 56px space-y gap to WORK, and the dock
+   (56px row + 2px border + its safe-area padding). Desktop subtracts main's
+   96px + the container's 40px and the 96px gap; there is no dock. */
+export function Hero() {
+  const { lang } = useLang();
+  const t = COPY[lang];
+  const reduce = useReducedMotion();
+  const sectionVariants = useSectionVariants();
+
+  /* The two halves of the name pull apart as the hero leaves. Desktop only in
+     practice: the markup this drives is display:none below md, so the
+     transform never reaches the phone layout. */
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const driftLeft = useTransform(heroProgress, [0, 1], [0, reduce ? 0 : -34]);
+  const driftRight = useTransform(heroProgress, [0, 1], [0, reduce ? 0 : 34]);
+
+  return (
+    <motion.section
+      ref={heroRef}
+      id="hero"
+      variants={sectionVariants}
+      className="flex flex-col pt-2 md:pt-0 min-h-[calc(100dvh-190px-max(12px,env(safe-area-inset-bottom,12px)))] md:min-h-[calc(100dvh-232px)]"
+    >
+      <div className="hidden md:block my-auto p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
+        <div className="space-y-4">
+          <motion.h1
+            variants={wordContainer}
+            initial={reduce ? false : "hidden"}
+            animate="show"
+            className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words"
+          >
+            {/* Outer span carries the scroll drift, inner one the entrance:
+                two motion values on one element would fight over x. */}
+            <motion.span style={{ x: driftLeft }} className="inline-block">
+              <motion.span variants={wordRise} className="inline-block">
+                FELIPE
+              </motion.span>
+            </motion.span>{" "}
+            <motion.span style={{ x: driftRight }} className="inline-block">
+              <motion.span variants={wordRise} className="inline-block">
+                <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
+                  BRIGAGÃO
+                </span>
+              </motion.span>
+            </motion.span>
+          </motion.h1>
+          <p className="font-display text-3xl text-[#0038FF] font-bold tracking-tight uppercase">
+            {t.role}
+          </p>
+          <p className="font-body text-lg text-black/85 leading-relaxed max-w-3xl pt-2">
+            {t.positioning}
+          </p>
+        </div>
+
+        <div className="mt-8 pt-8 border-t-[2.5px] border-black flex flex-wrap items-center gap-3">
+          <MagneticCta
+            className="btn-magnetic flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF] whitespace-nowrap"
+            href="#contact"
+          >
+            {t.cta.contact} <ArrowRight size={18} strokeWidth={2.5} />
+          </MagneticCta>
+          <a
+            className="btn-mechanical py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-black font-bold hover:bg-slate-100 [box-shadow:3px_3px_0px_#0038FF] whitespace-nowrap"
+            href="#work"
+          >
+            {t.cta.work}
+          </a>
+        </div>
+      </div>
+
+      <div className="md:hidden my-auto flex flex-col">
+        <motion.h1
+          variants={wordContainer}
+          initial={reduce ? false : "hidden"}
+          animate="show"
+          className="font-display font-extrabold text-[36px] leading-[1.04] tracking-tight uppercase text-black mb-1.5"
+        >
+          <motion.span variants={wordRise} className="inline-block">
+            FELIPE
+          </motion.span>{" "}
+          <br />
+          <motion.span variants={wordRise} className="inline-block">
+            <span className="italic text-[#0038FF] font-black leading-[1.1] inline-block pb-1">
+              BRIGAGÃO
+            </span>
+          </motion.span>
+        </motion.h1>
+        <p className="font-display font-semibold text-[16.5px] tracking-tight text-black mb-3.5 uppercase">
+          {t.role}
+        </p>
+        <p className="font-body text-[14px] leading-relaxed text-black/85 mb-4">
+          {t.positioningShort}
+        </p>
+
+        <div className="flex flex-col gap-2.5 w-full">
+          <a
+            className="w-full h-11 flex items-center justify-center gap-2 bg-[#0038FF] text-white font-code text-[12.5px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            href="#contact"
+          >
+            <span>{t.cta.contact}</span>
+            <ArrowRight size={16} strokeWidth={2.5} />
+          </a>
+          <a
+            className="w-full h-11 flex items-center justify-center gap-2 bg-white text-black font-code text-[12.5px] font-bold tracking-wider uppercase neo-border neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            href="#work"
+          >
+            <span>{t.cta.work}</span>
+            <ArrowRight size={16} strokeWidth={2.5} className="rotate-90" />
+          </a>
+        </div>
+      </div>
+
+      {/* In flow, pushed down by mt-auto rather than positioned: the section's
+          own height already stops above the dock, so the cue can never end up
+          under it. */}
+      <div className="mt-auto pt-8 flex items-center gap-2" aria-hidden>
+        <motion.span
+          animate={reduce ? undefined : { y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="flex text-[#0038FF]"
+        >
+          <ArrowRight size={17} strokeWidth={3} className="rotate-90" />
+        </motion.span>
+        <span className="font-code text-[11px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-black">
+          {t.scrollCue}
+        </span>
+      </div>
+    </motion.section>
+  );
+}

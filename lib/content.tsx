@@ -12,6 +12,15 @@ export const SITE = {
   },
 };
 
+/* Email is not in here: it is not a link. A mailto opens whatever desktop mail
+   client happens to be registered, which is usually not the one the reader
+   uses, so the address gets its own card with copy and compose as separate
+   explicit actions. */
+export const SOCIAL_LINKS = [
+  { label: "LinkedIn", value: "/in/felibrisantos", href: SITE.social.linkedin },
+  { label: "GitHub", value: "@felibrisantos", href: SITE.social.github },
+];
+
 export const COPY: Record<Lang, {
   role: string;
   /** Desktop hero. Full positioning. */

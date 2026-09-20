@@ -107,6 +107,38 @@ export const rowWipe: Variants = {
   show: { x: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
 };
 
+/* Section-level reveals. Motion runs in JS, so the reduced-motion block in
+   globals.css does not reach it; collapsing the variants here is what
+   actually honours it. They are hooks because the collapse depends on
+   useReducedMotion at runtime. */
+
+/** One block rising into place. */
+export function useSectionVariants(): Variants {
+  const reduce = useReducedMotion();
+  return {
+    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 30 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: reduce
+        ? { duration: 0 }
+        : { type: "spring", stiffness: 280, damping: 24, mass: 0.8 },
+    },
+  };
+}
+
+/** Orchestrator: timing only, never a visual state of its own. */
+export function useContainerVariants(): Variants {
+  const reduce = useReducedMotion();
+  return {
+    hidden: reduce ? { opacity: 1 } : { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: reduce ? { duration: 0 } : { staggerChildren: 0.15, delayChildren: 0.1 },
+    },
+  };
+}
+
 /** Orchestrators. They carry timing only, never a visual state of their own. */
 export const listStagger: Variants = {
   hidden: {},
