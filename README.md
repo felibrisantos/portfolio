@@ -30,6 +30,7 @@ PT and EN are kept in parity by hand. Every string added in one language needs i
 ## Layout rules worth keeping
 
 - One layout family per section: anchor card (hero), card grid with a featured first entry (work), inverted block with display metrics (research), bare prose column (about), ruled columns (stack), closing card (contact).
+- Every nav target is an in-page anchor under a fixed header, so `html` carries a `scroll-padding-top` in `globals.css`. It is per-breakpoint and keeps the safe-area term unresolved, because the mobile header grows with a notch.
 - The research block is the page's only theme inversion. On that dark surface the accent is `#5B8CFF`, not `#0038FF`, which fails contrast there.
 - `positioningShort` exists so the mobile hero CTA stays above the fold. Keep it under 20 words.
 

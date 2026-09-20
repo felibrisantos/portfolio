@@ -34,6 +34,19 @@
        document sideways until they animated in. Clip, not hidden: hidden makes
        a scroll container and takes sticky and scroll anchoring with it. */
     overflow-x: clip;
+    /* Every nav target is an in-page anchor and both headers are fixed, so a
+       jump would park the section heading underneath one. The reserve is the
+       mobile header (pt-safe + 48px row + its 1px inner and 2px outer rules)
+       plus a 16px gap, and the safe-area term has to stay live here rather
+       than be folded in: on a notched phone the header grows with it. */
+    scroll-padding-top: calc(67px + max(10px, env(safe-area-inset-top, 10px)));
+  }
+  /* Desktop header: 64px row + 2.5px rule + the 3px blue line it casts below,
+     then the same gap. */
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 88px;
+    }
   }
   body {
     overscroll-behavior: none;
