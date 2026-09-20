@@ -40,10 +40,11 @@ export const metadata: Metadata = {
 };
 
 const personSchema = {
-  "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://brigagao.dev/#felipe",
   name: "Felipe Brigagão",
   url: "https://brigagao.dev",
+  image: "https://brigagao.dev/foto-felipe.jpg",
   jobTitle: "Desenvolvedor fullstack",
   email: "mailto:felibrisantos@gmail.com",
   worksFor: { "@type": "Organization", name: "Abdou" },
@@ -62,13 +63,55 @@ const personSchema = {
   ],
 };
 
+/* The paper is the one credential that lives outside this domain, so it gets a
+   node of its own rather than only a `sameAs` on the person: the DOI, both
+   authors and the issue are facts a crawler can reconcile against the
+   publisher's own record. The journal is named by the acronym the page itself
+   shows, since that is what is verifiable from here. */
+const articleSchema = {
+  "@type": "ScholarlyArticle",
+  "@id": "https://doi.org/10.54033/icmrv5n3-043",
+  headline:
+    "O impacto dos indicadores econômicos no consumo: uma abordagem com redes neurais",
+  url: "https://doi.org/10.54033/icmrv5n3-043",
+  inLanguage: "pt-BR",
+  datePublished: "2024-12",
+  author: [
+    { "@id": "https://brigagao.dev/#felipe" },
+    { "@type": "Person", name: "Tardelli Ronan Coelho Stekel" },
+  ],
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "DOI",
+    value: "10.54033/icmrv5n3-043",
+  },
+  isPartOf: {
+    "@type": "PublicationIssue",
+    issueNumber: "3",
+    isPartOf: {
+      "@type": "PublicationVolume",
+      volumeNumber: "5",
+      isPartOf: { "@type": "Periodical", name: "ICMR" },
+    },
+  },
+  funder: { "@type": "Organization", name: "FAPESP", identifier: "2023/14073-1" },
+  about: ["Redes neurais", "Índices econômicos setoriais", "Consumo"],
+};
+
+/* One graph, not two script tags: the `@id` on the person is what lets the
+   article name him as an author instead of minting a second, unrelated Person. */
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [personSchema, articleSchema],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable} scroll-smooth`}>
       <body className="bg-grid-pattern font-body text-[#0f172a] antialiased selection:bg-[#0038FF] selection:text-white">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
         />
         <div className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.035] mix-blend-difference">
           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
