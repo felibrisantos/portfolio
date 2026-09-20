@@ -19,7 +19,7 @@ Fonts: Inter (body), Space Grotesk (display), JetBrains Mono (code), all via `ne
 
 ## Where the content lives
 
-- `lib/content.tsx` — every piece of copy: `SITE`, `COPY.pt` / `COPY.en`, `PROJECTS`, `STACK`. `COPY.cta` holds one label per intent; reuse those instead of writing a new CTA string. A `STACK` item is a plain string when it is a product name and a `{ pt, en }` pair when it reads differently per language; render it through `stackLabel`.
+- `lib/content.tsx` — every piece of copy: `SITE`, `COPY.pt` / `COPY.en`, `PROJECTS`, `STACK`. `COPY.cta` holds one label per intent; reuse those instead of writing a new CTA string. A `STACK` item is a plain string when it is a product name and a `{ pt, en }` pair when it reads differently per language; render it through `stackLabel`. A `PROJECTS` entry gets an `href` only when the work is publicly reachable; without one the card's footer slot falls back to `COPY.projectAccess`, so that corner answers the same question on every card.
 - `components/` — one file per section, composed by `app/page.tsx` (a server component). Only the hero and the two headers keep separate desktop/mobile trees (`hidden md:` / `md:hidden`); every other section is a single responsive tree, so most copy changes touch one place. Each section is its own `"use client"` boundary; `site-footer.tsx` and the page itself stay on the server.
 - `lib/use-lang.ts` — PT/EN toggle, persisted in `localStorage`, and keeps `<html lang>` in sync.
 - `app/layout.tsx` — metadata, OG tags and the JSON-LD graph: a `schema.org/Person` node and a `ScholarlyArticle` node for the paper, linked by `@id` so the article names the person as its author rather than minting a second one.

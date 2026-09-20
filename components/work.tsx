@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion, Variants } from "framer-motion";
-import { COPY, PROJECTS } from "@/lib/content";
+import { ArrowUpRight } from "lucide-react";
+import { COPY, hrefLabel, PROJECTS } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
 import { useContainerVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
@@ -95,6 +96,28 @@ export function Work() {
               <div className="border-t-2 border-black px-3 py-2 md:px-5 md:py-3 bg-slate-100 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-code text-[10.5px] md:text-xs uppercase">
                 <span className="text-black font-extrabold">{p.client[lang]}</span>
                 <span className="text-black/70 font-bold">{p.role[lang]}</span>
+                {/* Third slot, present on every card, so this corner always
+                    answers the same question: can the reader go and look at
+                    this? The live one names its domain, in lower case because
+                    a URL shouted in caps stops reading as a URL. The rest say
+                    why not, which is what silence here would fail to say. */}
+                {p.href ? (
+                  <a
+                    className="group inline-flex items-center gap-1 font-bold text-[#0038FF] normal-case hover:underline underline-offset-4"
+                    href={p.href}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {hrefLabel(p.href)}
+                    <ArrowUpRight
+                      size={12}
+                      strokeWidth={3}
+                      className="shrink-0 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </a>
+                ) : (
+                  <span className="font-bold text-black/45">{t.projectAccess}</span>
+                )}
               </div>
             </motion.article>
           );

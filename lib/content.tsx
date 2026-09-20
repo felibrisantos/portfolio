@@ -34,6 +34,9 @@ export const COPY: Record<Lang, {
   scrollCue: string;
   /** 404. The numeral itself is not copy, so it is not in here. */
   notFound: { title: string; body: string; home: string };
+  /** Footer slot on a project with no public URL. Phrased as access, not as
+      kind: "internal tool" is already a `tag` on one of these cards. */
+  projectAccess: string;
   /** Labels for the two explicit actions on the email card. */
   contactActions: { copy: string; copied: string; compose: string };
   availability: string;
@@ -65,6 +68,7 @@ export const COPY: Record<Lang, {
       body: "O endereço que você abriu não existe aqui. Ou foi removido, ou o link veio quebrado.",
       home: "Voltar ao início",
     },
+    projectAccess: "Acesso restrito",
     contactActions: { copy: "Copiar", copied: "Copiado", compose: "Escrever" },
     availability:
       "Aberto a posições fullstack e a projetos de IA em produção.",
@@ -106,6 +110,7 @@ export const COPY: Record<Lang, {
       body: "The address you opened does not exist here. It was either removed, or the link arrived broken.",
       home: "Back to the start",
     },
+    projectAccess: "Restricted access",
     contactActions: { copy: "Copy", copied: "Copied", compose: "Compose" },
     availability:
       "Open to fullstack roles and AI-in-production projects.",
@@ -146,7 +151,17 @@ export interface Project {
   decision: Bi;
   /** Omitted when there is nothing measured to report. */
   outcome?: Bi;
+  /** Public URL, when the work is reachable at all. Omitted means the card
+      renders `COPY.projectAccess` in its place: the slot answers the same
+      question on every card, and leaving it empty reads as nothing to show. */
+  href?: string;
   stack: string[];
+}
+
+/** Bare domain, for a project link. A URL the reader can recognise is stronger
+    proof than a generic "see it live", and it needs no translation. */
+export function hrefLabel(href: string): string {
+  return href.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 }
 
 /** First entry renders as the featured card (full grid width). */
@@ -215,6 +230,7 @@ export const PROJECTS: Project[] = [
       pt: "Produto ativo, com telas instaladas em todo o Brasil.",
       en: "Shipped product, with screens installed across Brazil.",
     },
+    href: "https://www.cymadisplay.com/",
     stack: ["Next.js", "Prisma", "PostgreSQL", "Stripe", "SendGrid"],
   },
   {
