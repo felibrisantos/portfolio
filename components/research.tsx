@@ -3,24 +3,11 @@
 import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { COPY } from "@/lib/content";
+import { scaleNumbers } from "@/lib/metrics";
 import { useLang } from "@/lib/use-lang";
 import { metricRise, metricStagger, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 import { useEffect, useRef } from "react";
-
-/**
- * Counts every number inside `value` up from zero, keeping whatever sits
- * between them. Works for "0,82-0,96", "5 de 8" and "3.8-9.2%" alike, and
- * keeps the decimal separator the string arrived with.
- */
-function scaleNumbers(value: string, progress: number) {
-  return value.replace(/\d+(?:[.,]\d+)?/g, (raw) => {
-    const separator = raw.includes(",") ? "," : ".";
-    const decimals = raw.includes(separator) ? raw.split(separator)[1].length : 0;
-    const scaled = parseFloat(raw.replace(",", ".")) * progress;
-    return scaled.toFixed(decimals).replace(".", separator);
-  });
-}
 
 function CountUp({ value }: { value: string }) {
   const reduce = useReducedMotion();
