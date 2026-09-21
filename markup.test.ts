@@ -120,6 +120,17 @@ describe.each(ROUTES)("the page served at $path", ({ lang, path, htmlLang }) => 
     expect(html).toMatch(new RegExp(`hreflang="x-default" href="${langUrl("en")}"`, "i"));
   });
 
+  it("carries three checkable facts on the first screen", () => {
+    /* A reader who leaves after the hero used to leave with positioning
+       prose and nothing to check it against. Each fact is stated again, in
+       full, further down the page. */
+    for (const fact of COPY[lang].evidence) {
+      expect(html).toContain(fact.value);
+      expect(html).toContain(fact.label);
+    }
+    expect(COPY[lang].evidence).toHaveLength(3);
+  });
+
   it("emits an Apple touch icon", () => {
     /* `apple-icon.svg` produced no route at all: the framework only accepts
        png/jpg, or a generator, under that name. */

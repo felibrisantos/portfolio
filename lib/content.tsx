@@ -45,6 +45,12 @@ export const COPY: Record<Lang, {
   a11y: { skip: string; navPrimary: string; navDock: string; heroRegion: string };
   /** One label per intent: every contact CTA uses cta.contact, every work CTA uses cta.work. */
   cta: { contact: string; work: string; resume: string };
+  /**
+   * Three facts on the first screen, each verifiable further down the page.
+   * A reader who leaves after the hero used to leave with positioning prose
+   * and nothing to check it against.
+   */
+  evidence: { value: string; label: string }[];
   /** Hint under the hero that the page continues below the fold. */
   scrollCue: string;
   /** 404. The numeral itself is not copy, so it is not in here. */
@@ -88,6 +94,11 @@ export const COPY: Record<Lang, {
       heroRegion: "Apresentação",
     },
     cta: { contact: "Falar comigo", work: "Ver projetos", resume: "Baixar currículo" },
+    evidence: [
+      { value: "Heineken · FEMSA", label: "em produção" },
+      { value: "R² 0,82–0,96", label: "artigo indexado" },
+      { value: "Gate de avaliação", label: "IA em produção" },
+    ],
     scrollCue: "Role",
     notFound: {
       title: "Página não encontrada",
@@ -141,6 +152,11 @@ export const COPY: Record<Lang, {
       heroRegion: "Introduction",
     },
     cta: { contact: "Get in touch", work: "See the work", resume: "Download CV" },
+    evidence: [
+      { value: "Heineken · FEMSA", label: "in production" },
+      { value: "R² 0.82–0.96", label: "indexed paper" },
+      { value: "Evaluation gate", label: "AI in production" },
+    ],
     scrollCue: "Scroll",
     notFound: {
       title: "Page not found",

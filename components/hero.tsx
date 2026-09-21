@@ -111,6 +111,20 @@ export function Hero({ lang }: { lang: Lang }) {
           <p className="font-body text-lg text-black/85 leading-relaxed max-w-3xl pt-2">
             {t.positioning}
           </p>
+          {/* The prose says what the work is; this says what can be checked.
+              Every item here is stated again, in full, further down the page. */}
+          <dl className="flex flex-wrap gap-x-8 gap-y-3 pt-5">
+            {t.evidence.map((fact) => (
+              <div key={fact.label} className="border-l-[3px] border-primary pl-3">
+                <dt className="font-display text-lg font-extrabold uppercase tracking-tight text-black leading-none">
+                  {fact.value}
+                </dt>
+                <dd className="font-code text-[11px] uppercase tracking-wider text-on-surface-muted pt-1">
+                  {fact.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         <div className="mt-8 pt-8 border-t-[2.5px] border-black flex flex-wrap items-center gap-3">
@@ -152,9 +166,19 @@ export function Hero({ lang }: { lang: Lang }) {
         <p className="font-display font-semibold text-[16.5px] tracking-tight text-black mb-3.5 uppercase">
           {t.role}
         </p>
-        <p className="font-body text-[14px] leading-relaxed text-black/85 mb-4">
+        <p className="font-body text-[14px] leading-relaxed text-black/85 mb-3">
           {t.positioningShort}
         </p>
+        {/* One line, not three blocks: the contact action has to survive the
+            first fold, which is the whole reason `positioningShort` exists. */}
+        <ul className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-4 font-code text-[10.5px] uppercase tracking-wider">
+          {t.evidence.map((fact, i) => (
+            <li key={fact.label} className="flex items-center gap-2">
+              {i > 0 && <span aria-hidden className="text-on-surface-muted/50">/</span>}
+              <span className="font-bold text-black">{fact.value}</span>
+            </li>
+          ))}
+        </ul>
 
         <div className="flex flex-col gap-2.5 w-full">
           <a
