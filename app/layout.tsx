@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -122,6 +123,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </svg>
         </div>
         {children}
+        {/* Page views per route. Once the two languages are two routes, the
+           route split is the language split, which is the one question this
+           is here to answer. No cookie, no consent banner, ~1KB. */}
+        <Analytics />
       </body>
     </html>
   );
