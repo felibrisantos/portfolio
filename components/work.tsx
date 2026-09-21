@@ -40,8 +40,9 @@ export function Work() {
       variants={containerVariants}
       className="space-y-5 md:space-y-8"
       id="work"
+      aria-labelledby="work-heading"
     >
-      <SectionHead>{t.sections.featured}</SectionHead>
+      <SectionHead id="work-heading">{t.sections.featured}</SectionHead>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
         {PROJECTS.map((p, i) => {

@@ -6,12 +6,13 @@ import { maskRise, ruleDraw, useReveal } from "@/components/scroll-fx";
 /* The heading is the section announcing itself: the words rise behind a mask
    and the rule draws itself across. The rule is an element rather than a
    border-b so it can be animated with transform alone. */
-export function SectionHead({ children }: { children: React.ReactNode }) {
+export function SectionHead({ id, children }: { id: string; children: React.ReactNode }) {
   const reduce = useReducedMotion();
   const { initial, revealKey } = useReveal();
 
   return (
     <motion.h2
+      id={id}
       key={revealKey}
       initial={reduce ? false : initial}
       whileInView="show"

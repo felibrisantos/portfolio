@@ -23,8 +23,9 @@ export function StackSection() {
       variants={containerVariants}
       className="space-y-5 md:space-y-8"
       id="stack"
+      aria-labelledby="stack-heading"
     >
-      <SectionHead>{t.stackHeading}</SectionHead>
+      <SectionHead id="stack-heading">{t.stackHeading}</SectionHead>
 
       {/* 2 columns at md, 4 in one ruled row at lg. The rules only appear at lg,
           where every column shares a single row. */}

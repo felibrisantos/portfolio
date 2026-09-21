@@ -43,8 +43,9 @@ export function Research() {
       variants={sectionVariants}
       className="space-y-5 md:space-y-8"
       id="research"
+      aria-labelledby="research-heading"
     >
-      <SectionHead>{t.researchHeading}</SectionHead>
+      <SectionHead id="research-heading">{t.researchHeading}</SectionHead>
 
       <div className="bg-ink text-white border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] p-4 md:p-10 space-y-5 md:space-y-8">
         <div className="flex flex-wrap items-center gap-1.5 md:gap-2 font-code text-[10.5px] md:text-xs uppercase font-bold">

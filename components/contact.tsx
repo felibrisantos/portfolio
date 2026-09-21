@@ -63,8 +63,9 @@ export function Contact() {
       variants={containerVariants}
       className="space-y-5 md:space-y-8 md:pb-12"
       id="contact"
+      aria-labelledby="contact-heading"
     >
-      <SectionHead>{t.sections.contact}</SectionHead>
+      <SectionHead id="contact-heading">{t.sections.contact}</SectionHead>
 
       <motion.div
         variants={sectionVariants}

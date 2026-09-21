@@ -24,8 +24,9 @@ export function About() {
       variants={sectionVariants}
       className="space-y-5 md:space-y-8"
       id="about"
+      aria-labelledby="about-heading"
     >
-      <SectionHead>{t.sections.about}</SectionHead>
+      <SectionHead id="about-heading">{t.sections.about}</SectionHead>
       <div className="md:grid md:grid-cols-[280px_minmax(0,1fr)] md:gap-10 md:items-start">
         {/* Mobile keeps the portrait small: full width at 4:5 costs a whole
             viewport and pushes the prose under the fold. The block is capped at

@@ -83,6 +83,7 @@ export function Hero() {
     <motion.section
       ref={heroRef}
       id="hero"
+      aria-label={t.a11y.heroRegion}
       /* No reveal variant here. The hero is the first screen: it has to be in
          the served markup, not waiting on a bundle to be granted opacity. Its
          entrance is the CSS word rise, which runs without JavaScript. */

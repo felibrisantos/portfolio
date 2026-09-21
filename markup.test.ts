@@ -59,6 +59,28 @@ describe("the served page", () => {
     expect(html).not.toMatch(/Ambev/i);
   });
 
+  it("offers a bypass before anything else focusable", () => {
+    /* With two fixed headers and a bottom dock, the first tab stop without
+       this was the wordmark, seven stops from a word of content. */
+    const body = html.slice(html.indexOf("<body"));
+    const firstAnchor = body.indexOf("<a ");
+    expect(firstAnchor).toBeGreaterThan(-1);
+    const skip = body.slice(firstAnchor, firstAnchor + 400);
+    expect(skip).toContain('href="#top"');
+    expect(skip).toContain("sr-only");
+    expect(skip).toContain("focus:not-sr-only");
+  });
+
+  it("names every landmark region", () => {
+    const sections = html.match(/<section[^>]*>/g) ?? [];
+    for (const section of sections) {
+      expect(section).toMatch(/aria-label(ledby)?="/);
+    }
+    for (const nav of html.match(/<nav[^>]*>/g) ?? []) {
+      expect(nav).toMatch(/aria-label="/);
+    }
+  });
+
   it("declares a document language", () => {
     expect(html).toMatch(/<html[^>]+lang="[a-z-]+"/i);
   });

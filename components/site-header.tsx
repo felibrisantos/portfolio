@@ -28,7 +28,7 @@ export function SiteHeader() {
             Felipe Brigagão
           </a>
           <div className="flex items-center gap-6">
-            <nav className="flex items-center gap-6">
+            <nav aria-label={t.a11y.navPrimary} className="flex items-center gap-6">
               {NAV_LINKS.map((key) => (
                 <a
                   key={key}
@@ -91,7 +91,7 @@ export function SiteHeader() {
       </header>
 
       {/* MOBILE BOTTOM DOCK */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-white/95 backdrop-blur-md border-t-2 border-black">
+      <nav aria-label={t.a11y.navDock} className="md:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-white/95 backdrop-blur-md border-t-2 border-black">
         <div className="h-14 max-w-[430px] mx-auto px-2 flex items-center justify-between gap-1.5">
           {([
             { key: "work", Icon: Terminal },

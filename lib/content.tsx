@@ -32,6 +32,8 @@ export const COPY: Record<Lang, {
   /** Mobile hero. Stays under 20 words so the CTA survives the first fold. */
   positioningShort: string;
   nav: { work: string; research: string; about: string; stack: string; contact: string };
+  /** Names for things only assistive technology and the keyboard ever reach. */
+  a11y: { skip: string; navPrimary: string; navDock: string; heroRegion: string };
   /** One label per intent: every contact CTA uses cta.contact, every work CTA uses cta.work. */
   cta: { contact: string; work: string };
   /** Hint under the hero that the page continues below the fold. */
@@ -65,6 +67,12 @@ export const COPY: Record<Lang, {
     positioningShort:
       "Sistemas em produção para Heineken e FEMSA. Cheguei ao código pela modelagem estatística.",
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
+    a11y: {
+      skip: "Pular para o conteúdo",
+      navPrimary: "Seções",
+      navDock: "Atalhos de seção",
+      heroRegion: "Apresentação",
+    },
     cta: { contact: "Falar comigo", work: "Ver projetos" },
     scrollCue: "Role",
     notFound: {
@@ -107,6 +115,12 @@ export const COPY: Record<Lang, {
     positioningShort:
       "Systems in production for Heineken and FEMSA. I came to code through statistical modelling.",
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
+    a11y: {
+      skip: "Skip to content",
+      navPrimary: "Sections",
+      navDock: "Section shortcuts",
+      heroRegion: "Introduction",
+    },
     cta: { contact: "Get in touch", work: "See the work" },
     scrollCue: "Scroll",
     notFound: {
