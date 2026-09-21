@@ -5,7 +5,11 @@ type Bi = { pt: string; en: string };
 export const SITE = {
   name: "Felipe Brigagão",
   email: "felibrisantos@gmail.com",
-  location: "Jacareí, SP",
+  /* Legible to both readers as one string: the footer is the last server
+     component on the page and does not know the language. The time zone is
+     here because overlap is the hardest filter in a remote search, and
+     "Jacareí, SP" alone means nothing to a reader outside Brazil. */
+  location: "Jacareí, Brasil (UTC−3)",
   social: {
     linkedin: "https://linkedin.com/in/felibrisantos",
     github: "https://github.com/felibrisantos",
@@ -71,7 +75,7 @@ export const COPY: Record<Lang, {
     projectAccess: "Acesso restrito",
     contactActions: { copy: "Copiar", copied: "Copiado", compose: "Escrever" },
     availability:
-      "Aberto a posições fullstack e a projetos de IA em produção.",
+      "Aberto a posições fullstack remotas e a projetos de IA em produção.",
     sections: { featured: "Trabalho", about: "Sobre", stack: "Stack", contact: "Contato" },
     researchHeading: "Pesquisa",
     aboutP1:
@@ -79,7 +83,7 @@ export const COPY: Record<Lang, {
     aboutP2:
       "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Trabalho nas duas pontas, e a parte de IA foi a que me cobrou esse mesmo rigor: cada prompt é um arquivo versionado, e nenhuma versão nova substitui a ativa sem passar por um gate de avaliação. Sem medir, o que sobra é impressão de que melhorou.",
     aboutP3:
-      "Tenho pouco tempo de carreira. O que escrevi já está em produção, com gente usando todo dia.",
+      "O que escrevi já está em produção, com gente usando todo dia. Faço isso há um ano.",
     portraitAlt: "Retrato em preto e branco de Felipe Brigagão.",
     stackHeading: "Stack",
     paperTitle: (
@@ -113,7 +117,7 @@ export const COPY: Record<Lang, {
     projectAccess: "Restricted access",
     contactActions: { copy: "Copy", copied: "Copied", compose: "Compose" },
     availability:
-      "Open to fullstack roles and AI-in-production projects.",
+      "Open to remote fullstack roles and AI-in-production projects.",
     sections: { featured: "Work", about: "About", stack: "Stack", contact: "Contact" },
     researchHeading: "Research",
     aboutP1:
@@ -121,7 +125,7 @@ export const COPY: Record<Lang, {
     aboutP2:
       "Today I am a fullstack developer at Abdou, in Jacareí. I work on both ends, and the AI side is the one that demanded that same rigour: every prompt is a versioned file, and no new version replaces the active one without passing an evaluation gate. Without measuring, all you have is the impression that it got better.",
     aboutP3:
-      "I am early in my career. What I wrote is already in production, with people using it every day.",
+      "What I wrote is already in production, with people using it every day. I have been doing it for a year.",
     portraitAlt: "Black and white portrait of Felipe Brigagão.",
     stackHeading: "Stack",
     paperTitle: (

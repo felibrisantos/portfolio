@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://brigagao.dev"),
   title: "Felipe Brigagão — Desenvolvedor fullstack",
   description:
-    "Desenvolvedor fullstack na Abdou, em Jacareí. Sistemas em produção para Heineken, Ambev e FEMSA. Artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
+    "Desenvolvedor fullstack na Abdou, em Jacareí. Sistemas em produção para Heineken e FEMSA. Artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Felipe Brigagão — Desenvolvedor fullstack",
