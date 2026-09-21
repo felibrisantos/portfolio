@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
-import { RESUME } from "@/lib/content";
+import { CONTENT_UPDATED, RESUME } from "@/lib/content";
+import { langUrl } from "@/lib/lang";
 
 /**
  * Seam 1: what the build actually emits.
@@ -107,8 +108,51 @@ describe.each(ROUTES)("the page served at $path", ({ lang, path, htmlLang }) => 
     expect(html).toMatch(new RegExp(`<html[^>]+lang="${htmlLang}"`, "i"));
   });
 
+  it("points a canonical at itself", () => {
+    expect(html).toContain(`<link rel="canonical" href="${langUrl(lang)}"/>`);
+  });
+
+  it("declares both languages as alternates, and a default", () => {
+    /* Reciprocal by construction: both routes emit the same map, so the two
+       cannot drift apart into each claiming to be the only version. */
+    expect(html).toMatch(new RegExp(`hreflang="en" href="${langUrl("en")}"`, "i"));
+    expect(html).toMatch(new RegExp(`hreflang="pt-BR" href="${langUrl("pt")}"`, "i"));
+    expect(html).toMatch(new RegExp(`hreflang="x-default" href="${langUrl("en")}"`, "i"));
+  });
+
   it("offers the language control as a link to the other route", () => {
     const other = lang === "en" ? "/pt" : "/";
     expect(html).toMatch(new RegExp(`href="${other === "/" ? "/" : other}"[^>]*hreflang=`, "i"));
+  });
+});
+
+describe("the sitemap", () => {
+  const FILE = ".next/server/app/sitemap.xml.body";
+  let xml = "";
+
+  beforeAll(() => {
+    if (!existsSync(FILE)) throw new Error(`${FILE} not found. Build before testing.`);
+    xml = readFileSync(FILE, "utf8");
+  });
+
+  it("lists both languages", () => {
+    expect(xml).toContain(`<loc>${langUrl("en")}</loc>`);
+    expect(xml).toContain(`<loc>${langUrl("pt")}</loc>`);
+  });
+
+  it("gives every entry the same reciprocal alternates", () => {
+    expect(xml.match(/hreflang="en"/g) ?? []).toHaveLength(2);
+    expect(xml.match(/hreflang="pt-BR"/g) ?? []).toHaveLength(2);
+  });
+
+  it("dates entries by the content, not by the build", () => {
+    /* `new Date()` here told crawlers every page changed on every deploy.
+       Asserted as an exact equality on every entry rather than as "not
+       today", which would be a test that only fails on some days. */
+    const stamps = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
+    expect(stamps).toHaveLength(2);
+    for (const stamp of stamps) {
+      expect(stamp).toBe(new Date(CONTENT_UPDATED).toISOString());
+    }
   });
 });

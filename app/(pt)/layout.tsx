@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import { DocumentShell } from "@/components/document-shell";
 import { COPY, SITE } from "@/lib/content";
+import { alternatesFor, langUrl, SITE_URL } from "@/lib/lang";
 import "../globals.css";
 
 /* The Portuguese route. English is the root; see docs/adr/0001. */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://brigagao.dev"),
+  metadataBase: new URL(SITE_URL),
+  alternates: alternatesFor("pt"),
   title: COPY.pt.meta.title,
   description: COPY.pt.meta.description,
   openGraph: {
     title: COPY.pt.meta.title,
     description: COPY.pt.meta.description,
-    url: "https://brigagao.dev/pt",
+    url: langUrl("pt"),
     siteName: SITE.name,
     locale: "pt_BR",
     type: "website",

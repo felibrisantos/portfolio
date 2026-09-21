@@ -2,6 +2,13 @@ import type { Lang } from "./lang";
 
 type Bi = { pt: string; en: string };
 
+/**
+ * When the copy last actually changed. Hand-maintained on purpose: the build
+ * clock told crawlers the site changed on every rebuild, which is a claim
+ * they learn to stop believing.
+ */
+export const CONTENT_UPDATED = "2026-09-20";
+
 export const SITE = {
   name: "Felipe Brigagão",
   email: "felibrisantos@gmail.com",
