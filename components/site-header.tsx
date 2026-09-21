@@ -33,7 +33,7 @@ export function SiteHeader() {
                 <a
                   key={key}
                   aria-current={activeSection === key ? "true" : undefined}
-                  className={`font-code text-xs uppercase font-bold tracking-wider transition-all hover:translate-y-[-1px] ${
+                  className={`font-code text-xs uppercase font-bold tracking-wider py-2.5 transition-all hover:translate-y-[-1px] ${
                     activeSection === key
                       ? "text-primary underline decoration-primary decoration-2 underline-offset-[7px]"
                       : "text-black hover:text-primary"
@@ -47,7 +47,7 @@ export function SiteHeader() {
             <div className="flex items-center border-l-[2px] border-black pl-4 gap-2 font-code text-xs uppercase font-bold">
               <button
                 aria-pressed={lang === "pt"}
-                className={`${lang === "pt" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
+                className={`px-1.5 py-2.5 ${lang === "pt" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
                 onClick={() => lang !== "pt" && toggle()}
                 type="button"
               >
@@ -56,7 +56,7 @@ export function SiteHeader() {
               <span className="text-slate-400">/</span>
               <button
                 aria-pressed={lang === "en"}
-                className={`${lang === "en" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
+                className={`px-1.5 py-2.5 ${lang === "en" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
                 onClick={() => lang !== "en" && toggle()}
                 type="button"
               >
@@ -80,7 +80,7 @@ export function SiteHeader() {
           <button
             onClick={toggle}
             aria-label={lang === "pt" ? "Mudar para inglês" : "Switch to Portuguese"}
-            className="h-7 px-2.5 bg-white neo-border-sm neo-shadow-dark-sm font-code text-[11px] font-bold text-black hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            className="h-11 px-3.5 bg-white neo-border-sm neo-shadow-dark-sm font-code text-[11px] font-bold text-black hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
             type="button"
           >
             {lang === "pt" ? "EN" : "PT"}
@@ -102,7 +102,7 @@ export function SiteHeader() {
             <a
               key={key}
               aria-current={activeSection === key ? "true" : undefined}
-              className={`flex-1 h-10 flex flex-col items-center justify-center gap-0.5 neo-border-sm border-black font-code text-[10.5px] font-bold uppercase active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all ${
+              className={`flex-1 h-11 flex flex-col items-center justify-center gap-0.5 neo-border-sm border-black font-code text-[10.5px] font-bold uppercase active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all ${
                 activeSection === key
                   ? "bg-primary text-white neo-shadow-dark-sm"
                   : "bg-white text-black hover:bg-slate-100"

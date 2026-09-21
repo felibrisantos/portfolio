@@ -118,7 +118,7 @@ export function Work() {
                     />
                   </a>
                 ) : (
-                  <span className="font-bold text-black/45">{t.projectAccess}</span>
+                  <span className="font-bold text-on-surface-muted">{t.projectAccess}</span>
                 )}
               </div>
             </motion.article>

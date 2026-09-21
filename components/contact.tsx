@@ -17,7 +17,7 @@ const CARD_VALUE =
 const CARD_FOOT =
   "shrink-0 flex items-center gap-1.5 lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:justify-end";
 const CARD_ACTION =
-  "btn-mechanical-sm inline-flex items-center gap-1.5 px-2 py-1.5 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase";
+  "btn-mechanical-sm inline-flex items-center justify-center gap-1.5 min-h-11 px-3 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase";
 
 /* CONTACT. Layout family: closing anchor card. */
 export function Contact() {

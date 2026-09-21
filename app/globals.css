@@ -14,6 +14,10 @@
      are the same black and should stay the same black. */
   --color-ink: #0d0f14;
   --color-on-surface: #0f172a;
+  /* Muted text that still clears AA on the strips: 6.92:1 on slate-100.
+     `text-black/45` used to sit here at 3.29:1, on the label four of the
+     five project cards show. */
+  --color-on-surface-muted: #475569;
 
   --color-primary: #0038FF;
   --color-primary-hover: #0028c2;
