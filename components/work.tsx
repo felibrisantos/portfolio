@@ -8,7 +8,6 @@ import { useContainerVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* WORK. Layout family: asymmetric card grid, first entry featured. */
-/* TODO: one cropped screenshot per project (16:10). Needs cleared assets. */
 export function Work() {
   const { lang } = useLang();
   const t = COPY[lang];

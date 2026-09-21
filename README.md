@@ -35,10 +35,6 @@ PT and EN are kept in parity by hand. Every string added in one language needs i
 - The research block is the page's only theme inversion. On that dark surface the accent is `#5B8CFF`, not `#0038FF`, which fails contrast there.
 - `positioningShort` exists so the mobile hero CTA stays above the fold. Keep it under 20 words.
 
-## Missing
-
-Project screenshots. Placement is marked with a `TODO` comment in `components/work.tsx`.
-
 ## Structure
 
 ```text
