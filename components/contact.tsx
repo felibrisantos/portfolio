@@ -9,7 +9,7 @@ import { SectionHead } from "@/components/section-head";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const CARD_SHELL =
-  "bg-white border-[2px] md:border-[2.5px] border-black neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_#0038FF] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0";
+  "bg-white border-[2px] md:border-[2.5px] border-black neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_var(--color-primary)] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0";
 const CARD_LABEL =
   "font-code text-[10.5px] md:text-xs text-black/70 uppercase tracking-wider font-bold";
 const CARD_VALUE =
@@ -66,7 +66,7 @@ export function Contact() {
 
       <motion.div
         variants={sectionVariants}
-        className="bg-white border-[2.5px] md:border-[3px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-12 space-y-5 md:space-y-8"
+        className="bg-white border-[2.5px] md:border-[3px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] p-4 md:p-12 space-y-5 md:space-y-8"
       >
         <p className="font-body text-[14px] md:text-lg text-black/85 max-w-2xl leading-relaxed">
           {t.availability}
@@ -90,7 +90,7 @@ export function Contact() {
                 onClick={copyEmail}
                 aria-label={`${t.contactActions.copy} ${SITE.email}`}
                 className={`${CARD_ACTION} ${
-                  copied ? "bg-black text-white" : "bg-[#0038FF] text-white hover:bg-[#0028c2]"
+                  copied ? "bg-black text-white" : "bg-primary text-white hover:bg-primary-hover"
                 }`}
               >
                 {copied ? <Check size={13} strokeWidth={3} /> : <Copy size={13} strokeWidth={2.5} />}
@@ -120,11 +120,11 @@ export function Contact() {
             >
               <span className="flex flex-col min-w-0">
                 <span className={CARD_LABEL}>{label}</span>
-                <span className={`${CARD_VALUE} group-hover:text-[#0038FF] transition-colors`}>
+                <span className={`${CARD_VALUE} group-hover:text-primary transition-colors`}>
                   {value}
                 </span>
               </span>
-              <span className={`${CARD_FOOT} text-[#0038FF]`}>
+              <span className={`${CARD_FOOT} text-primary`}>
                 <ArrowUpRight
                   size={16}
                   strokeWidth={3}

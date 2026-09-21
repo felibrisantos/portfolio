@@ -100,7 +100,7 @@ export function Hero() {
       variants={sectionVariants}
       className="flex flex-col pt-2 md:pt-0 min-h-[calc(100dvh-190px-max(12px,env(safe-area-inset-bottom,12px)))] md:min-h-[calc(100dvh-232px)]"
     >
-      <div className="hidden md:block my-auto p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_#0038FF]">
+      <div className="hidden md:block my-auto p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_var(--color-primary)] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_var(--color-primary)]">
         <div className="space-y-4">
           <motion.h1
             variants={wordContainer}
@@ -117,13 +117,13 @@ export function Hero() {
             </motion.span>{" "}
             <motion.span style={{ x: driftRight }} className="inline-block">
               <motion.span variants={wordRise} className="inline-block">
-                <span className="text-[#0038FF] italic underline decoration-[#0038FF] decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
+                <span className="text-primary italic underline decoration-primary decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
                   BRIGAGÃO
                 </span>
               </motion.span>
             </motion.span>
           </motion.h1>
-          <p className="font-display text-3xl text-[#0038FF] font-bold tracking-tight uppercase">
+          <p className="font-display text-3xl text-primary font-bold tracking-tight uppercase">
             {t.role}
           </p>
           <p className="font-body text-lg text-black/85 leading-relaxed max-w-3xl pt-2">
@@ -133,13 +133,13 @@ export function Hero() {
 
         <div className="mt-8 pt-8 border-t-[2.5px] border-black flex flex-wrap items-center gap-3">
           <MagneticCta
-            className="btn-magnetic flex items-center justify-center gap-2 py-3.5 px-6 bg-[#0038FF] text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-[#0028c2] [box-shadow:4px_4px_0px_#0038FF] whitespace-nowrap"
+            className="btn-magnetic flex items-center justify-center gap-2 py-3.5 px-6 bg-primary text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-primary-hover [box-shadow:4px_4px_0px_var(--color-primary)] whitespace-nowrap"
             href="#contact"
           >
             {t.cta.contact} <ArrowRight size={18} strokeWidth={2.5} />
           </MagneticCta>
           <a
-            className="btn-mechanical py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-black font-bold hover:bg-slate-100 [box-shadow:3px_3px_0px_#0038FF] whitespace-nowrap"
+            className="btn-mechanical py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-black font-bold hover:bg-slate-100 [box-shadow:3px_3px_0px_var(--color-primary)] whitespace-nowrap"
             href="#work"
           >
             {t.cta.work}
@@ -159,7 +159,7 @@ export function Hero() {
           </motion.span>{" "}
           <br />
           <motion.span variants={wordRise} className="inline-block">
-            <span className="italic text-[#0038FF] font-black leading-[1.1] inline-block pb-1">
+            <span className="italic text-primary font-black leading-[1.1] inline-block pb-1">
               BRIGAGÃO
             </span>
           </motion.span>
@@ -173,7 +173,7 @@ export function Hero() {
 
         <div className="flex flex-col gap-2.5 w-full">
           <a
-            className="w-full h-11 flex items-center justify-center gap-2 bg-[#0038FF] text-white font-code text-[12.5px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            className="w-full h-11 flex items-center justify-center gap-2 bg-primary text-white font-code text-[12.5px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
             href="#contact"
           >
             <span>{t.cta.contact}</span>
@@ -196,7 +196,7 @@ export function Hero() {
         <motion.span
           animate={reduce ? undefined : { y: [0, 6, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="flex text-[#0038FF]"
+          className="flex text-primary"
         >
           <ArrowRight size={17} strokeWidth={3} className="rotate-90" />
         </motion.span>

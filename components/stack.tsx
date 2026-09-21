@@ -33,7 +33,7 @@ export function StackSection() {
             key={s.category.en}
             className="flex flex-col gap-2 lg:px-6 lg:first:pl-0 lg:last:pr-0"
           >
-            <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase tracking-wider">
+            <span className="font-code text-[11px] md:text-xs font-bold text-primary uppercase tracking-wider">
               {s.category[lang]}
             </span>
             {/* Mobile keeps one line per category. The ruled list is tall enough

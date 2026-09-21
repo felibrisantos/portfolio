@@ -108,7 +108,7 @@ const schemaGraph = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable} scroll-smooth`}>
-      <body className="bg-grid-pattern font-body text-[#0f172a] antialiased selection:bg-[#0038FF] selection:text-white">
+      <body className="bg-grid-pattern font-body text-on-surface antialiased selection:bg-primary selection:text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}

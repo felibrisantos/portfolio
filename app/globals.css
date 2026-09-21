@@ -1,20 +1,27 @@
 @import "tailwindcss";
 
 @theme {
+  /* The page itself. Cards stay on `bg-white` and strips on the slate
+     scale: those read fine as they are, and an alias would be indirection
+     with nothing behind it. */
   --color-background: #f8fafc;
-  --color-surface: #ffffff;
-  --color-surface-low: #f1f5f9;
   --color-surface-muted: #e2e8f0;
+  /* The dot of the page's grid pattern. */
+  --color-dot: #cbd5e1;
+
+  /* Ink carries two jobs: every rule and border on the light page, and the
+     single inverted surface in the research block. One value, because they
+     are the same black and should stay the same black. */
+  --color-ink: #0d0f14;
   --color-on-surface: #0f172a;
-  --color-on-surface-variant: #334155;
+
   --color-primary: #0038FF;
-  --color-primary-container: #0038FF;
-  --color-navy-border: #0038FF;
-  --color-accent-blue: #eff6ff;
-  --color-accent-highlight: #0038FF;
+  --color-primary-hover: #0028c2;
+  /* The accent for the inverted surface. The primary fails contrast on ink,
+     so the dark block gets its own lighter blue rather than a shared one. */
+  --color-on-ink-accent: #5B8CFF;
 
   --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
-  --font-headline: var(--font-space-grotesk), "Space Grotesk", sans-serif;
   --font-body: var(--font-inter), "Inter", sans-serif;
   --font-code: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
 }
@@ -23,7 +30,7 @@
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #f8fafc;
+    background-color: var(--color-background);
   }
   /* The scroll container for useScroll(). Static would leave framer-motion
      measuring a target's offset against an element it never reaches. */
@@ -55,25 +62,25 @@
   main > :last-child { margin-bottom: 0 !important; }
 }
 
-/* KEYBOARD FOCUS: black outline reads on both white and #0038FF surfaces */
+/* KEYBOARD FOCUS: black outline reads on both white and var(--color-primary) surfaces */
 :focus-visible {
-  outline: 3px solid #0d0f14;
+  outline: 3px solid var(--color-ink);
   outline-offset: 2px;
-  box-shadow: 0 0 0 6px rgb(0 56 255 / 0.3) !important;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-primary) 30%, transparent) !important;
 }
 
 /* SCROLLBAR: styled, not hidden - position feedback is orientation */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #0038FF #e2e8f0;
+  scrollbar-color: var(--color-primary) var(--color-surface-muted);
 }
 ::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-track { background: #e2e8f0; }
-::-webkit-scrollbar-thumb { background: #0038FF; border: 2px solid #e2e8f0; }
+::-webkit-scrollbar-track { background: var(--color-surface-muted); }
+::-webkit-scrollbar-thumb { background: var(--color-primary); border: 2px solid var(--color-surface-muted); }
 
 .bg-grid-pattern {
-  background-color: #f8fafc;
-  background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+  background-color: var(--color-background);
+  background-image: radial-gradient(var(--color-dot) 1.2px, transparent 1.2px);
   background-size: 24px 24px;
 }
 
@@ -88,7 +95,7 @@
 }
 .btn-mechanical:hover {
   transform: translate(-3px, -3px);
-  box-shadow: 6px 6px 0px #0038FF;
+  box-shadow: 6px 6px 0px var(--color-primary);
 }
 .btn-mechanical:active {
   transform: translate(2px, 2px);
@@ -100,7 +107,7 @@
 }
 .btn-mechanical-sm:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px #0038FF;
+  box-shadow: 4px 4px 0px var(--color-primary);
 }
 .btn-mechanical-sm:active {
   transform: translate(1.5px, 1.5px);
@@ -113,10 +120,10 @@
   transition: box-shadow 0.16s var(--mechanical-ease), background-color 0.16s ease;
 }
 .btn-magnetic:hover {
-  box-shadow: 7px 7px 0px #0038FF;
+  box-shadow: 7px 7px 0px var(--color-primary);
 }
 .btn-magnetic:active {
-  box-shadow: 2px 2px 0px #0038FF;
+  box-shadow: 2px 2px 0px var(--color-primary);
 }
 
 /* CARD LIFT ON HOVER */
@@ -125,29 +132,20 @@
 }
 .card-mechanical:hover {
   transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0px #0038FF;
+  box-shadow: 9px 9px 0px var(--color-primary);
 }
 
-/* TAG PILLS INVERT ON HOVER */
-.tag-pill {
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
-.tag-pill:hover {
-  background-color: #0038FF;
-  color: #ffffff;
-  border-color: #0038FF;
-}
 
 /* MOBILE UTILITIES */
 .pb-safe { padding-bottom: max(12px, env(safe-area-inset-bottom, 12px)); }
 .pt-safe { padding-top: max(10px, env(safe-area-inset-top, 10px)); }
-.neo-shadow-blue { box-shadow: 4px 4px 0px 0px #0038FF; }
-.neo-shadow-blue-sm { box-shadow: 2.5px 2.5px 0px 0px #0038FF; }
-.neo-shadow-dark { box-shadow: 3.5px 3.5px 0px 0px #0d0f14; }
-.neo-shadow-dark-sm { box-shadow: 2px 2px 0px 0px #0d0f14; }
-.neo-border { border: 2px solid #0d0f14; }
-.neo-border-blue { border: 2px solid #0038FF; }
-.neo-border-sm { border: 1.5px solid #0d0f14; }
+.neo-shadow-blue { box-shadow: 4px 4px 0px 0px var(--color-primary); }
+.neo-shadow-blue-sm { box-shadow: 2.5px 2.5px 0px 0px var(--color-primary); }
+.neo-shadow-dark { box-shadow: 3.5px 3.5px 0px 0px var(--color-ink); }
+.neo-shadow-dark-sm { box-shadow: 2px 2px 0px 0px var(--color-ink); }
+.neo-border { border: 2px solid var(--color-ink); }
+
+.neo-border-sm { border: 1.5px solid var(--color-ink); }
 
 /* ACCESSIBILITY: REDUCED MOTION.
    Only animation and transition are neutralised. `transform: none` is NOT
@@ -160,15 +158,3 @@
     scroll-behavior: auto !important;
   }
 }
-
-/* STAGGERED PAGE ENTRANCE KEYFRAMES */
-@keyframes mechanical-rise {
-  from { opacity: 0; transform: translateY(22px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-rise-1 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.05s both; }
-.animate-rise-2 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.12s both; }
-.animate-rise-3 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.20s both; }
-.animate-rise-4 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.28s both; }
-.animate-rise-5 { animation: mechanical-rise 0.5s var(--mechanical-ease) 0.36s both; }

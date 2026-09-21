@@ -19,10 +19,10 @@ export function SiteHeader() {
   return (
     <>
       {/* DESKTOP HEADER */}
-      <header className="hidden md:flex fixed top-0 left-0 w-full z-50 bg-white border-b-[2.5px] border-black [box-shadow:0px_3px_0px_#0038FF]">
+      <header className="hidden md:flex fixed top-0 left-0 w-full z-50 bg-white border-b-[2.5px] border-black [box-shadow:0px_3px_0px_var(--color-primary)]">
         <div className="h-16 w-full max-w-[1400px] mx-auto px-4 md:px-8 flex items-center justify-between">
           <a
-            className="font-display text-lg md:text-xl uppercase tracking-tight text-[#0038FF] hover:text-[#0028c2] transition-colors font-bold"
+            className="font-display text-lg md:text-xl uppercase tracking-tight text-primary hover:text-primary-hover transition-colors font-bold"
             href="#top"
           >
             Felipe Brigagão
@@ -35,8 +35,8 @@ export function SiteHeader() {
                   aria-current={activeSection === key ? "true" : undefined}
                   className={`font-code text-xs uppercase font-bold tracking-wider transition-all hover:translate-y-[-1px] ${
                     activeSection === key
-                      ? "text-[#0038FF] underline decoration-[#0038FF] decoration-2 underline-offset-[7px]"
-                      : "text-black hover:text-[#0038FF]"
+                      ? "text-primary underline decoration-primary decoration-2 underline-offset-[7px]"
+                      : "text-black hover:text-primary"
                   }`}
                   href={`#${key}`}
                 >
@@ -47,7 +47,7 @@ export function SiteHeader() {
             <div className="flex items-center border-l-[2px] border-black pl-4 gap-2 font-code text-xs uppercase font-bold">
               <button
                 aria-pressed={lang === "pt"}
-                className={`${lang === "pt" ? "text-[#0038FF]" : "text-slate-600"} hover:text-black transition-colors`}
+                className={`${lang === "pt" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
                 onClick={() => lang !== "pt" && toggle()}
                 type="button"
               >
@@ -56,7 +56,7 @@ export function SiteHeader() {
               <span className="text-slate-400">/</span>
               <button
                 aria-pressed={lang === "en"}
-                className={`${lang === "en" ? "text-[#0038FF]" : "text-slate-600"} hover:text-black transition-colors`}
+                className={`${lang === "en" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
                 onClick={() => lang !== "en" && toggle()}
                 type="button"
               >
@@ -87,7 +87,7 @@ export function SiteHeader() {
           </button>
         </div>
         {/* No blue line under the mobile header, so here the rail is the blue. */}
-        <ScrollRail className="absolute left-0 bottom-0 h-[2px] w-full bg-[#0038FF]" />
+        <ScrollRail className="absolute left-0 bottom-0 h-[2px] w-full bg-primary" />
       </header>
 
       {/* MOBILE BOTTOM DOCK */}
@@ -104,7 +104,7 @@ export function SiteHeader() {
               aria-current={activeSection === key ? "true" : undefined}
               className={`flex-1 h-10 flex flex-col items-center justify-center gap-0.5 neo-border-sm border-black font-code text-[10.5px] font-bold uppercase active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all ${
                 activeSection === key
-                  ? "bg-[#0038FF] text-white neo-shadow-dark-sm"
+                  ? "bg-primary text-white neo-shadow-dark-sm"
                   : "bg-white text-black hover:bg-slate-100"
               }`}
               href={`#${key}`}

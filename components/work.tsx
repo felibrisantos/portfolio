@@ -50,12 +50,12 @@ export function Work() {
               key={p.id}
               custom={i}
               variants={cardVariants}
-              className={`card-mechanical bg-white neo-border md:border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col ${
+              className={`card-mechanical bg-white neo-border md:border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] flex flex-col ${
                 featured ? "lg:col-span-2" : ""
               }`}
             >
               <div className="border-b-2 border-black bg-slate-100 px-3 py-2 md:px-5 md:py-3 flex items-center justify-between gap-3 font-code text-[10.5px] md:text-xs uppercase">
-                <span className="px-2 py-0.5 bg-[#0038FF] text-white font-bold border border-black">
+                <span className="px-2 py-0.5 bg-primary text-white font-bold border border-black">
                   {p.tag[lang]}
                 </span>
                 <span className="text-black/70 font-bold shrink-0">{p.year}</span>
@@ -87,7 +87,7 @@ export function Work() {
                 </div>
 
                 {p.outcome && (
-                  <p className="p-2.5 md:p-3.5 bg-slate-50 border-l-[4px] border-[#0038FF] font-code text-[12.5px] md:text-sm text-black font-semibold leading-snug">
+                  <p className="p-2.5 md:p-3.5 bg-slate-50 border-l-[4px] border-primary font-code text-[12.5px] md:text-sm text-black font-semibold leading-snug">
                     {p.outcome[lang]}
                   </p>
                 )}
@@ -103,7 +103,7 @@ export function Work() {
                     why not, which is what silence here would fail to say. */}
                 {p.href ? (
                   <a
-                    className="group inline-flex items-center gap-1 font-bold text-[#0038FF] normal-case hover:underline underline-offset-4"
+                    className="group inline-flex items-center gap-1 font-bold text-primary normal-case hover:underline underline-offset-4"
                     href={p.href}
                     rel="noopener noreferrer"
                     target="_blank"

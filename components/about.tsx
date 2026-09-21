@@ -35,9 +35,9 @@ export function About() {
             width={1000}
             height={1250}
             sizes="(min-width: 768px) 280px, 176px"
-            className="w-full h-auto border-[2.5px] md:border-[3px] border-black [box-shadow:4px_4px_0px_#0038FF] md:[box-shadow:6px_6px_0px_#0038FF] transition-shadow duration-300 md:hover:[box-shadow:8px_8px_0px_#0038FF]"
+            className="w-full h-auto border-[2.5px] md:border-[3px] border-black [box-shadow:4px_4px_0px_var(--color-primary)] md:[box-shadow:6px_6px_0px_var(--color-primary)] transition-shadow duration-300 md:hover:[box-shadow:8px_8px_0px_var(--color-primary)]"
           />
-          <p className="mt-3 md:mt-4 font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase tracking-wider">
+          <p className="mt-3 md:mt-4 font-code text-[11px] md:text-xs font-bold text-primary uppercase tracking-wider">
             {SITE.location}
           </p>
           {/* Ruled rows, not the contact cards: contact already renders these
@@ -53,7 +53,7 @@ export function About() {
                   target="_blank"
                 >
                   <span className="text-black/70 uppercase tracking-wider font-bold">{label}</span>
-                  <span className="flex items-center gap-1 min-w-0 text-black font-medium group-hover:text-[#0038FF] transition-colors">
+                  <span className="flex items-center gap-1 min-w-0 text-black font-medium group-hover:text-primary transition-colors">
                     <span className="truncate">{value}</span>
                     <ArrowUpRight
                       size={12}

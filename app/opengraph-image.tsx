@@ -1,3 +1,4 @@
+import { PALETTE } from "@/lib/palette";
 import { ImageResponse } from "next/og";
 
 export const alt = "Felipe Brigagão — Desenvolvedor fullstack";
@@ -15,8 +16,8 @@ export default function OgImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          backgroundColor: "#f8fafc",
-          backgroundImage: "radial-gradient(#cbd5e1 1.2px, transparent 1.2px)",
+          backgroundColor: PALETTE.background,
+          backgroundImage: `radial-gradient(${PALETTE.dot} 1.2px, transparent 1.2px)`,
           backgroundSize: "24px 24px",
           padding: 56,
         }}
@@ -30,7 +31,7 @@ export default function OgImage() {
               top: 16,
               width: 1072,
               height: 502,
-              backgroundColor: "#0038FF",
+              backgroundColor: PALETTE.primary,
             }}
           />
           <div
@@ -41,8 +42,8 @@ export default function OgImage() {
               top: 0,
               width: 1088,
               height: 518,
-              backgroundColor: "#ffffff",
-              border: "6px solid #0d0f14",
+              backgroundColor: PALETTE.surface,
+              border: `6px solid ${PALETTE.ink}`,
               padding: 56,
               flexDirection: "column",
               justifyContent: "space-between",
@@ -56,7 +57,7 @@ export default function OgImage() {
                   fontWeight: 800,
                   letterSpacing: "-3px",
                   lineHeight: 1.02,
-                  color: "#0d0f14",
+                  color: PALETTE.ink,
                 }}
               >
                 FELIPE
@@ -68,7 +69,7 @@ export default function OgImage() {
                   fontWeight: 800,
                   letterSpacing: "-3px",
                   lineHeight: 1.02,
-                  color: "#0038FF",
+                  color: PALETTE.primary,
                 }}
               >
                 BRIGAGÃO
@@ -79,13 +80,13 @@ export default function OgImage() {
                   fontSize: 33,
                   fontWeight: 700,
                   letterSpacing: "1px",
-                  color: "#0038FF",
+                  color: PALETTE.primary,
                   marginTop: 28,
                 }}
               >
                 DESENVOLVEDOR FULLSTACK
               </div>
-              <div style={{ display: "flex", width: 180, height: 10, backgroundColor: "#0d0f14", marginTop: 28 }} />
+              <div style={{ display: "flex", width: 180, height: 10, backgroundColor: PALETTE.ink, marginTop: 28 }} />
             </div>
             <div
               style={{
@@ -93,10 +94,10 @@ export default function OgImage() {
                 justifyContent: "space-between",
                 fontSize: 22,
                 letterSpacing: "2px",
-                color: "#475569",
+                color: PALETTE.onSurfaceMuted,
               }}
             >
-              <div style={{ display: "flex", color: "#0d0f14", fontWeight: 700 }}>brigagao.dev</div>
+              <div style={{ display: "flex", color: PALETTE.ink, fontWeight: 700 }}>brigagao.dev</div>
               <div style={{ display: "flex" }}>JACAREÍ, SP — BRASIL</div>
             </div>
           </div>
