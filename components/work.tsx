@@ -3,16 +3,15 @@
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { COPY, hrefLabel, PROJECTS } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
-import { useContainerVariants } from "@/components/scroll-fx";
+import type { Lang } from "@/lib/lang";
+import { useContainerVariants, useReveal } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* WORK. Layout family: asymmetric card grid, first entry featured. */
-/* TODO: one cropped screenshot per project (16:10). Needs cleared assets. */
-export function Work() {
-  const { lang } = useLang();
+export function Work({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const reduce = useReducedMotion();
+  const { initial, revealKey } = useReveal();
   const containerVariants = useContainerVariants();
 
   /* Project cards lock into the grid from alternating sides instead of all
@@ -33,14 +32,16 @@ export function Work() {
 
   return (
     <motion.section
-      initial="hidden"
+      key={revealKey}
+      initial={reduce ? false : initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
       className="space-y-5 md:space-y-8"
       id="work"
+      aria-labelledby="work-heading"
     >
-      <SectionHead>{t.sections.featured}</SectionHead>
+      <SectionHead id="work-heading">{t.sections.featured}</SectionHead>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
         {PROJECTS.map((p, i) => {
@@ -50,12 +51,12 @@ export function Work() {
               key={p.id}
               custom={i}
               variants={cardVariants}
-              className={`card-mechanical bg-white neo-border md:border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] flex flex-col ${
+              className={`card-mechanical bg-white neo-border md:border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] flex flex-col ${
                 featured ? "lg:col-span-2" : ""
               }`}
             >
               <div className="border-b-2 border-black bg-slate-100 px-3 py-2 md:px-5 md:py-3 flex items-center justify-between gap-3 font-code text-[10.5px] md:text-xs uppercase">
-                <span className="px-2 py-0.5 bg-[#0038FF] text-white font-bold border border-black">
+                <span className="px-2 py-0.5 bg-primary text-white font-bold border border-black">
                   {p.tag[lang]}
                 </span>
                 <span className="text-black/70 font-bold shrink-0">{p.year}</span>
@@ -87,7 +88,7 @@ export function Work() {
                 </div>
 
                 {p.outcome && (
-                  <p className="p-2.5 md:p-3.5 bg-slate-50 border-l-[4px] border-[#0038FF] font-code text-[12.5px] md:text-sm text-black font-semibold leading-snug">
+                  <p className="p-2.5 md:p-3.5 bg-slate-50 border-l-[4px] border-primary font-code text-[12.5px] md:text-sm text-black font-semibold leading-snug">
                     {p.outcome[lang]}
                   </p>
                 )}
@@ -103,7 +104,7 @@ export function Work() {
                     why not, which is what silence here would fail to say. */}
                 {p.href ? (
                   <a
-                    className="group inline-flex items-center gap-1 font-bold text-[#0038FF] normal-case hover:underline underline-offset-4"
+                    className="group inline-flex items-center gap-1 font-bold text-primary normal-case hover:underline underline-offset-4"
                     href={p.href}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -116,7 +117,7 @@ export function Work() {
                     />
                   </a>
                 ) : (
-                  <span className="font-bold text-black/45">{t.projectAccess}</span>
+                  <span className="font-bold text-on-surface-muted">{t.projectAccess}</span>
                 )}
               </div>
             </motion.article>

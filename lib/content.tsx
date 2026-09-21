@@ -1,11 +1,22 @@
-import type { Lang } from "./use-lang";
+import type { Lang } from "./lang";
 
 type Bi = { pt: string; en: string };
+
+/**
+ * When the copy last actually changed. Hand-maintained on purpose: the build
+ * clock told crawlers the site changed on every rebuild, which is a claim
+ * they learn to stop believing.
+ */
+export const CONTENT_UPDATED = "2026-09-20";
 
 export const SITE = {
   name: "Felipe Brigagão",
   email: "felibrisantos@gmail.com",
-  location: "Jacareí, SP",
+  /* Legible to both readers as one string: the footer is the last server
+     component on the page and does not know the language. The time zone is
+     here because overlap is the hardest filter in a remote search, and
+     "Jacareí, SP" alone means nothing to a reader outside Brazil. */
+  location: "Jacareí, Brasil (UTC−3)",
   social: {
     linkedin: "https://linkedin.com/in/felibrisantos",
     github: "https://github.com/felibrisantos",
@@ -23,13 +34,23 @@ export const SOCIAL_LINKS = [
 
 export const COPY: Record<Lang, {
   role: string;
+  /** Title and description per language: each route is indexed on its own. */
+  meta: { title: string; description: string };
   /** Desktop hero. Full positioning. */
   positioning: string;
   /** Mobile hero. Stays under 20 words so the CTA survives the first fold. */
   positioningShort: string;
   nav: { work: string; research: string; about: string; stack: string; contact: string };
+  /** Names for things only assistive technology and the keyboard ever reach. */
+  a11y: { skip: string; navPrimary: string; navDock: string; heroRegion: string };
   /** One label per intent: every contact CTA uses cta.contact, every work CTA uses cta.work. */
-  cta: { contact: string; work: string };
+  cta: { contact: string; work: string; resume: string };
+  /**
+   * Three facts on the first screen, each verifiable further down the page.
+   * A reader who leaves after the hero used to leave with positioning prose
+   * and nothing to check it against.
+   */
+  evidence: { value: string; label: string }[];
   /** Hint under the hero that the page continues below the fold. */
   scrollCue: string;
   /** 404. The numeral itself is not copy, so it is not in here. */
@@ -56,12 +77,28 @@ export const COPY: Record<Lang, {
 }> = {
   pt: {
     role: "Desenvolvedor fullstack",
+    meta: {
+      title: "Felipe Brigagão — Desenvolvedor fullstack",
+      description:
+        "Desenvolvedor fullstack na Abdou, em Jacareí. Sistemas em produção para Heineken e FEMSA. Artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
+    },
     positioning:
       "Construo sistemas que rodam em produção para marcas de CPG. Cheguei ao código pela modelagem estatística, com artigo indexado sobre redes neurais.",
     positioningShort:
       "Sistemas em produção para Heineken e FEMSA. Cheguei ao código pela modelagem estatística.",
     nav: { work: "Trabalho", research: "Pesquisa", about: "Sobre", stack: "Stack", contact: "Contato" },
-    cta: { contact: "Falar comigo", work: "Ver projetos" },
+    a11y: {
+      skip: "Pular para o conteúdo",
+      navPrimary: "Seções",
+      navDock: "Atalhos de seção",
+      heroRegion: "Apresentação",
+    },
+    cta: { contact: "Falar comigo", work: "Ver projetos", resume: "Baixar currículo" },
+    evidence: [
+      { value: "Heineken · FEMSA", label: "em produção" },
+      { value: "R² 0,82–0,96", label: "artigo indexado" },
+      { value: "Gate de avaliação", label: "IA em produção" },
+    ],
     scrollCue: "Role",
     notFound: {
       title: "Página não encontrada",
@@ -71,7 +108,7 @@ export const COPY: Record<Lang, {
     projectAccess: "Acesso restrito",
     contactActions: { copy: "Copiar", copied: "Copiado", compose: "Escrever" },
     availability:
-      "Aberto a posições fullstack e a projetos de IA em produção.",
+      "Aberto a posições fullstack remotas e a projetos de IA em produção.",
     sections: { featured: "Trabalho", about: "Sobre", stack: "Stack", contact: "Contato" },
     researchHeading: "Pesquisa",
     aboutP1:
@@ -79,7 +116,7 @@ export const COPY: Record<Lang, {
     aboutP2:
       "Hoje sou desenvolvedor fullstack na Abdou, em Jacareí. Trabalho nas duas pontas, e a parte de IA foi a que me cobrou esse mesmo rigor: cada prompt é um arquivo versionado, e nenhuma versão nova substitui a ativa sem passar por um gate de avaliação. Sem medir, o que sobra é impressão de que melhorou.",
     aboutP3:
-      "Tenho pouco tempo de carreira. O que escrevi já está em produção, com gente usando todo dia.",
+      "O que escrevi já está em produção, com gente usando todo dia. Faço isso há um ano.",
     portraitAlt: "Retrato em preto e branco de Felipe Brigagão.",
     stackHeading: "Stack",
     paperTitle: (
@@ -98,12 +135,28 @@ export const COPY: Record<Lang, {
   },
   en: {
     role: "Fullstack developer",
+    meta: {
+      title: "Felipe Brigagão — Fullstack developer",
+      description:
+        "Fullstack developer at Abdou, in Jacareí, Brazil. Systems in production for Heineken and FEMSA. Indexed paper on neural networks applied to Brazilian economic indices.",
+    },
     positioning:
       "I build systems that run in production for CPG brands. I came to code through statistical modelling, with an indexed paper on neural networks.",
     positioningShort:
       "Systems in production for Heineken and FEMSA. I came to code through statistical modelling.",
     nav: { work: "Work", research: "Research", about: "About", stack: "Stack", contact: "Contact" },
-    cta: { contact: "Get in touch", work: "See the work" },
+    a11y: {
+      skip: "Skip to content",
+      navPrimary: "Sections",
+      navDock: "Section shortcuts",
+      heroRegion: "Introduction",
+    },
+    cta: { contact: "Get in touch", work: "See the work", resume: "Download CV" },
+    evidence: [
+      { value: "Heineken · FEMSA", label: "in production" },
+      { value: "R² 0.82–0.96", label: "indexed paper" },
+      { value: "Evaluation gate", label: "AI in production" },
+    ],
     scrollCue: "Scroll",
     notFound: {
       title: "Page not found",
@@ -113,7 +166,7 @@ export const COPY: Record<Lang, {
     projectAccess: "Restricted access",
     contactActions: { copy: "Copy", copied: "Copied", compose: "Compose" },
     availability:
-      "Open to fullstack roles and AI-in-production projects.",
+      "Open to remote fullstack roles and AI-in-production projects.",
     sections: { featured: "Work", about: "About", stack: "Stack", contact: "Contact" },
     researchHeading: "Research",
     aboutP1:
@@ -121,7 +174,7 @@ export const COPY: Record<Lang, {
     aboutP2:
       "Today I am a fullstack developer at Abdou, in Jacareí. I work on both ends, and the AI side is the one that demanded that same rigour: every prompt is a versioned file, and no new version replaces the active one without passing an evaluation gate. Without measuring, all you have is the impression that it got better.",
     aboutP3:
-      "I am early in my career. What I wrote is already in production, with people using it every day.",
+      "What I wrote is already in production, with people using it every day. I have been doing it for a year.",
     portraitAlt: "Black and white portrait of Felipe Brigagão.",
     stackHeading: "Stack",
     paperTitle: (
@@ -163,6 +216,16 @@ export interface Project {
 export function hrefLabel(href: string): string {
   return href.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 }
+
+/**
+ * The CV, one file per language. A recruiter is rarely the decision-maker:
+ * they need something to attach to a tracker that does not accept a website,
+ * and it has to be in the language they are reading.
+ */
+export const RESUME: Record<Lang, string> = {
+  pt: "/curriculo-felipe-brigagao.pdf",
+  en: "/resume-felipe-brigagao.pdf",
+};
 
 /** First entry renders as the featured card (full grid width). */
 export const PROJECTS: Project[] = [

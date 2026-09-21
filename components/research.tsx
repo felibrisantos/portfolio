@@ -3,24 +3,11 @@
 import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { COPY } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
-import { metricRise, metricStagger, useSectionVariants } from "@/components/scroll-fx";
+import { scaleNumbers } from "@/lib/metrics";
+import type { Lang } from "@/lib/lang";
+import { metricRise, metricStagger, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 import { useEffect, useRef } from "react";
-
-/**
- * Counts every number inside `value` up from zero, keeping whatever sits
- * between them. Works for "0,82-0,96", "5 de 8" and "3.8-9.2%" alike, and
- * keeps the decimal separator the string arrived with.
- */
-function scaleNumbers(value: string, progress: number) {
-  return value.replace(/\d+(?:[.,]\d+)?/g, (raw) => {
-    const separator = raw.includes(",") ? "," : ".";
-    const decimals = raw.includes(separator) ? raw.split(separator)[1].length : 0;
-    const scaled = parseFloat(raw.replace(",", ".")) * progress;
-    return scaled.toFixed(decimals).replace(".", separator);
-  });
-}
 
 function CountUp({ value }: { value: string }) {
   const reduce = useReducedMotion();
@@ -40,32 +27,34 @@ function CountUp({ value }: { value: string }) {
 
 /* RESEARCH. Layout family: inverted block with display metrics.
    This is the page's single deliberate theme inversion. */
-export function Research() {
-  const { lang } = useLang();
+export function Research({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const reduce = useReducedMotion();
   const sectionVariants = useSectionVariants();
+  const { initial, revealKey } = useReveal();
 
   return (
     <motion.section
-      initial={reduce ? false : "hidden"}
+      key={revealKey}
+      initial={reduce ? false : initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={sectionVariants}
       className="space-y-5 md:space-y-8"
       id="research"
+      aria-labelledby="research-heading"
     >
-      <SectionHead>{t.researchHeading}</SectionHead>
+      <SectionHead id="research-heading">{t.researchHeading}</SectionHead>
 
-      <div className="bg-[#0d0f14] text-white border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-10 space-y-5 md:space-y-8">
+      <div className="bg-ink text-white border-[2.5px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] p-4 md:p-10 space-y-5 md:space-y-8">
         <div className="flex flex-wrap items-center gap-1.5 md:gap-2 font-code text-[10.5px] md:text-xs uppercase font-bold">
           <span className="px-2.5 py-1 border border-white/35 text-white/80">ICMR, Vol. 05, № 03</span>
           <span className="px-2.5 py-1 border border-white/35 text-white/80">
             {lang === "pt" ? "Dezembro / 2024" : "December / 2024"}
           </span>
-          <span className="px-2.5 py-1 bg-[#0038FF] text-white border border-[#0038FF]">{t.paperKind}</span>
+          <span className="px-2.5 py-1 bg-primary text-white border border-primary">{t.paperKind}</span>
           <a
-            className="md:ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 border border-[#5B8CFF] text-[#5B8CFF] hover:bg-[#5B8CFF] hover:text-[#0d0f14] transition-colors"
+            className="md:ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 border border-on-ink-accent text-on-ink-accent hover:bg-on-ink-accent hover:text-ink transition-colors"
             href="https://doi.org/10.54033/icmrv5n3-043"
             rel="noopener noreferrer"
             target="_blank"
@@ -89,10 +78,10 @@ export function Research() {
               changing key would remount the cell into a variant tree that has
               already finished animating, leaving it stuck at `hidden`. */}
           {t.paperMetrics.map((m, index) => (
-            <div key={index} className="bg-[#0d0f14] p-3.5 md:p-5">
+            <div key={index} className="bg-ink p-3.5 md:p-5">
               <motion.p
                 variants={metricRise}
-                className="font-display text-[32px] md:text-5xl font-extrabold text-[#5B8CFF] leading-none tracking-tight tabular-nums"
+                className="font-display text-[32px] md:text-5xl font-extrabold text-on-ink-accent leading-none tracking-tight tabular-nums"
               >
                 <CountUp value={m.value} />
               </motion.p>

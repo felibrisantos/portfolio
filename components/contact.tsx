@@ -1,15 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Copy, Mail } from "lucide-react";
-import { COPY, SITE, SOCIAL_LINKS } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
-import { useContainerVariants, useSectionVariants } from "@/components/scroll-fx";
+import { ArrowUpRight, Check, Copy, Download, Mail } from "lucide-react";
+import { COPY, RESUME, SITE, SOCIAL_LINKS } from "@/lib/content";
+import type { Lang } from "@/lib/lang";
+import { useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const CARD_SHELL =
-  "bg-white border-[2px] md:border-[2.5px] border-black neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_#0038FF] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0";
+  "bg-white border-[2px] md:border-[2.5px] border-black neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_var(--color-primary)] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0";
 const CARD_LABEL =
   "font-code text-[10.5px] md:text-xs text-black/70 uppercase tracking-wider font-bold";
 const CARD_VALUE =
@@ -17,13 +17,13 @@ const CARD_VALUE =
 const CARD_FOOT =
   "shrink-0 flex items-center gap-1.5 lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:justify-end";
 const CARD_ACTION =
-  "btn-mechanical-sm inline-flex items-center gap-1.5 px-2 py-1.5 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase";
+  "btn-mechanical-sm inline-flex items-center justify-center gap-1.5 min-h-11 px-3 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase";
 
 /* CONTACT. Layout family: closing anchor card. */
-export function Contact() {
-  const { lang } = useLang();
+export function Contact({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const containerVariants = useContainerVariants();
+  const { initial, revealKey } = useReveal();
   const sectionVariants = useSectionVariants();
 
   const [copied, setCopied] = useState(false);
@@ -55,18 +55,20 @@ export function Contact() {
 
   return (
     <motion.section
-      initial="hidden"
+      key={revealKey}
+      initial={initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
       className="space-y-5 md:space-y-8 md:pb-12"
       id="contact"
+      aria-labelledby="contact-heading"
     >
-      <SectionHead>{t.sections.contact}</SectionHead>
+      <SectionHead id="contact-heading">{t.sections.contact}</SectionHead>
 
       <motion.div
         variants={sectionVariants}
-        className="bg-white border-[2.5px] md:border-[3px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_#0038FF] p-4 md:p-12 space-y-5 md:space-y-8"
+        className="bg-white border-[2.5px] md:border-[3px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] p-4 md:p-12 space-y-5 md:space-y-8"
       >
         <p className="font-body text-[14px] md:text-lg text-black/85 max-w-2xl leading-relaxed">
           {t.availability}
@@ -90,7 +92,7 @@ export function Contact() {
                 onClick={copyEmail}
                 aria-label={`${t.contactActions.copy} ${SITE.email}`}
                 className={`${CARD_ACTION} ${
-                  copied ? "bg-black text-white" : "bg-[#0038FF] text-white hover:bg-[#0028c2]"
+                  copied ? "bg-black text-white" : "bg-primary text-white hover:bg-primary-hover"
                 }`}
               >
                 {copied ? <Check size={13} strokeWidth={3} /> : <Copy size={13} strokeWidth={2.5} />}
@@ -120,11 +122,11 @@ export function Contact() {
             >
               <span className="flex flex-col min-w-0">
                 <span className={CARD_LABEL}>{label}</span>
-                <span className={`${CARD_VALUE} group-hover:text-[#0038FF] transition-colors`}>
+                <span className={`${CARD_VALUE} group-hover:text-primary transition-colors`}>
                   {value}
                 </span>
               </span>
-              <span className={`${CARD_FOOT} text-[#0038FF]`}>
+              <span className={`${CARD_FOOT} text-primary`}>
                 <ArrowUpRight
                   size={16}
                   strokeWidth={3}
@@ -134,6 +136,17 @@ export function Contact() {
             </a>
           ))}
         </div>
+
+        {/* Here because this is where a reader who has decided to pass the
+            candidate on actually is: a tracker will not take a website. */}
+        <a
+          className="btn-mechanical-sm inline-flex items-center justify-center gap-2 min-h-11 px-4 bg-white border-[2px] border-black font-code text-[11px] md:text-xs uppercase tracking-wider font-bold text-black hover:bg-slate-100 [box-shadow:3px_3px_0px_var(--color-primary)]"
+          href={RESUME[lang]}
+          download
+        >
+          <Download size={15} strokeWidth={2.5} />
+          {t.cta.resume}
+        </a>
 
         <p className="md:hidden font-code text-[10.5px] text-black/70 uppercase">
           © {new Date().getFullYear()} Felipe Brigagão · {t.role} · {SITE.location}

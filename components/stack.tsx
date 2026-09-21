@@ -2,27 +2,29 @@
 
 import { motion } from "framer-motion";
 import { COPY, STACK, stackLabel } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
-import { listStagger, RowWipe, useContainerVariants, useSectionVariants } from "@/components/scroll-fx";
+import type { Lang } from "@/lib/lang";
+import { RowWipe, listStagger, useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* STACK. Layout family: ruled columns, no container. */
-export function StackSection() {
-  const { lang } = useLang();
+export function StackSection({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const containerVariants = useContainerVariants();
+  const { initial, revealKey } = useReveal();
   const sectionVariants = useSectionVariants();
 
   return (
     <motion.section
-      initial="hidden"
+      key={revealKey}
+      initial={initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
       className="space-y-5 md:space-y-8"
       id="stack"
+      aria-labelledby="stack-heading"
     >
-      <SectionHead>{t.stackHeading}</SectionHead>
+      <SectionHead id="stack-heading">{t.stackHeading}</SectionHead>
 
       {/* 2 columns at md, 4 in one ruled row at lg. The rules only appear at lg,
           where every column shares a single row. */}
@@ -33,7 +35,7 @@ export function StackSection() {
             key={s.category.en}
             className="flex flex-col gap-2 lg:px-6 lg:first:pl-0 lg:last:pr-0"
           >
-            <span className="font-code text-[11px] md:text-xs font-bold text-[#0038FF] uppercase tracking-wider">
+            <span className="font-code text-[11px] md:text-xs font-bold text-primary uppercase tracking-wider">
               {s.category[lang]}
             </span>
             {/* Mobile keeps one line per category. The ruled list is tall enough
