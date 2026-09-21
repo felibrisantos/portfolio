@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
+import { RESUME } from "@/lib/content";
 
 /**
  * Seam 1: what the build actually emits.
@@ -79,6 +80,15 @@ describe("the served page", () => {
     for (const nav of html.match(/<nav[^>]*>/g) ?? []) {
       expect(nav).toMatch(/aria-label="/);
     }
+  });
+
+  it("offers a CV that is actually served", () => {
+    /* The two files sat at the repo root, where the framework does not serve
+       them: as far as a browser was concerned they did not exist. */
+    for (const href of Object.values(RESUME)) {
+      expect(existsSync(`public${href}`)).toBe(true);
+    }
+    expect(html).toContain(RESUME.pt);
   });
 
   it("declares a document language", () => {

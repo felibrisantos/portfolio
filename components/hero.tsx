@@ -8,8 +8,8 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { COPY } from "@/lib/content";
+import { ArrowRight, Download } from "lucide-react";
+import { COPY, RESUME } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
 import { useRef } from "react";
 
@@ -127,6 +127,16 @@ export function Hero() {
           >
             {t.cta.work}
           </a>
+          {/* Tertiary on purpose. A third button would compete with the contact
+              action, and on a phone it would push it off the first fold. */}
+          <a
+            className="inline-flex items-center gap-1.5 font-code text-xs uppercase tracking-wider font-bold text-on-surface-muted hover:text-primary underline underline-offset-4 decoration-1"
+            href={RESUME[lang]}
+            download
+          >
+            <Download size={14} strokeWidth={2.5} />
+            {t.cta.resume}
+          </a>
         </div>
       </div>
 
@@ -161,6 +171,14 @@ export function Hero() {
           >
             <span>{t.cta.work}</span>
             <ArrowRight size={16} strokeWidth={2.5} className="rotate-90" />
+          </a>
+          <a
+            className="self-start inline-flex items-center gap-1.5 pt-0.5 font-code text-[11.5px] uppercase tracking-wider font-bold text-on-surface-muted underline underline-offset-4 decoration-1"
+            href={RESUME[lang]}
+            download
+          >
+            <Download size={13} strokeWidth={2.5} />
+            {t.cta.resume}
           </a>
         </div>
       </div>

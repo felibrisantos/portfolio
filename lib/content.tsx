@@ -35,7 +35,7 @@ export const COPY: Record<Lang, {
   /** Names for things only assistive technology and the keyboard ever reach. */
   a11y: { skip: string; navPrimary: string; navDock: string; heroRegion: string };
   /** One label per intent: every contact CTA uses cta.contact, every work CTA uses cta.work. */
-  cta: { contact: string; work: string };
+  cta: { contact: string; work: string; resume: string };
   /** Hint under the hero that the page continues below the fold. */
   scrollCue: string;
   /** 404. The numeral itself is not copy, so it is not in here. */
@@ -73,7 +73,7 @@ export const COPY: Record<Lang, {
       navDock: "Atalhos de seção",
       heroRegion: "Apresentação",
     },
-    cta: { contact: "Falar comigo", work: "Ver projetos" },
+    cta: { contact: "Falar comigo", work: "Ver projetos", resume: "Baixar currículo" },
     scrollCue: "Role",
     notFound: {
       title: "Página não encontrada",
@@ -121,7 +121,7 @@ export const COPY: Record<Lang, {
       navDock: "Section shortcuts",
       heroRegion: "Introduction",
     },
-    cta: { contact: "Get in touch", work: "See the work" },
+    cta: { contact: "Get in touch", work: "See the work", resume: "Download CV" },
     scrollCue: "Scroll",
     notFound: {
       title: "Page not found",
@@ -181,6 +181,16 @@ export interface Project {
 export function hrefLabel(href: string): string {
   return href.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 }
+
+/**
+ * The CV, one file per language. A recruiter is rarely the decision-maker:
+ * they need something to attach to a tracker that does not accept a website,
+ * and it has to be in the language they are reading.
+ */
+export const RESUME: Record<Lang, string> = {
+  pt: "/curriculo-felipe-brigagao.pdf",
+  en: "/resume-felipe-brigagao.pdf",
+};
 
 /** First entry renders as the featured card (full grid width). */
 export const PROJECTS: Project[] = [

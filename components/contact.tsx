@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Copy, Mail } from "lucide-react";
-import { COPY, SITE, SOCIAL_LINKS } from "@/lib/content";
+import { ArrowUpRight, Check, Copy, Download, Mail } from "lucide-react";
+import { COPY, RESUME, SITE, SOCIAL_LINKS } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
 import { useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
@@ -137,6 +137,17 @@ export function Contact() {
             </a>
           ))}
         </div>
+
+        {/* Here because this is where a reader who has decided to pass the
+            candidate on actually is: a tracker will not take a website. */}
+        <a
+          className="btn-mechanical-sm inline-flex items-center justify-center gap-2 min-h-11 px-4 bg-white border-[2px] border-black font-code text-[11px] md:text-xs uppercase tracking-wider font-bold text-black hover:bg-slate-100 [box-shadow:3px_3px_0px_var(--color-primary)]"
+          href={RESUME[lang]}
+          download
+        >
+          <Download size={15} strokeWidth={2.5} />
+          {t.cta.resume}
+        </a>
 
         <p className="md:hidden font-code text-[10.5px] text-black/70 uppercase">
           © {new Date().getFullYear()} Felipe Brigagão · {t.role} · {SITE.location}
