@@ -2,7 +2,7 @@
 
 import { AtSign, FlaskConical, Layers, Terminal } from "lucide-react";
 import { COPY } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import { LANG_PATH, OTHER, type Lang } from "@/lib/lang";
 import { ScrollRail, useActiveSection } from "@/components/scroll-fx";
 
 const NAV_LINKS = ["work", "research", "about", "stack", "contact"] as const;
@@ -11,8 +11,7 @@ const NAV_LINKS = ["work", "research", "about", "stack", "contact"] as const;
    rather than "work" being lit before the reader has reached it. */
 const SPY_IDS = ["hero", ...NAV_LINKS] as const;
 
-export function SiteHeader() {
-  const { lang, toggle } = useLang();
+export function SiteHeader({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const activeSection = useActiveSection(SPY_IDS);
 
@@ -45,23 +44,26 @@ export function SiteHeader() {
               ))}
             </nav>
             <div className="flex items-center border-l-[2px] border-black pl-4 gap-2 font-code text-xs uppercase font-bold">
-              <button
-                aria-pressed={lang === "pt"}
+              {/* Links, not buttons: the language is the URL now, so the
+                  control has to be something a reader can copy, open in a new
+                  tab, or send to someone and have it arrive in that language. */}
+              <a
+                aria-current={lang === "pt" ? "true" : undefined}
                 className={`px-1.5 py-2.5 ${lang === "pt" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
-                onClick={() => lang !== "pt" && toggle()}
-                type="button"
+                href={LANG_PATH.pt}
+                hrefLang="pt-BR"
               >
                 PT
-              </button>
+              </a>
               <span className="text-slate-400">/</span>
-              <button
-                aria-pressed={lang === "en"}
+              <a
+                aria-current={lang === "en" ? "true" : undefined}
                 className={`px-1.5 py-2.5 ${lang === "en" ? "text-primary" : "text-slate-600"} hover:text-black transition-colors`}
-                onClick={() => lang !== "en" && toggle()}
-                type="button"
+                href={LANG_PATH.en}
+                hrefLang="en"
               >
                 EN
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -77,14 +79,14 @@ export function SiteHeader() {
             FELIPE BRIGAGÃO
           </a>
           {/* No contact CTA here: the hero and the bottom dock already carry it. */}
-          <button
-            onClick={toggle}
+          <a
             aria-label={lang === "pt" ? "Mudar para inglês" : "Switch to Portuguese"}
-            className="h-11 px-3.5 bg-white neo-border-sm neo-shadow-dark-sm font-code text-[11px] font-bold text-black hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
-            type="button"
+            className="h-11 px-3.5 flex items-center bg-white neo-border-sm neo-shadow-dark-sm font-code text-[11px] font-bold text-black hover:bg-slate-100 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            href={LANG_PATH[OTHER[lang]]}
+            hrefLang={OTHER[lang] === "pt" ? "pt-BR" : "en"}
           >
             {lang === "pt" ? "EN" : "PT"}
-          </button>
+          </a>
         </div>
         {/* No blue line under the mobile header, so here the rail is the blue. */}
         <ScrollRail className="absolute left-0 bottom-0 h-[2px] w-full bg-primary" />

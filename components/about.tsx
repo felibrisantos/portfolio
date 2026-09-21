@@ -4,13 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { COPY, SITE, SOCIAL_LINKS } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 import { useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* ABOUT. Layout family: bare prose column, portrait ruled off to its left at md+. */
-export function About() {
-  const { lang } = useLang();
+export function About({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const sectionVariants = useSectionVariants();
   const { initial, revealKey } = useReveal();

@@ -2,13 +2,12 @@
 
 import { motion } from "framer-motion";
 import { COPY, STACK, stackLabel } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 import { RowWipe, listStagger, useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* STACK. Layout family: ruled columns, no container. */
-export function StackSection() {
-  const { lang } = useLang();
+export function StackSection({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const containerVariants = useContainerVariants();
   const { initial, revealKey } = useReveal();

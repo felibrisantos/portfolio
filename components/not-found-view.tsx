@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { COPY } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 
 /* 404. Layout family: the hero's bordered anchor card, alone on the page.
    No header and no dock: every nav target is an in-page anchor that does not
@@ -12,8 +12,7 @@ import { useLang } from "@/lib/use-lang";
    No language toggle either. The choice is already stored, so a reader who
    picked EN lands in EN; one who arrives here first has never been offered
    the toggle anyway, and the page they are being sent to carries it. */
-export function NotFoundView() {
-  const { lang } = useLang();
+export function NotFoundView({ lang }: { lang: Lang }) {
   const t = COPY[lang];
 
   return (

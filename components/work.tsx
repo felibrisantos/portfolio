@@ -3,13 +3,12 @@
 import { motion, useReducedMotion, Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { COPY, hrefLabel, PROJECTS } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 import { useContainerVariants, useReveal } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* WORK. Layout family: asymmetric card grid, first entry featured. */
-export function Work() {
-  const { lang } = useLang();
+export function Work({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const reduce = useReducedMotion();
   const { initial, revealKey } = useReveal();

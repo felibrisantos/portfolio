@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check, Copy, Download, Mail } from "lucide-react";
 import { COPY, RESUME, SITE, SOCIAL_LINKS } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 import { useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -20,8 +20,7 @@ const CARD_ACTION =
   "btn-mechanical-sm inline-flex items-center justify-center gap-1.5 min-h-11 px-3 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase";
 
 /* CONTACT. Layout family: closing anchor card. */
-export function Contact() {
-  const { lang } = useLang();
+export function Contact({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const containerVariants = useContainerVariants();
   const { initial, revealKey } = useReveal();

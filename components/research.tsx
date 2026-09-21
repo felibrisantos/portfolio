@@ -4,7 +4,7 @@ import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransf
 import { ArrowUpRight } from "lucide-react";
 import { COPY } from "@/lib/content";
 import { scaleNumbers } from "@/lib/metrics";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 import { metricRise, metricStagger, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 import { useEffect, useRef } from "react";
@@ -27,8 +27,7 @@ function CountUp({ value }: { value: string }) {
 
 /* RESEARCH. Layout family: inverted block with display metrics.
    This is the page's single deliberate theme inversion. */
-export function Research() {
-  const { lang } = useLang();
+export function Research({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const reduce = useReducedMotion();
   const sectionVariants = useSectionVariants();

@@ -1,7 +1,7 @@
 "use client";
 
 import { COPY } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 
 /**
  * First focusable element on the page, and it has to stay first: with two
@@ -11,8 +11,7 @@ import { useLang } from "@/lib/use-lang";
  *
  * Off screen until focused, then anchored top-left over everything.
  */
-export function SkipLink() {
-  const { lang } = useLang();
+export function SkipLink({ lang }: { lang: Lang }) {
 
   return (
     <a

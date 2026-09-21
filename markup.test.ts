@@ -13,18 +13,28 @@ import { RESUME } from "@/lib/content";
  *
  * Requires a build. The pipeline runs `build` before `test` for this reason.
  */
-const PAGE = ".next/server/app/index.html";
+const ROUTES = [
+  { lang: "en" as const, path: "/", file: ".next/server/app/index.html", htmlLang: "en" },
+  { lang: "pt" as const, path: "/pt", file: ".next/server/app/pt.html", htmlLang: "pt-BR" },
+];
 
-let html = "";
+const pages = new Map<string, string>();
 
 beforeAll(() => {
-  if (!existsSync(PAGE)) {
-    throw new Error(`${PAGE} not found. Run \`npm run build\` before \`npm test\`.`);
+  for (const route of ROUTES) {
+    if (!existsSync(route.file)) {
+      throw new Error(`${route.file} not found. Run \`npm run build\` before \`npm test\`.`);
+    }
+    pages.set(route.path, readFileSync(route.file, "utf8"));
   }
-  html = readFileSync(PAGE, "utf8");
 });
 
-describe("the served page", () => {
+describe.each(ROUTES)("the page served at $path", ({ lang, path, htmlLang }) => {
+  let html = "";
+  beforeAll(() => {
+    html = pages.get(path)!;
+  });
+
   it("is not blank before the script runs", () => {
     /* The regression this exists for: every section and the main element were
        emitted at zero opacity and revealed only on hydration, so a bundle that
@@ -88,10 +98,17 @@ describe("the served page", () => {
     for (const href of Object.values(RESUME)) {
       expect(existsSync(`public${href}`)).toBe(true);
     }
-    expect(html).toContain(RESUME.pt);
+    expect(html).toContain(RESUME[lang]);
   });
 
-  it("declares a document language", () => {
-    expect(html).toMatch(/<html[^>]+lang="[a-z-]+"/i);
+  it("declares its own language in the markup, before any script runs", () => {
+    /* The language used to live in browser storage, so the server rendered
+       Portuguese for everyone and a shared link arrived in the wrong one. */
+    expect(html).toMatch(new RegExp(`<html[^>]+lang="${htmlLang}"`, "i"));
+  });
+
+  it("offers the language control as a link to the other route", () => {
+    const other = lang === "en" ? "/pt" : "/";
+    expect(html).toMatch(new RegExp(`href="${other === "/" ? "/" : other}"[^>]*hreflang=`, "i"));
   });
 });

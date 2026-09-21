@@ -1,4 +1,4 @@
-import type { Lang } from "./use-lang";
+import type { Lang } from "./lang";
 
 type Bi = { pt: string; en: string };
 
@@ -27,6 +27,8 @@ export const SOCIAL_LINKS = [
 
 export const COPY: Record<Lang, {
   role: string;
+  /** Title and description per language: each route is indexed on its own. */
+  meta: { title: string; description: string };
   /** Desktop hero. Full positioning. */
   positioning: string;
   /** Mobile hero. Stays under 20 words so the CTA survives the first fold. */
@@ -62,6 +64,11 @@ export const COPY: Record<Lang, {
 }> = {
   pt: {
     role: "Desenvolvedor fullstack",
+    meta: {
+      title: "Felipe Brigagão — Desenvolvedor fullstack",
+      description:
+        "Desenvolvedor fullstack na Abdou, em Jacareí. Sistemas em produção para Heineken e FEMSA. Artigo indexado sobre redes neurais aplicadas a índices econômicos brasileiros.",
+    },
     positioning:
       "Construo sistemas que rodam em produção para marcas de CPG. Cheguei ao código pela modelagem estatística, com artigo indexado sobre redes neurais.",
     positioningShort:
@@ -110,6 +117,11 @@ export const COPY: Record<Lang, {
   },
   en: {
     role: "Fullstack developer",
+    meta: {
+      title: "Felipe Brigagão — Fullstack developer",
+      description:
+        "Fullstack developer at Abdou, in Jacareí, Brazil. Systems in production for Heineken and FEMSA. Indexed paper on neural networks applied to Brazilian economic indices.",
+    },
     positioning:
       "I build systems that run in production for CPG brands. I came to code through statistical modelling, with an indexed paper on neural networks.",
     positioningShort:

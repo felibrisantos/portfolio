@@ -10,7 +10,7 @@ import {
 } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import { COPY, RESUME } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Lang } from "@/lib/lang";
 import { useRef } from "react";
 
 /** Desktop-only: the CTA leans toward the pointer. Touch never fires mousemove. */
@@ -63,8 +63,7 @@ function MagneticCta({
    offset + the container's 8px, the 56px space-y gap to WORK, and the dock
    (56px row + 2px border + its safe-area padding). Desktop subtracts main's
    96px + the container's 40px and the 96px gap; there is no dock. */
-export function Hero() {
-  const { lang } = useLang();
+export function Hero({ lang }: { lang: Lang }) {
   const t = COPY[lang];
   const reduce = useReducedMotion();
 
