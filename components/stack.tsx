@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { COPY, STACK, stackLabel } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
-import { listStagger, RowWipe, useContainerVariants, useSectionVariants } from "@/components/scroll-fx";
+import { RowWipe, listStagger, useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* STACK. Layout family: ruled columns, no container. */
@@ -11,11 +11,13 @@ export function StackSection() {
   const { lang } = useLang();
   const t = COPY[lang];
   const containerVariants = useContainerVariants();
+  const { initial, revealKey } = useReveal();
   const sectionVariants = useSectionVariants();
 
   return (
     <motion.section
-      initial="hidden"
+      key={revealKey}
+      initial={initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}

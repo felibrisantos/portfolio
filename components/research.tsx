@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { COPY } from "@/lib/content";
 import { scaleNumbers } from "@/lib/metrics";
 import { useLang } from "@/lib/use-lang";
-import { metricRise, metricStagger, useSectionVariants } from "@/components/scroll-fx";
+import { metricRise, metricStagger, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 import { useEffect, useRef } from "react";
 
@@ -32,10 +32,12 @@ export function Research() {
   const t = COPY[lang];
   const reduce = useReducedMotion();
   const sectionVariants = useSectionVariants();
+  const { initial, revealKey } = useReveal();
 
   return (
     <motion.section
-      initial={reduce ? false : "hidden"}
+      key={revealKey}
+      initial={reduce ? false : initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={sectionVariants}

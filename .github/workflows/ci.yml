@@ -19,5 +19,6 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm test
+      # build before test: the markup seam asserts over what the build emits
       - run: npm run build
+      - run: npm test

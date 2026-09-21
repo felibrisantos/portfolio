@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Check, Copy, Mail } from "lucide-react";
 import { COPY, SITE, SOCIAL_LINKS } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
-import { useContainerVariants, useSectionVariants } from "@/components/scroll-fx";
+import { useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -24,6 +24,7 @@ export function Contact() {
   const { lang } = useLang();
   const t = COPY[lang];
   const containerVariants = useContainerVariants();
+  const { initial, revealKey } = useReveal();
   const sectionVariants = useSectionVariants();
 
   const [copied, setCopied] = useState(false);
@@ -55,7 +56,8 @@ export function Contact() {
 
   return (
     <motion.section
-      initial="hidden"
+      key={revealKey}
+      initial={initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}

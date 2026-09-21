@@ -158,3 +158,30 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* HERO ENTRANCE.
+   In CSS rather than in the motion layer, and for one reason: the hero is the
+   first thing painted and its content is the positioning line, so it has to be
+   in the served markup. A motion variant renders its words hidden on the
+   server and leaves them hidden if the bundle is slow, blocked or broken. A
+   CSS animation runs and completes with no JavaScript at all.
+   The reduced-motion block above already neutralises it. */
+@keyframes word-rise {
+  from { opacity: 0; transform: translateY(0.3em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.word-rise {
+  display: inline-block;
+  animation: word-rise 0.62s var(--mechanical-ease) both;
+}
+.word-rise-1 { animation-delay: 0.18s; }
+.word-rise-2 { animation-delay: 0.32s; }
+
+/* NO SCRIPT: the floor.
+   Reveal is gated on hydration, so this should never be reached. It is here
+   because "should never" is not a guarantee, and the cost of being wrong is
+   the whole page. */
+@media (scripting: none) {
+  [style*="opacity:0"], [style*="opacity: 0"] { opacity: 1 !important; }
+  .word-rise { animation: none; }
+}

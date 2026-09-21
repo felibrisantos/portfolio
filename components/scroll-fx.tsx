@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useSpring, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 /**
  * Document progress, as a hard bar filling left to right.
@@ -131,12 +131,34 @@ export function useSectionVariants(): Variants {
 export function useContainerVariants(): Variants {
   const reduce = useReducedMotion();
   return {
-    hidden: reduce ? { opacity: 1 } : { opacity: 0 },
+    hidden: {},
     show: {
-      opacity: 1,
       transition: reduce ? { duration: 0 } : { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
+}
+
+/**
+ * Reveal is an enhancement, not a precondition for the content existing.
+ *
+ * A `hidden` variant is applied during server rendering too, which is how the
+ * whole page came to be served at zero opacity: with the bundle slow, blocked
+ * or simply broken, there was nothing to read. So the server renders every
+ * section resolved, and the hidden state is applied only once the client has
+ * taken over — the remount on that flip is what re-applies `initial`.
+ *
+ * It is invisible in practice. Everything using this sits below the fold, so
+ * the element is off screen at the moment it flips. The hero cannot use it for
+ * that exact reason, and animates in CSS instead.
+ */
+const noSubscribe = () => () => {};
+
+export function useReveal() {
+  /* Same idiom as the language store: the server snapshot is what the first
+     client render uses too, so the flip lands after hydration rather than
+     during it. */
+  const on = useSyncExternalStore(noSubscribe, () => true, () => false);
+  return { initial: on ? ("hidden" as const) : false, revealKey: on ? "on" : "off" };
 }
 
 /** Orchestrators. They carry timing only, never a visual state of their own. */

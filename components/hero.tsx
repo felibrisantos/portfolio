@@ -7,24 +7,11 @@ import {
   useScroll,
   useSpring,
   useTransform,
-  Variants,
 } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { COPY } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
-import { useSectionVariants } from "@/components/scroll-fx";
 import { useRef } from "react";
-
-/** Words of the hero headline rise in sequence. */
-const wordContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.14, delayChildren: 0.18 } },
-};
-
-const wordRise: Variants = {
-  hidden: { opacity: 0, y: "0.3em" },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 210, damping: 24 } },
-};
 
 /** Desktop-only: the CTA leans toward the pointer. Touch never fires mousemove. */
 function MagneticCta({
@@ -80,7 +67,6 @@ export function Hero() {
   const { lang } = useLang();
   const t = COPY[lang];
   const reduce = useReducedMotion();
-  const sectionVariants = useSectionVariants();
 
   /* The two halves of the name pull apart as the hero leaves. Desktop only in
      practice: the markup this drives is display:none below md, so the
@@ -97,32 +83,28 @@ export function Hero() {
     <motion.section
       ref={heroRef}
       id="hero"
-      variants={sectionVariants}
+      /* No reveal variant here. The hero is the first screen: it has to be in
+         the served markup, not waiting on a bundle to be granted opacity. Its
+         entrance is the CSS word rise, which runs without JavaScript. */
+      initial={false}
       className="flex flex-col pt-2 md:pt-0 min-h-[calc(100dvh-190px-max(12px,env(safe-area-inset-bottom,12px)))] md:min-h-[calc(100dvh-232px)]"
     >
       <div className="hidden md:block my-auto p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_var(--color-primary)] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_var(--color-primary)]">
         <div className="space-y-4">
-          <motion.h1
-            variants={wordContainer}
-            initial={reduce ? false : "hidden"}
-            animate="show"
-            className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words"
-          >
+          <h1 className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words">
             {/* Outer span carries the scroll drift, inner one the entrance:
                 two motion values on one element would fight over x. */}
             <motion.span style={{ x: driftLeft }} className="inline-block">
-              <motion.span variants={wordRise} className="inline-block">
-                FELIPE
-              </motion.span>
+              <span className="word-rise word-rise-1">FELIPE</span>
             </motion.span>{" "}
             <motion.span style={{ x: driftRight }} className="inline-block">
-              <motion.span variants={wordRise} className="inline-block">
+              <span className="word-rise word-rise-2">
                 <span className="text-primary italic underline decoration-primary decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
                   BRIGAGÃO
                 </span>
-              </motion.span>
+              </span>
             </motion.span>
-          </motion.h1>
+          </h1>
           <p className="font-display text-3xl text-primary font-bold tracking-tight uppercase">
             {t.role}
           </p>
@@ -148,22 +130,15 @@ export function Hero() {
       </div>
 
       <div className="md:hidden my-auto flex flex-col">
-        <motion.h1
-          variants={wordContainer}
-          initial={reduce ? false : "hidden"}
-          animate="show"
-          className="font-display font-extrabold text-[36px] leading-[1.04] tracking-tight uppercase text-black mb-1.5"
-        >
-          <motion.span variants={wordRise} className="inline-block">
-            FELIPE
-          </motion.span>{" "}
+        <h1 className="font-display font-extrabold text-[36px] leading-[1.04] tracking-tight uppercase text-black mb-1.5">
+          <span className="word-rise word-rise-1">FELIPE</span>{" "}
           <br />
-          <motion.span variants={wordRise} className="inline-block">
+          <span className="word-rise word-rise-2">
             <span className="italic text-primary font-black leading-[1.1] inline-block pb-1">
               BRIGAGÃO
             </span>
-          </motion.span>
-        </motion.h1>
+          </span>
+        </h1>
         <p className="font-display font-semibold text-[16.5px] tracking-tight text-black mb-3.5 uppercase">
           {t.role}
         </p>

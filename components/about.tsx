@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { COPY, SITE, SOCIAL_LINKS } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
-import { useSectionVariants } from "@/components/scroll-fx";
+import { useReveal, useSectionVariants } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* ABOUT. Layout family: bare prose column, portrait ruled off to its left at md+. */
@@ -13,10 +13,12 @@ export function About() {
   const { lang } = useLang();
   const t = COPY[lang];
   const sectionVariants = useSectionVariants();
+  const { initial, revealKey } = useReveal();
 
   return (
     <motion.section
-      initial="hidden"
+      key={revealKey}
+      initial={initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={sectionVariants}

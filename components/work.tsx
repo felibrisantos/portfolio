@@ -4,7 +4,7 @@ import { motion, useReducedMotion, Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { COPY, hrefLabel, PROJECTS } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
-import { useContainerVariants } from "@/components/scroll-fx";
+import { useContainerVariants, useReveal } from "@/components/scroll-fx";
 import { SectionHead } from "@/components/section-head";
 
 /* WORK. Layout family: asymmetric card grid, first entry featured. */
@@ -12,6 +12,7 @@ export function Work() {
   const { lang } = useLang();
   const t = COPY[lang];
   const reduce = useReducedMotion();
+  const { initial, revealKey } = useReveal();
   const containerVariants = useContainerVariants();
 
   /* Project cards lock into the grid from alternating sides instead of all
@@ -32,7 +33,8 @@ export function Work() {
 
   return (
     <motion.section
-      initial="hidden"
+      key={revealKey}
+      initial={reduce ? false : initial}
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
