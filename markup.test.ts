@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
-import { CONTENT_UPDATED, RESUME } from "@/lib/content";
+import { CONTENT_UPDATED, COPY, RESUME } from "@/lib/content";
 import { langUrl } from "@/lib/lang";
 
 /**
@@ -118,6 +118,21 @@ describe.each(ROUTES)("the page served at $path", ({ lang, path, htmlLang }) => 
     expect(html).toMatch(new RegExp(`hreflang="en" href="${langUrl("en")}"`, "i"));
     expect(html).toMatch(new RegExp(`hreflang="pt-BR" href="${langUrl("pt")}"`, "i"));
     expect(html).toMatch(new RegExp(`hreflang="x-default" href="${langUrl("en")}"`, "i"));
+  });
+
+  it("emits an Apple touch icon", () => {
+    /* `apple-icon.svg` produced no route at all: the framework only accepts
+       png/jpg, or a generator, under that name. */
+    expect(html).toMatch(/<link rel="apple-touch-icon"[^>]*type="image\/png"/);
+  });
+
+  it("points at its own preview card, in its own language", () => {
+    const image = html.match(/<meta property="og:image" content="([^"]*)"/)?.[1] ?? "";
+    expect(image).toContain("opengraph-image");
+    if (lang === "pt") expect(image).toContain("/pt/");
+    else expect(image).not.toContain("/pt/");
+    const alt = html.match(/<meta property="og:image:alt" content="([^"]*)"/)?.[1] ?? "";
+    expect(alt).toContain(COPY[lang].role);
   });
 
   it("offers the language control as a link to the other route", () => {
