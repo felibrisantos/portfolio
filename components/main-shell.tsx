@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useContainerVariants } from "@/components/scroll-fx";
 
 /* Page-level entrance. The hero has variants but no initial/animate of its
@@ -10,7 +10,7 @@ export function MainShell({ children }: { children: React.ReactNode }) {
   const containerVariants = useContainerVariants();
 
   return (
-    <motion.main
+    <m.main
       variants={containerVariants}
       initial="hidden"
       animate="show"
@@ -18,6 +18,6 @@ export function MainShell({ children }: { children: React.ReactNode }) {
       id="top"
     >
       {children}
-    </motion.main>
+    </m.main>
   );
 }

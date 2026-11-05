@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { COPY, SITE, SOCIAL_LINKS } from "@/lib/content";
@@ -15,7 +15,7 @@ export function About({ lang }: { lang: Lang }) {
   const { initial, revealKey } = useReveal();
 
   return (
-    <motion.section
+    <m.section
       key={revealKey}
       initial={initial}
       whileInView="show"
@@ -37,7 +37,7 @@ export function About({ lang }: { lang: Lang }) {
             width={1000}
             height={1250}
             sizes="(min-width: 768px) 280px, 176px"
-            className="w-full h-auto border-[2.5px] md:border-[3px] border-black [box-shadow:4px_4px_0px_var(--color-primary)] md:[box-shadow:6px_6px_0px_var(--color-primary)] transition-shadow duration-300 md:hover:[box-shadow:8px_8px_0px_var(--color-primary)]"
+            className="w-full h-auto border-[2.5px] md:border-[3px] border-ink [box-shadow:4px_4px_0px_var(--color-primary)] md:[box-shadow:6px_6px_0px_var(--color-primary)] transition-shadow duration-300 md:hover:[box-shadow:8px_8px_0px_var(--color-primary)]"
           />
           <p className="mt-3 md:mt-4 font-code text-[11px] md:text-xs font-bold text-primary uppercase tracking-wider">
             {SITE.location}
@@ -47,7 +47,7 @@ export function About({ lang }: { lang: Lang }) {
               second contact block. */}
           <ul className="mt-2 font-code text-[11px] md:text-xs">
             {SOCIAL_LINKS.map(({ label, value, href }) => (
-              <li key={label} className="border-b border-black/15 last:border-b-0">
+              <li key={label} className="border-b border-ink/15 last:border-b-0">
                 <a
                   className="group flex flex-col md:flex-row md:items-center md:justify-between md:gap-3 py-2 transition-transform duration-150 hover:translate-x-1"
                   href={href}
@@ -74,6 +74,6 @@ export function About({ lang }: { lang: Lang }) {
           <p className="font-body text-[14px] md:text-lg text-black/85 leading-relaxed">{t.aboutP3}</p>
         </div>
       </div>
-    </motion.section>
+    </m.section>
   );
 }

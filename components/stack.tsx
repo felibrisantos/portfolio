@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { COPY, STACK, stackLabel } from "@/lib/content";
 import type { Lang } from "@/lib/lang";
 import { RowWipe, listStagger, useContainerVariants, useReveal, useSectionVariants } from "@/components/scroll-fx";
@@ -14,7 +14,7 @@ export function StackSection({ lang }: { lang: Lang }) {
   const sectionVariants = useSectionVariants();
 
   return (
-    <motion.section
+    <m.section
       key={revealKey}
       initial={initial}
       whileInView="show"
@@ -28,9 +28,9 @@ export function StackSection({ lang }: { lang: Lang }) {
 
       {/* 2 columns at md, 4 in one ruled row at lg. The rules only appear at lg,
           where every column shares a single row. */}
-      <div className="grid grid-cols-1 gap-y-7 md:grid-cols-2 md:gap-x-10 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0 lg:divide-x-2 lg:divide-black">
+      <div className="grid grid-cols-1 gap-y-7 md:grid-cols-2 md:gap-x-10 lg:grid-cols-4 lg:gap-x-0 lg:gap-y-0 lg:divide-x-2 lg:divide-ink">
         {STACK.map((s) => (
-          <motion.div
+          <m.div
             variants={sectionVariants}
             key={s.category.en}
             className="flex flex-col gap-2 lg:px-6 lg:first:pl-0 lg:last:pr-0"
@@ -43,7 +43,7 @@ export function StackSection({ lang }: { lang: Lang }) {
             <p className="md:hidden font-code text-[13px] text-black font-medium leading-relaxed">
               {s.items.map((item) => stackLabel(item, lang)).join(", ")}
             </p>
-            <motion.ul
+            <m.ul
               variants={listStagger}
               className="hidden md:block font-code text-sm text-black font-medium"
             >
@@ -52,16 +52,16 @@ export function StackSection({ lang }: { lang: Lang }) {
                 return (
                   <li
                     key={stackLabel(item, "en")}
-                    className="py-2 border-b border-black/15 last:border-b-0 transition-transform duration-150 hover:translate-x-1"
+                    className="py-2 border-b border-ink/15 last:border-b-0 transition-transform duration-150 hover:translate-x-1"
                   >
                     <RowWipe>{label}</RowWipe>
                   </li>
                 );
               })}
-            </motion.ul>
-          </motion.div>
+            </m.ul>
+          </m.div>
         ))}
       </div>
-    </motion.section>
+    </m.section>
   );
 }

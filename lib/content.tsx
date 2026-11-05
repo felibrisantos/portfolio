@@ -42,7 +42,7 @@ export const COPY: Record<Lang, {
   positioningShort: string;
   nav: { work: string; research: string; about: string; stack: string; contact: string };
   /** Names for things only assistive technology and the keyboard ever reach. */
-  a11y: { skip: string; navPrimary: string; navDock: string; heroRegion: string };
+  a11y: { skip: string; navPrimary: string; navDock: string; heroRegion: string; switchLang: string };
   /** One label per intent: every contact CTA uses cta.contact, every work CTA uses cta.work. */
   cta: { contact: string; work: string; resume: string };
   /**
@@ -74,6 +74,8 @@ export const COPY: Record<Lang, {
   paperMetrics: { value: string; label: string }[];
   paperCredits: string;
   paperKind: string;
+  /** Month and year of publication, written the way the page reads. */
+  paperDate: string;
 }> = {
   pt: {
     role: "Desenvolvedor fullstack",
@@ -92,6 +94,7 @@ export const COPY: Record<Lang, {
       navPrimary: "Seções",
       navDock: "Atalhos de seção",
       heroRegion: "Apresentação",
+      switchLang: "Mudar para inglês",
     },
     cta: { contact: "Falar comigo", work: "Ver projetos", resume: "Baixar currículo" },
     evidence: [
@@ -132,6 +135,7 @@ export const COPY: Record<Lang, {
     paperCredits:
       "Escrito com Tardelli Ronan Coelho Stekel (IFSP). Pesquisa financiada em parte pela FAPESP, processo #2023/14073-1.",
     paperKind: "Artigo científico",
+    paperDate: "Dezembro / 2024",
   },
   en: {
     role: "Fullstack developer",
@@ -150,6 +154,7 @@ export const COPY: Record<Lang, {
       navPrimary: "Sections",
       navDock: "Section shortcuts",
       heroRegion: "Introduction",
+      switchLang: "Switch to Portuguese",
     },
     cta: { contact: "Get in touch", work: "See the work", resume: "Download CV" },
     evidence: [
@@ -190,6 +195,7 @@ export const COPY: Record<Lang, {
     paperCredits:
       "Written with Tardelli Ronan Coelho Stekel (IFSP). Research partly funded by FAPESP, grant #2023/14073-1.",
     paperKind: "Scientific article",
+    paperDate: "December / 2024",
   },
 };
 

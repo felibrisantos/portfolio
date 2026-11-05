@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowUpRight, Check, Copy, Download, Mail } from "lucide-react";
 import { COPY, RESUME, SITE, SOCIAL_LINKS } from "@/lib/content";
 import type { Lang } from "@/lib/lang";
@@ -9,7 +9,7 @@ import { SectionHead } from "@/components/section-head";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const CARD_SHELL =
-  "bg-white border-[2px] md:border-[2.5px] border-black neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_var(--color-primary)] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0";
+  "bg-white border-[2px] md:border-[2.5px] border-ink neo-shadow-blue-sm md:[box-shadow:4px_4px_0px_var(--color-primary)] p-3 md:p-5 flex items-center lg:flex-col lg:items-stretch justify-between gap-3 lg:gap-0";
 const CARD_LABEL =
   "font-code text-[10.5px] md:text-xs text-black/70 uppercase tracking-wider font-bold";
 const CARD_VALUE =
@@ -17,7 +17,7 @@ const CARD_VALUE =
 const CARD_FOOT =
   "shrink-0 flex items-center gap-1.5 lg:mt-4 lg:pt-3 lg:border-t lg:border-slate-200 lg:self-stretch lg:justify-end";
 const CARD_ACTION =
-  "btn-mechanical-sm inline-flex items-center justify-center gap-1.5 min-h-11 px-3 border-[1.5px] border-black font-code text-[10px] md:text-[11px] font-bold uppercase";
+  "btn-mechanical-sm inline-flex items-center justify-center gap-1.5 min-h-11 px-3 border-[1.5px] border-ink font-code text-[10px] md:text-[11px] font-bold uppercase";
 
 /* CONTACT. Layout family: closing anchor card. */
 export function Contact({ lang }: { lang: Lang }) {
@@ -54,7 +54,7 @@ export function Contact({ lang }: { lang: Lang }) {
   }, [copied]);
 
   return (
-    <motion.section
+    <m.section
       key={revealKey}
       initial={initial}
       whileInView="show"
@@ -66,9 +66,9 @@ export function Contact({ lang }: { lang: Lang }) {
     >
       <SectionHead id="contact-heading">{t.sections.contact}</SectionHead>
 
-      <motion.div
+      <m.div
         variants={sectionVariants}
-        className="bg-white border-[2.5px] md:border-[3px] border-black neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] p-4 md:p-12 space-y-5 md:space-y-8"
+        className="bg-white border-[2.5px] md:border-[3px] border-ink neo-shadow-blue md:[box-shadow:6px_6px_0px_var(--color-primary)] p-4 md:p-12 space-y-5 md:space-y-8"
       >
         <p className="font-body text-[14px] md:text-lg text-black/85 max-w-2xl leading-relaxed">
           {t.availability}
@@ -140,7 +140,7 @@ export function Contact({ lang }: { lang: Lang }) {
         {/* Here because this is where a reader who has decided to pass the
             candidate on actually is: a tracker will not take a website. */}
         <a
-          className="btn-mechanical-sm inline-flex items-center justify-center gap-2 min-h-11 px-4 bg-white border-[2px] border-black font-code text-[11px] md:text-xs uppercase tracking-wider font-bold text-black hover:bg-slate-100 [box-shadow:3px_3px_0px_var(--color-primary)]"
+          className="btn-mechanical-sm inline-flex items-center justify-center gap-2 min-h-11 px-4 bg-white border-[2px] border-ink font-code text-[11px] md:text-xs uppercase tracking-wider font-bold text-black hover:bg-slate-100 [box-shadow:3px_3px_0px_var(--color-primary)]"
           href={RESUME[lang]}
           download
         >
@@ -151,7 +151,7 @@ export function Contact({ lang }: { lang: Lang }) {
         <p className="md:hidden font-code text-[10.5px] text-black/70 uppercase">
           © {new Date().getFullYear()} Felipe Brigagão · {t.role} · {SITE.location}
         </p>
-      </motion.div>
-    </motion.section>
+      </m.div>
+    </m.section>
   );
 }

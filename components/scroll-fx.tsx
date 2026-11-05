@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring, Variants } from "framer-motion";
+import { m, useReducedMotion, useScroll, useSpring, Variants } from "framer-motion";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 /**
@@ -15,7 +15,7 @@ export function ScrollRail({ className }: { className: string }) {
   const smooth = useSpring(scrollYProgress, { stiffness: 340, damping: 42, mass: 0.35 });
 
   return (
-    <motion.div
+    <m.div
       aria-hidden
       className={className}
       style={{ scaleX: reduce ? scrollYProgress : smooth, transformOrigin: "0% 50%" }}
@@ -189,9 +189,9 @@ export function RowWipe({ children }: { children: React.ReactNode }) {
 
   return (
     <span className="block overflow-hidden">
-      <motion.span variants={rowWipe} className="block">
+      <m.span variants={rowWipe} className="block">
         {children}
-      </motion.span>
+      </m.span>
     </span>
   );
 }

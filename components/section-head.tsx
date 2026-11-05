@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { maskRise, ruleDraw, useReveal } from "@/components/scroll-fx";
 
 /* The heading is the section announcing itself: the words rise behind a mask
@@ -11,7 +11,7 @@ export function SectionHead({ id, children }: { id: string; children: React.Reac
   const { initial, revealKey } = useReveal();
 
   return (
-    <motion.h2
+    <m.h2
       id={id}
       key={revealKey}
       initial={reduce ? false : initial}
@@ -21,15 +21,15 @@ export function SectionHead({ id, children }: { id: string; children: React.Reac
     >
       {/* pb reserve: the mask would otherwise clip the tail of a Ç or a Q. */}
       <span className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
-        <motion.span variants={maskRise} className="block">
+        <m.span variants={maskRise} className="block">
           {children}
-        </motion.span>
+        </m.span>
       </span>
-      <motion.span
+      <m.span
         aria-hidden
         variants={ruleDraw}
         className="absolute bottom-0 left-0 h-[2.5px] w-full bg-black origin-left"
       />
-    </motion.h2>
+    </m.h2>
   );
 }

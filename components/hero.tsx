@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  motion,
+  m,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -43,7 +43,7 @@ function MagneticCta({
   };
 
   return (
-    <motion.a
+    <m.a
       ref={ref}
       href={href}
       className={className}
@@ -52,7 +52,7 @@ function MagneticCta({
       onMouseLeave={release}
     >
       {children}
-    </motion.a>
+    </m.a>
   );
 }
 
@@ -79,7 +79,7 @@ export function Hero({ lang }: { lang: Lang }) {
   const driftRight = useTransform(heroProgress, [0, 1], [0, reduce ? 0 : 34]);
 
   return (
-    <motion.section
+    <m.section
       ref={heroRef}
       id="hero"
       aria-label={t.a11y.heroRegion}
@@ -89,21 +89,21 @@ export function Hero({ lang }: { lang: Lang }) {
       initial={false}
       className="flex flex-col pt-2 md:pt-0 min-h-[calc(100dvh-190px-max(12px,env(safe-area-inset-bottom,12px)))] md:min-h-[calc(100dvh-232px)]"
     >
-      <div className="hidden md:block my-auto p-12 bg-white border-[3px] border-black [box-shadow:6px_6px_0px_var(--color-primary)] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_var(--color-primary)]">
+      <div className="hidden md:block my-auto p-12 bg-white border-[3px] border-ink [box-shadow:6px_6px_0px_var(--color-primary)] transition-shadow duration-300 hover:[box-shadow:8px_8px_0px_var(--color-primary)]">
         <div className="space-y-4">
           <h1 className="font-display text-6xl lg:text-7xl uppercase tracking-tight text-black font-extrabold leading-none break-words">
             {/* Outer span carries the scroll drift, inner one the entrance:
                 two motion values on one element would fight over x. */}
-            <motion.span style={{ x: driftLeft }} className="inline-block">
+            <m.span style={{ x: driftLeft }} className="inline-block">
               <span className="word-rise word-rise-1">FELIPE</span>
-            </motion.span>{" "}
-            <motion.span style={{ x: driftRight }} className="inline-block">
+            </m.span>{" "}
+            <m.span style={{ x: driftRight }} className="inline-block">
               <span className="word-rise word-rise-2">
                 <span className="text-primary italic underline decoration-primary decoration-4 underline-offset-8 inline-block leading-[1.1] pb-1 transition-transform duration-200 hover:-rotate-1">
                   BRIGAGÃO
                 </span>
               </span>
-            </motion.span>
+            </m.span>
           </h1>
           <p className="font-display text-3xl text-primary font-bold tracking-tight uppercase">
             {t.role}
@@ -127,15 +127,15 @@ export function Hero({ lang }: { lang: Lang }) {
           </dl>
         </div>
 
-        <div className="mt-8 pt-8 border-t-[2.5px] border-black flex flex-wrap items-center gap-3">
+        <div className="mt-8 pt-8 border-t-[2.5px] border-ink flex flex-wrap items-center gap-3">
           <MagneticCta
-            className="btn-magnetic flex items-center justify-center gap-2 py-3.5 px-6 bg-primary text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-black hover:bg-primary-hover [box-shadow:4px_4px_0px_var(--color-primary)] whitespace-nowrap"
+            className="btn-magnetic flex items-center justify-center gap-2 py-3.5 px-6 bg-primary text-white font-display text-lg uppercase tracking-wider font-bold border-[2.5px] border-ink hover:bg-primary-hover [box-shadow:4px_4px_0px_var(--color-primary)] whitespace-nowrap"
             href="#contact"
           >
             {t.cta.contact} <ArrowRight size={18} strokeWidth={2.5} />
           </MagneticCta>
           <a
-            className="btn-mechanical py-3.5 px-6 bg-white border-[2px] border-black font-code text-xs uppercase tracking-wider text-black font-bold hover:bg-slate-100 [box-shadow:3px_3px_0px_var(--color-primary)] whitespace-nowrap"
+            className="btn-mechanical py-3.5 px-6 bg-white border-[2px] border-ink font-code text-xs uppercase tracking-wider text-black font-bold hover:bg-slate-100 [box-shadow:3px_3px_0px_var(--color-primary)] whitespace-nowrap"
             href="#work"
           >
             {t.cta.work}
@@ -182,7 +182,7 @@ export function Hero({ lang }: { lang: Lang }) {
 
         <div className="flex flex-col gap-2.5 w-full">
           <a
-            className="w-full h-11 flex items-center justify-center gap-2 bg-primary text-white font-code text-[12.5px] font-bold tracking-wider uppercase neo-border border-black neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+            className="w-full h-11 flex items-center justify-center gap-2 bg-primary text-white font-code text-[12.5px] font-bold tracking-wider uppercase neo-border border-ink neo-shadow-dark active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
             href="#contact"
           >
             <span>{t.cta.contact}</span>
@@ -210,17 +210,17 @@ export function Hero({ lang }: { lang: Lang }) {
           own height already stops above the dock, so the cue can never end up
           under it. */}
       <div className="mt-auto pt-8 flex items-center gap-2" aria-hidden>
-        <motion.span
+        <m.span
           animate={reduce ? undefined : { y: [0, 6, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           className="flex text-primary"
         >
           <ArrowRight size={17} strokeWidth={3} className="rotate-90" />
-        </motion.span>
+        </m.span>
         <span className="font-code text-[11px] md:text-[13px] font-bold uppercase tracking-[0.2em] text-black">
           {t.scrollCue}
         </span>
       </div>
-    </motion.section>
+    </m.section>
   );
 }
